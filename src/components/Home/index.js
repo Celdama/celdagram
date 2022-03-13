@@ -1,11 +1,12 @@
 import React from 'react';
+import { Timeline } from '../Timeline';
 import { Wrapper, Content, ContentPhotos, ContentUser } from './home.style';
 
 export const Home = () => {
   return (
     <Wrapper>
       <Content>
-        <ContentPhotos>photos content</ContentPhotos>
+        <Timeline />
         <ContentUser>
           <div className='content-user-info'>
             <img
