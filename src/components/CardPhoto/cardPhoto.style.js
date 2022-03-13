@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.article`
-  outline: 1px solid red;
   height: 800px;
-  width: 400px;
+  width: 440px;
   margin: 30px 0;
-  background-color: #bada55;
+  outline: 1px solid lightgray;
+  background-color: #fff;
 
   img {
     width: 100%;
