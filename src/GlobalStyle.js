@@ -4,6 +4,10 @@ import 'sanitize.css';
 export const GlobalStyle = createGlobalStyle`
   :root {}
 
+  * {
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
 
 
 `;
