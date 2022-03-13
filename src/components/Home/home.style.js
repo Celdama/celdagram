@@ -7,14 +7,13 @@ export const Content = styled.div`
 `;
 
 export const ContentPhotos = styled.div`
-  width: 80%;
+  width: 78%;
 `;
 
 export const ContentUser = styled.div`
-  width: 20%;
+  width: 22%;
 
   .content-user-info {
-    outline: 1px solid red;
     justify-content: center;
     display: flex;
     gap: 1rem;
@@ -28,17 +27,14 @@ export const ContentUser = styled.div`
   }
 
   .content-user-suggestion {
-    outline: 1px solid red;
-
     .suggestion-user {
-      outline: 1px solid blue;
       display: flex;
       align-items: center;
       justify-content: space-between;
 
       div {
         display: flex;
-        gap: 1rem;
+        align-items: center;
       }
 
       img {
