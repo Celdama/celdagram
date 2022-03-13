@@ -27,7 +27,7 @@ see notebook
 - user can unfollow another user
 - user can see the profile of a user in detail
 
-# Compnents
+# Components
 
 ```
 - <Navbar />
