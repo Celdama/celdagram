@@ -7,11 +7,11 @@ export const Content = styled.div`
 `;
 
 export const ContentPhotos = styled.div`
-  width: 78%;
+  width: 80%;
 `;
 
 export const ContentUser = styled.div`
-  width: 22%;
+  width: 20%;
 
   .content-user-info {
     justify-content: center;
