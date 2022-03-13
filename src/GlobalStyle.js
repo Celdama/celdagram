@@ -4,5 +4,5 @@ export const GlobalStyle = createGlobalStyle`
   :root {}
 
 
-  
+
 `;
