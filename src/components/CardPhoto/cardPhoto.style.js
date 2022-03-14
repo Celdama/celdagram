@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.article`
   height: 800px;
-  width: 440px;
-  margin: 30px 0;
+  width: 504px;
+  margin-bottom: 30px;
   outline: 1px solid lightgrey;
   background-color: #fff;
 

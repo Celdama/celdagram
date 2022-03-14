@@ -6,12 +6,9 @@ export const Content = styled.div`
   display: flex;
 `;
 
-export const ContentPhotos = styled.div`
-  width: 80%;
-`;
-
 export const ContentUser = styled.div`
-  width: 20%;
+  width: 100%;
+  padding-left: 1.4rem;
 
   .content-user-info {
     display: flex;
