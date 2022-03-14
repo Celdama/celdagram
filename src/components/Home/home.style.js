@@ -15,7 +15,6 @@ export const ContentUser = styled.div`
 
   .content-user-info {
     display: flex;
-    gap: 1rem;
     align-items: center;
 
     img {
