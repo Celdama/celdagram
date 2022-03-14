@@ -11,7 +11,7 @@ export const CardPhoto = ({ url }) => {
       <p>list comments</p>
       <p>list comments</p>
       <p>list comments</p>
-      <p>addcomments</p>
+      <p>add comments</p>
     </Wrapper>
   );
 };

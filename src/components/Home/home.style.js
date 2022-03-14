@@ -14,7 +14,6 @@ export const ContentUser = styled.div`
   width: 20%;
 
   .content-user-info {
-    justify-content: center;
     display: flex;
     gap: 1rem;
     align-items: center;
