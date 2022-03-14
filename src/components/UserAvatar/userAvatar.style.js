@@ -8,6 +8,9 @@ export const Wrapper = styled.div`
 export const Avatar = styled.img`
   width: ${({ size }) => `${size}px`};
   border-radius: 25px;
+  margin-right: 0.8rem;
 `;
 
-export const Name = styled.h4``;
+export const Name = styled.h4`
+  font-size: 0.9rem;
+`;
