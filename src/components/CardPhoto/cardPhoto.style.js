@@ -7,7 +7,7 @@ export const Wrapper = styled.article`
   outline: 1px solid lightgrey;
   background-color: #fff;
 
-  img {
+  .photo {
     width: 100%;
     height: 600px;
   }
