@@ -34,12 +34,6 @@ export const ContentUser = styled.div`
         display: flex;
         align-items: center;
       }
-
-      img {
-        margin: 5px;
-        width: 40px;
-        border-radius: 20px;
-      }
     }
   }
 `;
