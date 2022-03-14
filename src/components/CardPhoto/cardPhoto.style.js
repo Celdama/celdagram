@@ -7,6 +7,10 @@ export const Wrapper = styled.article`
   outline: 1px solid lightgrey;
   background-color: #fff;
 
+  div {
+    padding-left: 0.6rem;
+  }
+
   .photo {
     width: 100%;
     height: 600px;
