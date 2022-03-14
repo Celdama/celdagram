@@ -22,14 +22,26 @@ export const ContentUser = styled.div`
   }
 
   .content-user-suggestion {
+    h5 {
+      margin-bottom: 0.4rem;
+      color: gray;
+    }
     .suggestion-user {
       display: flex;
+      margin: 0;
       align-items: center;
       justify-content: space-between;
 
-      div {
-        display: flex;
-        align-items: center;
+      button {
+        border: none;
+        background-color: transparent;
+        color: #184e77;
+        font-weight: bold;
+        font-size: 0.7rem;
+
+        :hover {
+          cursor: pointer;
+        }
       }
     }
   }

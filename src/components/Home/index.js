@@ -14,8 +14,7 @@ export const Home = () => {
             name='johndoe'
           />
           <div className='content-user-suggestion'>
-            <h5>Suggestions</h5>
-
+            <h5>Suggestions for you</h5>
             <div className='suggestion-user'>
               <UserAvatar
                 url='https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
@@ -23,7 +22,7 @@ export const Home = () => {
                 name='foofoo'
               />
 
-              <button>follow</button>
+              <button>Follow</button>
             </div>
           </div>
         </ContentUser>
