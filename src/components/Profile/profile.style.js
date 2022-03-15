@@ -59,7 +59,7 @@ export const UserPhotos = styled.div`
 export const Photo = styled.div`
   height: 340px;
   width: 240px;
-  background-image: ${({ urlImg }) => `url(${urlImg})`};
+  background-image: ${({ imgUrl }) => `url(${imgUrl})`};
   background-position: center;
   background-size: cover;
 `;

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export const NavBar = () => {
   return (
-    <Wrapper className='wrapper'>
+    <Wrapper>
       <Content className='content'>
         <Link to='/'>Celdagram</Link>
         <ul>
