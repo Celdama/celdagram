@@ -2,13 +2,18 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   font-size: 0.9rem;
-  /* font-weight: 600; */
-  .user-info {
-    display: flex;
-    align-items: center;
-    padding: 1.2rem 5rem;
-    border-bottom: 1px solid lightgray;
-    gap: 4rem;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 1.2rem 5rem;
+  border-bottom: 1px solid lightgray;
+  gap: 4rem;
+
+  .avatar {
+    height: 100px;
+    border-radius: 50px;
   }
 
   .user {
@@ -20,7 +25,7 @@ export const Wrapper = styled.div`
       background-color: #184e77;
       color: #fff;
       border: none;
-      padding: 3px 8px;
+      padding: 0.18rem 0.5rem;
       border-radius: 4px;
 
       :hover {
@@ -38,23 +43,17 @@ export const Wrapper = styled.div`
     gap: 1.3rem;
     margin: 0.4rem 0;
   }
-
   .name {
     margin: 0;
   }
+`;
 
-  .avatar {
-    height: 100px;
-    border-radius: 50px;
-  }
-
-  .photos-container {
-    padding: 1.2rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: flex-start;
-  }
+export const UserPhotos = styled.div`
+  padding: 1.2rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: flex-start;
 `;
 
 export const Photo = styled.div`
