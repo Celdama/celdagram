@@ -1,4 +1,5 @@
 import React from 'react';
+import formatDistance from 'date-fns/formatDistance';
 import { UserAvatar } from '../UserAvatar';
 import {
   Wrapper,
@@ -13,9 +14,12 @@ import {
 } from './post.style';
 import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
+import { refactorDateString } from '../../Helpers/refactorDateString';
 
 export const Post = ({ post }) => {
   const { comments, photoURL } = post;
+
+  const date = formatDistance(new Date(), new Date(post.date.toDate()));
 
   const commentList = comments.map((comment, index) => {
     return (
@@ -47,7 +51,7 @@ export const Post = ({ post }) => {
         </LikesWrapper>
         <CommentsWrapper>{commentList}</CommentsWrapper>
         <DateWrapper>
-          <span>5 month ago</span>
+          <span>{refactorDateString(date)}</span>
         </DateWrapper>
       </ContentPost>
       <AddCommentWrapper>
