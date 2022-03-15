@@ -14,6 +14,7 @@ export const App = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
   return (
     <div className='App'>
       <BrowserRouter>
