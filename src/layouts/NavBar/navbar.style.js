@@ -22,7 +22,6 @@ export const Content = styled.div`
 
     .icon {
       height: 1.25rem;
-      color: #000;
 
       :hover {
         cursor: pointer;
