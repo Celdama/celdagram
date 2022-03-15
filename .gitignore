@@ -23,3 +23,12 @@ yarn-debug.log*
 yarn-error.log*
 
 .vscode
+
+# firebase
+.firebaserc
+firebase.json
+firestore.indexes.json
+firestore.rules
+storage.rules
+build
+.firebase
