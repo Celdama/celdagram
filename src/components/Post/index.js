@@ -10,26 +10,11 @@ import {
   DateWrapper,
   AddCommentWrapper,
   AvatarWrapper,
-} from './cardPhoto.style';
+} from './post.style';
 import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
 
-const comments = [
-  {
-    author: 'johndoe',
-    comments: 'My desktop',
-  },
-  {
-    author: 'marshal',
-    comments: 'love this place !',
-  },
-  {
-    author: 'orwell',
-    comments: 'simplicity',
-  },
-];
-
-export const CardPhoto = ({ url }) => {
+export const Post = ({ post }) => {
   return (
     <Wrapper>
       <AvatarWrapper>
@@ -39,7 +24,7 @@ export const CardPhoto = ({ url }) => {
           size={30}
         />
       </AvatarWrapper>
-      <Photo className='photo' src={url} alt='desc' />
+      <Photo className='photo' src={post.photoURL} alt='desc' />
       <ContentPost>
         <IconsWrapper>
           {/* <HeartIcon className='icon not-like' /> */}
@@ -50,11 +35,11 @@ export const CardPhoto = ({ url }) => {
           <span>2 likes</span>
         </LikesWrapper>
         <CommentsWrapper>
-          {comments.map(({ author, comments }, index) => {
+          {post.comments.map((comment, index) => {
             return (
               <li key={index}>
-                <span className='author'>{author}</span>{' '}
-                <span className='comment'>{comments}</span>
+                <span className='author'>author</span>{' '}
+                <span className='comment'>{comment}</span>
               </li>
             );
           })}
