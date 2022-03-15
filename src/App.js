@@ -1,3 +1,6 @@
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getPosts } from './store/actions/postsAction';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { NavBar } from './layouts/NavBar';
@@ -6,6 +9,11 @@ import { Home } from './components/Home';
 import { Profile } from './components/Profile';
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
   return (
     <div className='App'>
       <BrowserRouter>
