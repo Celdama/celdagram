@@ -1,6 +1,15 @@
 import React from 'react';
 import { UserAvatar } from '../UserAvatar';
-import { Wrapper } from './cardPhoto.style';
+import {
+  Wrapper,
+  Photo,
+  ContentPost,
+  IconsWrapper,
+  LikesWrapper,
+  CommentsWrapper,
+  DateWrapper,
+  AddCommentWrapper,
+} from './cardPhoto.style';
 import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
 
@@ -29,17 +38,17 @@ export const CardPhoto = ({ url }) => {
           size={30}
         />
       </div>
-      <img className='photo' src={url} alt='desc' />
-      <div className='content-post'>
-        <div className='icons-wrapper'>
+      <Photo className='photo' src={url} alt='desc' />
+      <ContentPost>
+        <IconsWrapper>
           {/* <HeartIcon className='icon not-like' /> */}
           <HeartIconSolid className='icon like' />
           <ChatIcon className='icon' />
-        </div>
-        <div className='likes-wrapper'>
-          <p>2 likes</p>
-        </div>
-        <ul className='comments-wrapper'>
+        </IconsWrapper>
+        <LikesWrapper>
+          <span>2 likes</span>
+        </LikesWrapper>
+        <CommentsWrapper>
           {comments.map(({ author, comments }, index) => {
             return (
               <li key={index}>
@@ -48,15 +57,15 @@ export const CardPhoto = ({ url }) => {
               </li>
             );
           })}
-        </ul>
-        <div className='date-wrapper'>
-          <p>5 month ago</p>
-        </div>
-      </div>
-      <div className='add-comment-wrapper'>
+        </CommentsWrapper>
+        <DateWrapper>
+          <span>5 month ago</span>
+        </DateWrapper>
+      </ContentPost>
+      <AddCommentWrapper>
         <input type='text' name='' id='' placeholder='Add a comment...' />
         <button>Post</button>
-      </div>
+      </AddCommentWrapper>
     </Wrapper>
   );
 };
