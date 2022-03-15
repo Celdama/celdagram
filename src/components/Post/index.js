@@ -15,6 +15,17 @@ import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
 
 export const Post = ({ post }) => {
+  const { comments, photoURL } = post;
+
+  const commentList = comments.map((comment, index) => {
+    return (
+      <li key={index}>
+        <span className='author'>{comment.author}</span>{' '}
+        <span className='comment'>{comment.comment}</span>
+      </li>
+    );
+  });
+
   return (
     <Wrapper>
       <AvatarWrapper>
@@ -24,7 +35,7 @@ export const Post = ({ post }) => {
           size={30}
         />
       </AvatarWrapper>
-      <Photo className='photo' src={post.photoURL} alt='desc' />
+      <Photo className='photo' src={photoURL} alt='pictures' />
       <ContentPost>
         <IconsWrapper>
           {/* <HeartIcon className='icon not-like' /> */}
@@ -34,16 +45,7 @@ export const Post = ({ post }) => {
         <LikesWrapper>
           <span>2 likes</span>
         </LikesWrapper>
-        <CommentsWrapper>
-          {post.comments.map((comment, index) => {
-            return (
-              <li key={index}>
-                <span className='author'>{comment.author}</span>{' '}
-                <span className='comment'>{comment.comment}</span>
-              </li>
-            );
-          })}
-        </CommentsWrapper>
+        <CommentsWrapper>{commentList}</CommentsWrapper>
         <DateWrapper>
           <span>5 month ago</span>
         </DateWrapper>
