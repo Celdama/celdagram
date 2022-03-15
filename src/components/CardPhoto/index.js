@@ -9,6 +9,7 @@ import {
   CommentsWrapper,
   DateWrapper,
   AddCommentWrapper,
+  AvatarWrapper,
 } from './cardPhoto.style';
 import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
@@ -31,13 +32,13 @@ const comments = [
 export const CardPhoto = ({ url }) => {
   return (
     <Wrapper>
-      <div>
+      <AvatarWrapper>
         <UserAvatar
           url='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
           name='johndoe'
           size={30}
         />
-      </div>
+      </AvatarWrapper>
       <Photo className='photo' src={url} alt='desc' />
       <ContentPost>
         <IconsWrapper>
