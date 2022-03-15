@@ -38,8 +38,8 @@ export const Post = ({ post }) => {
           {post.comments.map((comment, index) => {
             return (
               <li key={index}>
-                <span className='author'>author</span>{' '}
-                <span className='comment'>{comment}</span>
+                <span className='author'>{comment.author}</span>{' '}
+                <span className='comment'>{comment.comment}</span>
               </li>
             );
           })}
