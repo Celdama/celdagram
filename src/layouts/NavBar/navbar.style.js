@@ -13,6 +13,15 @@ export const Content = styled.div`
 
   ul {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
+
+    .icon {
+      height: 1.25rem;
+    }
+
+    img {
+      height: 22px;
+      border-radius: 11px;
+    }
   }
 `;
