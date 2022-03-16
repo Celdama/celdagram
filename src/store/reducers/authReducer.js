@@ -9,7 +9,7 @@ export const authReducer = (state = initialState, action) => {
     case REGISTER_USER:
       return { ...state, ...action.payload };
     case UPDATE_USER:
-      return { ...state };
+      return { ...state, ...action.payload };
     case MONITOR_AUTH_STATE:
       return { ...state, ...action.payload };
     default:

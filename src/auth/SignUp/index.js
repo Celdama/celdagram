@@ -1,11 +1,17 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../store/actions/authAction';
+import {
+  monitorAuthState,
+  registerUser,
+  updateUser,
+} from '../../store/actions/authAction';
 
-export const SignUp = ({ registerUserInFirebase }) => {
+export const SignUp = ({ registerUserInFirebase, updateUserInFirebase }) => {
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
     password: '',
+    avatar: '',
   });
 
   const handleChange = (e) => {
@@ -22,8 +28,12 @@ export const SignUp = ({ registerUserInFirebase }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await registerUserInFirebase(formData.email, formData.password);
-      console.log(formData);
+      await registerUserInFirebase(
+        formData.email,
+        formData.password,
+        formData.username,
+        formData.avatar
+      );
     } catch (err) {
       console.log(err);
     }
@@ -32,11 +42,11 @@ export const SignUp = ({ registerUserInFirebase }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {/* <div>
-          <label>Username</label>
-          <input type='text' name='' id='' />
-        </div>
         <div>
+          <label>Username</label>
+          <input onChange={handleChange} type='text' name='username' />
+        </div>
+        {/* <div>
           <label>Full name</label>
           <input type='text' name='' id='' />
         </div> */}
@@ -48,10 +58,10 @@ export const SignUp = ({ registerUserInFirebase }) => {
           <label>Password</label>
           <input onChange={handleChange} type='password' name='password' />
         </div>
-        {/* <div>
+        <div>
           <label>Avatar</label>
-          <input type='file' />
-        </div> */}
+          <input onChange={handleChange} type='text' name='avatar' />
+        </div>
         <button>Sign up</button>
       </form>
     </div>
@@ -62,13 +72,13 @@ export const SignUpStore = () => {
   const dispatch = useDispatch();
 
   const registerUserInFirebase = useCallback(
-    (emailRegister, passwordRegister) => {
-      dispatch(registerUser(emailRegister, passwordRegister));
+    async (emailRegister, passwordRegister, username, avatar) => {
+      await dispatch(registerUser(emailRegister, passwordRegister));
+      await dispatch(updateUser(username, avatar));
+      await dispatch(monitorAuthState());
     },
     [dispatch]
   );
 
-  const test = () => console.log('t');
-
-  return <SignUp registerUserInFirebase={registerUserInFirebase} test={test} />;
+  return <SignUp registerUserInFirebase={registerUserInFirebase} />;
 };

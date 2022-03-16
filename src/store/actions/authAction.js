@@ -32,6 +32,7 @@ export const registerUser = (registerEmail, registerPassword) => {
 
 export const updateUser = (username, avatar) => {
   const auth = getAuth();
+  console.log(auth);
   return async (dispatch) => {
     try {
       await updateProfile(auth.currentUser, {
@@ -40,7 +41,7 @@ export const updateUser = (username, avatar) => {
       });
       dispatch({
         type: UPDATE_USER,
-        payload: null,
+        payload: {},
       });
     } catch (err) {
       return console.log(err);
