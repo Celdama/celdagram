@@ -17,18 +17,24 @@ import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
 import { refactorDateString } from '../../Helpers/refactorDateString';
 
 export const Post = ({ post }) => {
-  const { comments, photoURL } = post;
+  const { comments, photoURL, likes } = post;
 
   const date = formatDistance(new Date(), new Date(post.date.toDate()));
 
-  const commentList = comments.map((comment, index) => {
+  const commentList = comments.map(({ author, comment }, index) => {
     return (
       <li key={index}>
-        <span className='author'>{comment.author}</span>{' '}
-        <span className='comment'>{comment.comment}</span>
+        <span className='author'>{author}</span>{' '}
+        <span className='comment'>{comment}</span>
       </li>
     );
   });
+
+  const likesContent = (
+    <span>
+      {likes.length} like{likes.length > 1 ? 's' : ''}
+    </span>
+  );
 
   return (
     <Wrapper>
@@ -42,13 +48,14 @@ export const Post = ({ post }) => {
       <Photo className='photo' src={photoURL} alt='pictures' />
       <ContentPost>
         <IconsWrapper>
-          {/* <HeartIcon className='icon not-like' /> */}
-          <HeartIconSolid className='icon like' />
+          {!!likes.length ? (
+            <HeartIconSolid className='icon like' />
+          ) : (
+            <HeartIcon className='icon not-like' />
+          )}
           <ChatIcon className='icon' />
         </IconsWrapper>
-        <LikesWrapper>
-          <span>2 likes</span>
-        </LikesWrapper>
+        <LikesWrapper>{likesContent}</LikesWrapper>
         <CommentsWrapper>{commentList}</CommentsWrapper>
         <DateWrapper>
           <span>{refactorDateString(date)}</span>
