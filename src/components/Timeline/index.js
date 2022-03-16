@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { postsSelector } from '../../store/selectors/postsSelector';
 
-import { Post } from '../Post';
+import { PostStore } from '../Post';
 import { Wrapper, Content } from './timeline.style';
 
 export const Timeline = () => {
@@ -12,7 +12,7 @@ export const Timeline = () => {
     <Wrapper>
       <Content>
         {posts.map((post, index) => (
-          <Post key={index} post={post} />
+          <PostStore key={index} post={post} />
         ))}
       </Content>
     </Wrapper>

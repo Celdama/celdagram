@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import formatDistance from 'date-fns/formatDistance';
 import { addComment } from '../../store/actions/postsAction';
@@ -18,18 +18,13 @@ import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
 import { refactorDateString } from '../../Helpers/refactorDateString';
 
-export const Post = ({ post }) => {
+export const Post = ({ post, addCommentToFirebase }) => {
   const [formData, setFormData] = useState({
     author: 'john',
     comment: '',
   });
 
-  const dispatch = useDispatch();
-
-  const { comment } = formData;
-
   const { comments, photoURL, likes } = post;
-
   const date = formatDistance(new Date(), new Date(post.date.toDate()));
 
   const commentList = comments.map(({ author, comment }, index) => {
@@ -60,15 +55,7 @@ export const Post = ({ post }) => {
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    dispatch(
-      addComment(
-        {
-          authorId: 'sdfsdsfsdfds',
-          ...formData,
-        },
-        post.id
-      )
-    );
+    addCommentToFirebase(formData, post.id);
     setFormData({
       author: 'John',
       comment: '',
@@ -106,7 +93,7 @@ export const Post = ({ post }) => {
             type='text'
             name='comment'
             onChange={handleChange}
-            value={comment}
+            value={formData.comment}
             placeholder='Add a comment...'
           />
           <button>Post</button>
@@ -114,4 +101,25 @@ export const Post = ({ post }) => {
       </AddCommentWrapper>
     </Wrapper>
   );
+};
+
+export const PostStore = ({ post }) => {
+  const dispatch = useDispatch();
+
+  const addCommentToFirebase = useCallback(
+    (data, postId) => {
+      dispatch(
+        addComment(
+          {
+            authorId: 'fdsdfdsfs',
+            ...data,
+          },
+          postId
+        )
+      );
+    },
+    [dispatch]
+  );
+
+  return <Post addCommentToFirebase={addCommentToFirebase} post={post} />;
 };
