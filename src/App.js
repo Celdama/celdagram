@@ -7,6 +7,7 @@ import { NavBar } from './layouts/NavBar';
 import { Main } from './layouts/Main';
 import { Home } from './components/Home';
 import { Profile } from './components/Profile';
+import { SignUp } from './auth/SignUp';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export const App = () => {
           <Routes>
             <Route exact path='/' element={<Home />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/signup' element={<SignUp />} />
           </Routes>
           {/* <Home /> */}
         </Main>
