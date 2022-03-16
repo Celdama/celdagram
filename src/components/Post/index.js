@@ -58,9 +58,9 @@ export const Post = ({ post }) => {
     });
   };
 
-  const handleAddComment = async (e) => {
+  const handleAddComment = (e) => {
     e.preventDefault();
-    await dispatch(
+    dispatch(
       addComment(
         {
           authorId: 'sdfsdsfsdfds',

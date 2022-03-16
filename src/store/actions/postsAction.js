@@ -6,7 +6,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { db } from '../../config/firebaseConfig';
-import { GET_POSTS, ADD_COMMENTS } from '../reducers/postsReducer';
+import { GET_POSTS, ADD_COMMENT } from '../reducers/postsReducer';
 
 const postsCollectionRef = collection(db, 'posts');
 
@@ -33,7 +33,7 @@ export const addComment = (data, postId) => {
         comments: arrayUnion(data),
       });
       dispatch({
-        type: ADD_COMMENTS,
+        type: ADD_COMMENT,
         payload: {
           data,
           postId,
