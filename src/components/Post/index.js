@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import formatDistance from 'date-fns/formatDistance';
+import { addComment } from '../../store/actions/postsAction';
 import { UserAvatar } from '../UserAvatar';
 import {
   Wrapper,
@@ -21,6 +23,8 @@ export const Post = ({ post }) => {
     author: 'john',
     comment: '',
   });
+
+  const dispatch = useDispatch();
 
   const { comment } = formData;
 
@@ -54,9 +58,21 @@ export const Post = ({ post }) => {
     });
   };
 
-  const handleAddComment = (e) => {
+  const handleAddComment = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    await dispatch(
+      addComment(
+        {
+          authorId: 'sdfsdsfsdfds',
+          ...formData,
+        },
+        post.id
+      )
+    );
+    setFormData({
+      author: 'John',
+      comment: '',
+    });
   };
 
   return (
