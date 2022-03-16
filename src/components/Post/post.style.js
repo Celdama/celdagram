@@ -65,7 +65,11 @@ export const AddCommentWrapper = styled.div`
   height: 36px;
   padding: 0;
   border-top: 1px solid lightgray;
-  display: flex;
+
+  form {
+    height: 100%;
+    display: flex;
+  }
 
   input {
     width: 90%;

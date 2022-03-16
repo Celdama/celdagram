@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import formatDistance from 'date-fns/formatDistance';
 import { UserAvatar } from '../UserAvatar';
 import {
@@ -17,6 +17,13 @@ import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
 import { refactorDateString } from '../../Helpers/refactorDateString';
 
 export const Post = ({ post }) => {
+  const [formData, setFormData] = useState({
+    author: 'john',
+    comment: '',
+  });
+
+  const { comment } = formData;
+
   const { comments, photoURL, likes } = post;
 
   const date = formatDistance(new Date(), new Date(post.date.toDate()));
@@ -35,6 +42,22 @@ export const Post = ({ post }) => {
       {likes.length} like{likes.length > 1 ? 's' : ''}
     </span>
   );
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleAddComment = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
 
   return (
     <Wrapper>
@@ -62,8 +85,16 @@ export const Post = ({ post }) => {
         </DateWrapper>
       </ContentPost>
       <AddCommentWrapper>
-        <input type='text' name='' id='' placeholder='Add a comment...' />
-        <button>Post</button>
+        <form onSubmit={handleAddComment}>
+          <input
+            type='text'
+            name='comment'
+            onChange={handleChange}
+            value={comment}
+            placeholder='Add a comment...'
+          />
+          <button>Post</button>
+        </form>
       </AddCommentWrapper>
     </Wrapper>
   );
