@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getPosts } from './store/actions/postsAction';
+import { getUsers } from './store/actions/usersAction';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { NavBar } from './layouts/NavBar';
@@ -15,6 +16,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(monitorAuthState());
+    dispatch(getUsers());
     dispatch(getPosts());
   }, [dispatch]);
 
