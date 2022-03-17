@@ -17,6 +17,7 @@ export const Home = ({ isAuth, authUser }) => {
           {isAuth && (
             <>
               <UserAvatar
+                id={authUser && authUser.uid}
                 url={authUser && authUser.photoURL}
                 name={authUser && authUser.displayName}
               />
