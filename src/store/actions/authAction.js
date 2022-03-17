@@ -3,6 +3,7 @@ import {
   UPDATE_USER,
   MONITOR_AUTH_STATE,
   LOGIN_USER,
+  LOGOUT_USER,
 } from '../reducers/authReducer';
 import {
   getAuth,
@@ -10,6 +11,7 @@ import {
   updateProfile,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 
 import { auth } from '../../config/firebaseConfig';
@@ -61,6 +63,20 @@ export const updateUser = (username, avatar) => {
       });
       dispatch({
         type: UPDATE_USER,
+        payload: {},
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const logOutUser = () => {
+  return async (dispatch) => {
+    try {
+      await signOut(auth);
+      dispatch({
+        type: LOGOUT_USER,
         payload: {},
       });
     } catch (err) {
