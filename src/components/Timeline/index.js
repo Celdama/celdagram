@@ -18,3 +18,7 @@ export const Timeline = () => {
     </Wrapper>
   );
 };
+
+export const TimelineStore = () => {
+  return <Timeline />;
+};

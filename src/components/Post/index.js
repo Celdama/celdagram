@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import formatDistance from 'date-fns/formatDistance';
 import { addComment } from '../../store/actions/postsAction';
 import { UserAvatar } from '../UserAvatar';
@@ -17,12 +17,15 @@ import {
 import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
 import { refactorDateString } from '../../Helpers/refactorDateString';
+import { usersSelector } from '../../store/selectors/usersSelector';
 
-export const Post = ({ post, addCommentToFirebase }) => {
+export const Post = ({ post, addCommentToFirebase, users }) => {
   const [formData, setFormData] = useState({
     author: 'john',
     comment: '',
   });
+
+  const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
   const { comments, photoURL, likes } = post;
   const date = formatDistance(new Date(), new Date(post.date.toDate()));
@@ -66,8 +69,9 @@ export const Post = ({ post, addCommentToFirebase }) => {
     <Wrapper>
       <AvatarWrapper>
         <UserAvatar
-          url='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
-          name='johndoe'
+          id={authorPost && authorPost.uid}
+          url={authorPost && authorPost.avatar}
+          name={authorPost && authorPost.username}
           size={30}
         />
       </AvatarWrapper>
@@ -105,6 +109,7 @@ export const Post = ({ post, addCommentToFirebase }) => {
 
 export const PostStore = ({ post }) => {
   const dispatch = useDispatch();
+  const users = useSelector(usersSelector);
 
   const addCommentToFirebase = useCallback(
     (data, postId) => {
@@ -121,5 +126,11 @@ export const PostStore = ({ post }) => {
     [dispatch]
   );
 
-  return <Post addCommentToFirebase={addCommentToFirebase} post={post} />;
+  return (
+    <Post
+      addCommentToFirebase={addCommentToFirebase}
+      post={post}
+      users={users}
+    />
+  );
 };
