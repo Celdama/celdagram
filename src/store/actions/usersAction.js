@@ -73,8 +73,4 @@ export const toggleFollow = (followerId, followingId) => {
       return console.log(err);
     }
   };
-
-  // const followingsDoc =
-  // return async (dispatch) => {
-  // }
 };
