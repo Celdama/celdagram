@@ -54,7 +54,6 @@ export const logInUser = (loginEmail, loginPassword) => {
 
 export const updateUser = (username, avatar) => {
   const auth = getAuth();
-  console.log(auth);
   return async (dispatch) => {
     try {
       await updateProfile(auth.currentUser, {
