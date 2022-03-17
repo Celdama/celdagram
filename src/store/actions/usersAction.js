@@ -1,5 +1,13 @@
-import { ADD_USER, GET_USERS } from '../reducers/usersReducer';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { ADD_USER, GET_USERS, TOGGLE_FOLLOW } from '../reducers/usersReducer';
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+} from 'firebase/firestore';
 import { db } from '../../config/firebaseConfig';
 import { getAuth } from 'firebase/auth';
 
@@ -26,13 +34,14 @@ export const addUser = (data) => {
       const auth = getAuth();
       const { email, uid, displayName, photoURL } = auth.currentUser;
 
-      await addDoc(usersCollectionRef, {
+      await setDoc(doc(db, 'users', uid), {
         ...data,
         email,
         uid,
         username: displayName,
         avatar: photoURL,
       });
+
       dispatch({
         type: ADD_USER,
         payload: {
@@ -47,4 +56,25 @@ export const addUser = (data) => {
       return console.log(err);
     }
   };
+};
+
+export const toggleFollow = (followerId, followingId) => {
+  return async (dispatch) => {
+    const followingsDoc = doc(db, 'users', followerId);
+    try {
+      await updateDoc(followingsDoc, {
+        followings: arrayUnion(followingId),
+      });
+      dispatch({
+        type: TOGGLE_FOLLOW,
+        payload: {},
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+
+  // const followingsDoc =
+  // return async (dispatch) => {
+  // }
 };

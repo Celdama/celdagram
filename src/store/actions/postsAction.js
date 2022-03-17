@@ -28,6 +28,7 @@ export const getPosts = () => {
 export const addComment = (data, postId) => {
   return async (dispatch) => {
     const postDoc = doc(db, 'posts', postId);
+    console.log(postDoc);
     try {
       await updateDoc(postDoc, {
         comments: arrayUnion(data),

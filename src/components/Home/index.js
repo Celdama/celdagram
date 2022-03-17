@@ -25,7 +25,10 @@ export const Home = ({ isAuth, authUser, users }) => {
                 url={authUser && authUser.photoURL}
                 name={authUser && authUser.displayName}
               />
-              <SuggestionListStore suggestions={suggestionsContent} />
+              <SuggestionListStore
+                authUser={authUser}
+                suggestions={suggestionsContent}
+              />
             </>
           )}
         </ContentUser>

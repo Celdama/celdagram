@@ -11,7 +11,7 @@ export const usersReducer = (state = initialState, action) => {
     case GET_USERS:
       return [...action.payload];
     case TOGGLE_FOLLOW:
-      return [...action.payload];
+      return state;
     default:
       return state;
   }
