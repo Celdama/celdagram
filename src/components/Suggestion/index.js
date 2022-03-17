@@ -7,15 +7,10 @@ export const SuggestionList = ({ suggestions }) => {
       <h5>Suggestions for you</h5>
       <div className='suggestion-user'>
         {suggestions &&
-          suggestions.map((suggestion) => {
+          suggestions.map(({ uid, avatar, username }) => {
             return (
-              <div key={suggestion.uid}>
-                <UserAvatar
-                  id={suggestion.uid}
-                  url={suggestion.avatar}
-                  name={suggestion.username}
-                  size={30}
-                />
+              <div key={uid}>
+                <UserAvatar id={uid} url={avatar} name={username} size={30} />
                 <button>Follow</button>
               </div>
             );
