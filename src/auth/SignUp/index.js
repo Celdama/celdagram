@@ -5,6 +5,7 @@ import {
   registerUser,
   updateUser,
 } from '../../store/actions/authAction';
+import { addUser } from '../../store/actions/usersAction';
 
 export const SignUp = ({ registerUserInFirebase }) => {
   const [formData, setFormData] = useState({
@@ -28,12 +29,7 @@ export const SignUp = ({ registerUserInFirebase }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await registerUserInFirebase(
-        formData.email,
-        formData.password,
-        formData.username,
-        formData.avatar
-      );
+      await registerUserInFirebase(formData);
     } catch (err) {
       console.log(err);
     }
@@ -46,10 +42,6 @@ export const SignUp = ({ registerUserInFirebase }) => {
           <label>Username</label>
           <input onChange={handleChange} type='text' name='username' />
         </div>
-        {/* <div>
-          <label>Full name</label>
-          <input type='text' name='' id='' />
-        </div> */}
         <div>
           <label>Email</label>
           <input onChange={handleChange} type='email' name='email' />
@@ -72,9 +64,17 @@ export const SignUpStore = () => {
   const dispatch = useDispatch();
 
   const registerUserInFirebase = useCallback(
-    async (emailRegister, passwordRegister, username, avatar) => {
-      await dispatch(registerUser(emailRegister, passwordRegister));
+    async ({ username, email, password, avatar }) => {
+      await dispatch(registerUser(email, password));
       await dispatch(updateUser(username, avatar));
+      await dispatch(
+        addUser({
+          followers: [],
+          followings: [],
+          likes: [],
+          posts: [],
+        })
+      );
       await dispatch(monitorAuthState());
     },
     [dispatch]
