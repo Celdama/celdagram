@@ -18,10 +18,11 @@ import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
 import { refactorDateString } from '../../Helpers/refactorDateString';
 import { usersSelector } from '../../store/selectors/usersSelector';
+import { authSelector } from '../../store/selectors/authSelector';
 
-export const Post = ({ post, addCommentToFirebase, users }) => {
+export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
   const [formData, setFormData] = useState({
-    author: 'john',
+    author: authUser && authUser.displayName,
     comment: '',
   });
 
@@ -60,7 +61,7 @@ export const Post = ({ post, addCommentToFirebase, users }) => {
     e.preventDefault();
     addCommentToFirebase(formData, post.id);
     setFormData({
-      author: 'John',
+      author: authUser && authUser.displayName,
       comment: '',
     });
   };
@@ -77,32 +78,36 @@ export const Post = ({ post, addCommentToFirebase, users }) => {
       </AvatarWrapper>
       <Photo className='photo' src={photoURL} alt='pictures' />
       <ContentPost>
-        <IconsWrapper>
-          {!!likes.length ? (
-            <HeartIconSolid className='icon like' />
-          ) : (
-            <HeartIcon className='icon not-like' />
-          )}
-          <ChatIcon className='icon' />
-        </IconsWrapper>
+        {authUser && (
+          <IconsWrapper>
+            {!!likes.length ? (
+              <HeartIconSolid className='icon like' />
+            ) : (
+              <HeartIcon className='icon not-like' />
+            )}
+            <ChatIcon className='icon' />
+          </IconsWrapper>
+        )}
         <LikesWrapper>{likesContent}</LikesWrapper>
         <CommentsWrapper>{commentList}</CommentsWrapper>
         <DateWrapper>
           <span>{refactorDateString(date)}</span>
         </DateWrapper>
       </ContentPost>
-      <AddCommentWrapper>
-        <form onSubmit={handleAddComment}>
-          <input
-            type='text'
-            name='comment'
-            onChange={handleChange}
-            value={formData.comment}
-            placeholder='Add a comment...'
-          />
-          <button>Post</button>
-        </form>
-      </AddCommentWrapper>
+      {authUser && (
+        <AddCommentWrapper>
+          <form onSubmit={handleAddComment}>
+            <input
+              type='text'
+              name='comment'
+              onChange={handleChange}
+              value={formData.comment}
+              placeholder='Add a comment...'
+            />
+            <button>Post</button>
+          </form>
+        </AddCommentWrapper>
+      )}
     </Wrapper>
   );
 };
@@ -110,6 +115,7 @@ export const Post = ({ post, addCommentToFirebase, users }) => {
 export const PostStore = ({ post }) => {
   const dispatch = useDispatch();
   const users = useSelector(usersSelector);
+  const authUser = useSelector(authSelector);
 
   const addCommentToFirebase = useCallback(
     (data, postId) => {
@@ -129,6 +135,7 @@ export const PostStore = ({ post }) => {
   return (
     <Post
       addCommentToFirebase={addCommentToFirebase}
+      authUser={authUser}
       post={post}
       users={users}
     />
