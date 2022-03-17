@@ -6,7 +6,7 @@ import {
   updateUser,
 } from '../../store/actions/authAction';
 
-export const SignUp = ({ registerUserInFirebase, updateUserInFirebase }) => {
+export const SignUp = ({ registerUserInFirebase }) => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
