@@ -10,6 +10,7 @@ import { Home } from './components/Home';
 import { Profile } from './components/Profile';
 import { SignUpStore } from './auth/SignUp';
 import { monitorAuthState } from './store/actions/authAction';
+import { RequireAuth } from './Helpers/requireAuth';
 
 export const App = () => {
   const dispatch = useDispatch();
