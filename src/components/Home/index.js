@@ -30,16 +30,15 @@ export const Home = ({ isAuth, authUser, users }) => {
                   {suggestionsContent &&
                     suggestionsContent.map((suggestion) => {
                       return (
-                        <>
+                        <div key={suggestion.uid}>
                           <UserAvatar
                             id={suggestion.uid}
-                            key={suggestion.uid}
                             url={suggestion.avatar}
                             name={suggestion.username}
                             size={30}
                           />
                           <button>Follow</button>
-                        </>
+                        </div>
                       );
                     })}
                 </div>

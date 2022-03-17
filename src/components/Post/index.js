@@ -26,8 +26,6 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
     comment: '',
   });
 
-  console.log(!!authUser.email);
-
   const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
   const { comments, photoURL, likes } = post;
