@@ -5,7 +5,7 @@ import {
   isAuthSelector,
 } from '../../store/selectors/authSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
-import { Timeline } from '../Timeline';
+import { TimelineStore } from '../Timeline';
 import { UserAvatar } from '../UserAvatar';
 import { Wrapper, Content, ContentUser } from './home.style';
 
@@ -15,7 +15,7 @@ export const Home = ({ isAuth, authUser, users }) => {
   return (
     <Wrapper>
       <Content>
-        <Timeline />
+        <TimelineStore />
         <ContentUser>
           {isAuth && (
             <>

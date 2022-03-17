@@ -5,20 +5,20 @@ import { postsSelector } from '../../store/selectors/postsSelector';
 import { PostStore } from '../Post';
 import { Wrapper, Content } from './timeline.style';
 
-export const Timeline = () => {
-  const posts = useSelector(postsSelector);
-
+export const Timeline = ({ posts }) => {
   return (
     <Wrapper>
       <Content>
-        {posts.map((post, index) => (
-          <PostStore key={index} post={post} />
-        ))}
+        {posts &&
+          posts.map((post, index) => <PostStore key={index} post={post} />)}
       </Content>
     </Wrapper>
   );
 };
 
 export const TimelineStore = () => {
-  return <Timeline />;
+  const posts = useSelector(postsSelector);
+  console.log(posts);
+
+  return <Timeline posts={posts} />;
 };
