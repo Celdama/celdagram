@@ -4,7 +4,7 @@ import { getPosts } from './store/actions/postsAction';
 import { getUsers } from './store/actions/usersAction';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
-import { NavBar } from './layouts/NavBar';
+import { NavBarStore } from './layouts/NavBar';
 import { Main } from './layouts/Main';
 import { Home } from './components/Home';
 import { Profile } from './components/Profile';
@@ -24,7 +24,7 @@ export const App = () => {
   return (
     <div className='App'>
       <BrowserRouter>
-        <NavBar />
+        <NavBarStore />
         <Main>
           <Routes>
             <Route exact path='/' element={<Home />} />
