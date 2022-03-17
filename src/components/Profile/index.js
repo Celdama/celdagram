@@ -33,3 +33,7 @@ export const Profile = () => {
     </Wrapper>
   );
 };
+
+export const ProfileStore = () => {
+  return <Profile />;
+};

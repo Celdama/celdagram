@@ -7,11 +7,11 @@ import { GlobalStyle } from './GlobalStyle';
 import { NavBarStore } from './layouts/NavBar';
 import { Main } from './layouts/Main';
 import { Home } from './components/Home';
-import { Profile } from './components/Profile';
 import { SignUpStore } from './auth/SignUp';
 import { monitorAuthState } from './store/actions/authAction';
 import { RequireAuth } from './Helpers/requireAuth';
 import { LogInStore } from './auth/LogIn';
+import { ProfileStore } from './components/Profile';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export const App = () => {
         <Main>
           <Routes>
             <Route exact path='/' element={<Home />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile' element={<ProfileStore />} />
             <Route path='/signup' element={<SignUpStore />} />
             <Route path='/login' element={<LogInStore />} />
           </Routes>
