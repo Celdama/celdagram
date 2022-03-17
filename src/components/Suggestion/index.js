@@ -2,6 +2,10 @@ import React from 'react';
 import { UserAvatar } from '../UserAvatar';
 
 export const SuggestionList = ({ suggestions }) => {
+  const toggleUserFollow = (userId) => {
+    console.log('follow' + userId);
+  };
+
   return (
     <div className='content-user-suggestion'>
       <h5>Suggestions for you</h5>
@@ -11,7 +15,7 @@ export const SuggestionList = ({ suggestions }) => {
             return (
               <div key={uid}>
                 <UserAvatar id={uid} url={avatar} name={username} size={30} />
-                <button>Follow</button>
+                <button onClick={() => toggleUserFollow(uid)}>Follow</button>
               </div>
             );
           })}
