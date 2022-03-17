@@ -31,7 +31,7 @@ export const NavBar = ({ isAuth, authUser }) => {
             </>
           ) : (
             <>
-              <li>login</li>
+              <Link to='/login'>login</Link>
               <Link to='/signup'>Sign up</Link>
             </>
           )}

@@ -1,6 +1,7 @@
 export const REGISTER_USER = 'REGISTER_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const MONITOR_AUTH_STATE = 'MONITOR_AUTH_STATE';
+export const LOGIN_USER = 'LOGIN_USER';
 
 const initialState = {};
 
@@ -11,6 +12,8 @@ export const authReducer = (state = initialState, action) => {
     case UPDATE_USER:
       return { ...state, ...action.payload };
     case MONITOR_AUTH_STATE:
+      return { ...state, ...action.payload };
+    case LOGIN_USER:
       return { ...state, ...action.payload };
     default:
       return state;
