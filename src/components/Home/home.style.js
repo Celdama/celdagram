@@ -27,10 +27,13 @@ export const ContentUser = styled.div`
       color: gray;
     }
     .suggestion-user {
-      display: flex;
       margin: 0;
-      align-items: center;
-      justify-content: space-between;
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
       button {
         border: none;
