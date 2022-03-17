@@ -18,7 +18,6 @@ export const Timeline = ({ posts }) => {
 
 export const TimelineStore = () => {
   const posts = useSelector(postsSelector);
-  console.log(posts);
 
   return <Timeline posts={posts} />;
 };
