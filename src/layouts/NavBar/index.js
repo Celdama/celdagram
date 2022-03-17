@@ -46,7 +46,7 @@ export const NavBarStore = () => {
 
   const handleLogOut = useCallback(() => {
     dispatch(logOutUser());
-  });
+  }, [dispatch]);
 
   return (
     <NavBar isAuth={isAuth} authUser={authUser} handleLogOut={handleLogOut} />
