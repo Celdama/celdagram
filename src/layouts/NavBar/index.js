@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Wrapper, Content } from './navbar.style';
 import { HomeIcon, LogoutIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   authSelector,
   isAuthSelector,
 } from '../../store/selectors/authSelector';
+import { logOutUser } from '../../store/actions/authAction';
 
-export const NavBar = ({ isAuth, authUser }) => {
+export const NavBar = ({ isAuth, authUser, handleLogOut }) => {
   return (
     <Wrapper>
       <Content className='content'>
@@ -19,7 +20,7 @@ export const NavBar = ({ isAuth, authUser }) => {
           </Link>
           {isAuth ? (
             <>
-              <li>
+              <li onClick={handleLogOut}>
                 <LogoutIcon className='icon' />
               </li>
               <Link to='/profile'>
@@ -44,6 +45,13 @@ export const NavBar = ({ isAuth, authUser }) => {
 export const NavBarStore = () => {
   const isAuth = useSelector(isAuthSelector);
   const authUser = useSelector(authSelector);
+  const dispatch = useDispatch();
 
-  return <NavBar isAuth={isAuth} authUser={authUser} />;
+  const handleLogOut = useCallback(() => {
+    dispatch(logOutUser());
+  });
+
+  return (
+    <NavBar isAuth={isAuth} authUser={authUser} handleLogOut={handleLogOut} />
+  );
 };
