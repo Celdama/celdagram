@@ -29,7 +29,7 @@ export const App = () => {
         <Main>
           <Routes>
             <Route exact path='/' element={<Home />} />
-            <Route path='/profile' element={<ProfileStore />} />
+            <Route path='/profile/:id' element={<ProfileStore />} />
             <Route path='/signup' element={<SignUpStore />} />
             <Route path='/login' element={<LogInStore />} />
           </Routes>
