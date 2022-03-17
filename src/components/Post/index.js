@@ -122,14 +122,14 @@ export const PostStore = ({ post }) => {
       dispatch(
         addComment(
           {
-            authorId: 'fdsdfdsfs',
+            authorId: authUser.uid,
             ...data,
           },
           postId
         )
       );
     },
-    [dispatch]
+    [dispatch, authUser.uid]
   );
 
   return (
