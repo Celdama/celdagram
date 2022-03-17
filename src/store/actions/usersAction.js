@@ -58,6 +58,10 @@ export const addUser = (data) => {
   };
 };
 
+// INSTEAD TOGGLE FOLLOW
+// ONE ACTION TO ADD FOLLOW
+// ONE ACTION TO REMOVE FOLLOW
+// 2 BUTTON (FOLLOW / UNFOLLOW FOR EACH ACTION)
 export const toggleFollow = (followerId, followingId) => {
   return async (dispatch) => {
     const followingsDoc = doc(db, 'users', followerId);
