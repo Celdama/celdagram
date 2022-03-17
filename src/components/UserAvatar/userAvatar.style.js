@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 export const Avatar = styled.img`
