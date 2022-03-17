@@ -4,11 +4,14 @@ import {
   authSelector,
   isAuthSelector,
 } from '../../store/selectors/authSelector';
+import { usersSelector } from '../../store/selectors/usersSelector';
 import { Timeline } from '../Timeline';
 import { UserAvatar } from '../UserAvatar';
 import { Wrapper, Content, ContentUser } from './home.style';
 
-export const Home = ({ isAuth, authUser }) => {
+export const Home = ({ isAuth, authUser, users }) => {
+  const suggestionsContent = users.filter((user) => user.uid !== authUser.uid);
+
   return (
     <Wrapper>
       <Content>
@@ -24,13 +27,21 @@ export const Home = ({ isAuth, authUser }) => {
               <div className='content-user-suggestion'>
                 <h5>Suggestions for you</h5>
                 <div className='suggestion-user'>
-                  <UserAvatar
-                    url='https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
-                    size={30}
-                    name='foofoo'
-                  />
-
-                  <button>Follow</button>
+                  {suggestionsContent &&
+                    suggestionsContent.map((suggestion) => {
+                      return (
+                        <>
+                          <UserAvatar
+                            id={suggestion.uid}
+                            key={suggestion.uid}
+                            url={suggestion.avatar}
+                            name={suggestion.username}
+                            size={30}
+                          />
+                          <button>Follow</button>
+                        </>
+                      );
+                    })}
                 </div>
               </div>
             </>
@@ -44,6 +55,7 @@ export const Home = ({ isAuth, authUser }) => {
 export const HomeStore = () => {
   const authUser = useSelector(authSelector);
   const isAuth = useSelector(isAuthSelector);
+  const users = useSelector(usersSelector);
 
-  return <Home isAuth={isAuth} authUser={authUser} />;
+  return <Home isAuth={isAuth} authUser={authUser} users={users} />;
 };

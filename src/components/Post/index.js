@@ -26,6 +26,8 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
     comment: '',
   });
 
+  console.log(!!authUser.email);
+
   const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
   const { comments, photoURL, likes } = post;
@@ -78,7 +80,7 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
       </AvatarWrapper>
       <Photo className='photo' src={photoURL} alt='pictures' />
       <ContentPost>
-        {authUser && (
+        {!!authUser.email && (
           <IconsWrapper>
             {!!likes.length ? (
               <HeartIconSolid className='icon like' />
@@ -94,7 +96,7 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
           <span>{refactorDateString(date)}</span>
         </DateWrapper>
       </ContentPost>
-      {authUser && (
+      {!!authUser.email && (
         <AddCommentWrapper>
           <form onSubmit={handleAddComment}>
             <input
