@@ -5,6 +5,7 @@ import {
   isAuthSelector,
 } from '../../store/selectors/authSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
+import { SuggestionListStore } from '../Suggestion';
 import { TimelineStore } from '../Timeline';
 import { UserAvatar } from '../UserAvatar';
 import { Wrapper, Content, ContentUser } from './home.style';
@@ -24,25 +25,7 @@ export const Home = ({ isAuth, authUser, users }) => {
                 url={authUser && authUser.photoURL}
                 name={authUser && authUser.displayName}
               />
-              <div className='content-user-suggestion'>
-                <h5>Suggestions for you</h5>
-                <div className='suggestion-user'>
-                  {suggestionsContent &&
-                    suggestionsContent.map((suggestion) => {
-                      return (
-                        <div key={suggestion.uid}>
-                          <UserAvatar
-                            id={suggestion.uid}
-                            url={suggestion.avatar}
-                            name={suggestion.username}
-                            size={30}
-                          />
-                          <button>Follow</button>
-                        </div>
-                      );
-                    })}
-                </div>
-              </div>
+              <SuggestionListStore suggestions={suggestionsContent} />
             </>
           )}
         </ContentUser>
