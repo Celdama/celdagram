@@ -8,11 +8,13 @@ import { Main } from './layouts/Main';
 import { Home } from './components/Home';
 import { Profile } from './components/Profile';
 import { SignUpStore } from './auth/SignUp';
+import { monitorAuthState } from './store/actions/authAction';
 
 export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(monitorAuthState());
     dispatch(getPosts());
   }, [dispatch]);
 
