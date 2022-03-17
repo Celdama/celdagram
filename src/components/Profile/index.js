@@ -1,18 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { usersSelector } from '../../store/selectors/usersSelector';
 import { Wrapper, Photo, UserInfo, UserPhotos } from './profile.style';
 
-export const Profile = () => {
+export const Profile = ({ users, id }) => {
+  const user = users.filter((user) => user.uid === id)[0];
+
   return (
     <Wrapper>
       <UserInfo>
-        <img
-          className='avatar'
-          alt='avatar'
-          src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
-        />
+        <img className='avatar' alt='avatar' src={user && user.avatar} />
         <div>
           <div className='user'>
-            <h4>johndoe</h4>
+            <h4>{user && user.username}</h4>
             <button>Follow</button>
           </div>
           <div className='social'>
@@ -20,7 +21,6 @@ export const Profile = () => {
             <span>1 followers</span>
             <span>0 following</span>
           </div>
-          <p className='name'>John Doe from Sweden</p>
         </div>
       </UserInfo>
       <UserPhotos>
@@ -35,5 +35,8 @@ export const Profile = () => {
 };
 
 export const ProfileStore = () => {
-  return <Profile />;
+  const { id } = useParams();
+  const users = useSelector(usersSelector);
+
+  return <Profile users={users} id={id} />;
 };
