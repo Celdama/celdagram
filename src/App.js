@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { NavBarStore } from './layouts/NavBar';
 import { Main } from './layouts/Main';
-import { Home } from './components/Home';
+import { HomeStore } from './components/Home';
 import { SignUpStore } from './auth/SignUp';
 import { monitorAuthState } from './store/actions/authAction';
 import { RequireAuth } from './Helpers/requireAuth';
@@ -28,7 +28,7 @@ export const App = () => {
         <NavBarStore />
         <Main>
           <Routes>
-            <Route exact path='/' element={<Home />} />
+            <Route exact path='/' element={<HomeStore />} />
             <Route path='/profile/:id' element={<ProfileStore />} />
             <Route path='/signup' element={<SignUpStore />} />
             <Route path='/login' element={<LogInStore />} />
