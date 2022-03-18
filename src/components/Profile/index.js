@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { removeFollowing } from '../../store/actions/usersAction';
+import { addFollowing, removeFollowing } from '../../store/actions/usersAction';
 import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
@@ -13,13 +13,27 @@ export const Profile = ({ users, id, posts, currentUser }) => {
 
   const userPosts = posts.filter((post) => post.userId === user.uid);
 
+  const handleAddFollowing = (currentUserId, userToFollow) => {
+    dispatch(addFollowing(currentUserId, userToFollow));
+  };
+
   const handleRemoveFollowing = (currentUserId, userToUnfollow) => {
     dispatch(removeFollowing(currentUserId, userToUnfollow));
   };
 
   const socialBtn =
     currentUser && !currentUser.followings.some((e) => e.uid === id) ? (
-      <button>follow</button>
+      <button
+        onClick={() =>
+          handleAddFollowing(currentUser.uid, {
+            avatar: user.avatar,
+            uid: user.uid,
+            username: user.username,
+          })
+        }
+      >
+        follow
+      </button>
     ) : (
       <button
         onClick={() =>
