@@ -19,7 +19,7 @@ export const Profile = ({ users, id, posts, currentUser }) => {
   const userPosts = posts.filter((post) => post.userId === user.uid);
 
   const handleAddFollowing = (currentUser, userToFollow) => {
-    const { avatar, uid, username } = currentUser;
+    const { uid, avatar, username } = currentUser;
     dispatch(addFollowing(uid, userToFollow));
     dispatch(
       addFollower(userToFollow.uid, {
@@ -31,8 +31,9 @@ export const Profile = ({ users, id, posts, currentUser }) => {
   };
 
   const handleRemoveFollowing = (currentUser, userToUnfollow) => {
-    const { avatar, uid, username } = currentUser;
-    dispatch(removeFollowing(uid, userToUnfollow));
+    const { uid, avatar, username } = currentUser;
+
+    dispatch(removeFollowing(currentUser.uid, userToUnfollow));
     dispatch(
       removeFollower(userToUnfollow.uid, {
         avatar,
@@ -82,8 +83,8 @@ export const Profile = ({ users, id, posts, currentUser }) => {
             <span>
               {userPosts.length} photo{userPosts.length > 1 ? 's' : ''}
             </span>
-            <span>1 followers</span>
-            <span>0 following</span>
+            <span>{user && user.followers.length} followers</span>
+            <span>{user && user.followings.length} following</span>
           </div>
         </div>
       </UserInfo>
