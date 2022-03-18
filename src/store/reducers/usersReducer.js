@@ -1,6 +1,7 @@
 export const ADD_USER = 'ADD_USER';
 export const GET_USERS = 'GET_USERS';
 export const ADD_FOLLOWING = 'ADD_FOLLOWING';
+export const REMOVE_FOLLOWING = 'REMOVE_FOLLOWING';
 
 const initialState = [];
 
@@ -19,6 +20,8 @@ export const usersReducer = (state = initialState, action) => {
             }
           : user;
       });
+    case REMOVE_FOLLOWING:
+      return state;
     default:
       return state;
   }
