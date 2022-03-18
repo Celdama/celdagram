@@ -6,7 +6,7 @@ import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { Wrapper, Photo, UserInfo, UserPhotos } from './profile.style';
 
-export const Profile = ({ users, id, posts, authUser, currentUser }) => {
+export const Profile = ({ users, id, posts, currentUser }) => {
   const user = users.filter((user) => user.uid === id)[0];
 
   const userPosts = posts.filter((post) => post.userId === user.uid);
@@ -54,12 +54,6 @@ export const ProfileStore = () => {
   const currentUser = users.filter((user) => user.uid === authUser.uid)[0];
 
   return (
-    <Profile
-      users={users}
-      id={id}
-      posts={posts}
-      authUser={authUser}
-      currentUser={currentUser}
-    />
+    <Profile users={users} id={id} posts={posts} currentUser={currentUser} />
   );
 };
