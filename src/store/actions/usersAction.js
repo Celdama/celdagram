@@ -71,7 +71,10 @@ export const addFollowing = (followerId, following) => {
       });
       dispatch({
         type: ADD_FOLLOWING,
-        payload: {},
+        payload: {
+          followerId,
+          following,
+        },
       });
     } catch (err) {
       return console.log(err);
