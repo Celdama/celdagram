@@ -11,7 +11,14 @@ export const usersReducer = (state = initialState, action) => {
     case GET_USERS:
       return [...action.payload];
     case ADD_FOLLOWING:
-      return state;
+      return state.map((user) => {
+        return user.uid === action.payload.followerId
+          ? {
+              ...user,
+              followings: [...user.followings, action.payload.following],
+            }
+          : user;
+      });
     default:
       return state;
   }

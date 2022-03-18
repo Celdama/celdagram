@@ -67,7 +67,7 @@ export const addFollowing = (followerId, following) => {
     const followingsDoc = doc(db, 'users', followerId);
     try {
       await updateDoc(followingsDoc, {
-        followings: arrayUnion({ following }),
+        followings: arrayUnion(following),
       });
       dispatch({
         type: ADD_FOLLOWING,
