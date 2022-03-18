@@ -5,6 +5,7 @@ import {
   addFollowing,
   removeFollowing,
   addFollower,
+  removeFollower,
 } from '../../store/actions/usersAction';
 import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
@@ -30,8 +31,15 @@ export const Profile = ({ users, id, posts, currentUser }) => {
     );
   };
 
-  const handleRemoveFollowing = (currentUserId, userToUnfollow) => {
-    dispatch(removeFollowing(currentUserId, userToUnfollow));
+  const handleRemoveFollowing = (currentUser, userToUnfollow) => {
+    dispatch(removeFollowing(currentUser.uid, userToUnfollow));
+    dispatch(
+      removeFollower(userToUnfollow.uid, {
+        avatar: currentUser.avatar,
+        uid: currentUser.uid,
+        username: currentUser.username,
+      })
+    );
   };
 
   const socialBtn =
@@ -50,7 +58,7 @@ export const Profile = ({ users, id, posts, currentUser }) => {
     ) : (
       <button
         onClick={() =>
-          handleRemoveFollowing(currentUser.uid, {
+          handleRemoveFollowing(currentUser, {
             avatar: user.avatar,
             uid: user.uid,
             username: user.username,
