@@ -1,6 +1,6 @@
 export const ADD_USER = 'ADD_USER';
 export const GET_USERS = 'GET_USERS';
-export const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
+export const ADD_FOLLOWING = 'ADD_FOLLOWING';
 
 const initialState = [];
 
@@ -10,7 +10,7 @@ export const usersReducer = (state = initialState, action) => {
       return [...initialState, action.payload];
     case GET_USERS:
       return [...action.payload];
-    case TOGGLE_FOLLOW:
+    case ADD_FOLLOWING:
       return state;
     default:
       return state;

@@ -1,4 +1,4 @@
-import { ADD_USER, GET_USERS, TOGGLE_FOLLOW } from '../reducers/usersReducer';
+import { ADD_USER, GET_USERS, ADD_FOLLOWING } from '../reducers/usersReducer';
 import {
   collection,
   getDocs,
@@ -62,7 +62,7 @@ export const addUser = (data) => {
 // ONE ACTION TO ADD FOLLOW
 // ONE ACTION TO REMOVE FOLLOW
 // 2 BUTTON (FOLLOW / UNFOLLOW FOR EACH ACTION)
-export const toggleFollow = (followerId, following) => {
+export const addFollowing = (followerId, following) => {
   return async (dispatch) => {
     const followingsDoc = doc(db, 'users', followerId);
     try {
@@ -70,7 +70,7 @@ export const toggleFollow = (followerId, following) => {
         followings: arrayUnion({ following }),
       });
       dispatch({
-        type: TOGGLE_FOLLOW,
+        type: ADD_FOLLOWING,
         payload: {},
       });
     } catch (err) {

@@ -1,13 +1,13 @@
 import React from 'react';
 import { UserAvatar } from '../UserAvatar';
-import { toggleFollow } from '../../store/actions/usersAction';
+import { addFollowing } from '../../store/actions/usersAction';
 import { useDispatch } from 'react-redux';
 
 export const SuggestionList = ({ authUser, suggestions }) => {
   const dispatch = useDispatch();
 
-  const toggleUserFollow = (authUserId, userId) => {
-    dispatch(toggleFollow(authUserId, userId));
+  const handleAddFollowing = (authUserId, userId) => {
+    dispatch(addFollowing(authUserId, userId));
   };
 
   return (
@@ -21,7 +21,7 @@ export const SuggestionList = ({ authUser, suggestions }) => {
                 <UserAvatar id={uid} url={avatar} name={username} size={30} />
                 <button
                   onClick={() =>
-                    toggleUserFollow(authUser.uid, {
+                    handleAddFollowing(authUser.uid, {
                       avatar,
                       uid,
                       username,
