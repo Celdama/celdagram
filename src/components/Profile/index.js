@@ -19,8 +19,6 @@ export const Profile = ({ users, id, posts, currentUser }) => {
   const userPosts = posts.filter((post) => post.userId === user.uid);
 
   const handleAddFollowing = (currentUser, userToFollow) => {
-    // console.log(currentUser);
-    // console.log(userToFollow);
     dispatch(addFollowing(currentUser.uid, userToFollow));
     dispatch(
       addFollower(userToFollow.uid, {
