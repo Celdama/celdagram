@@ -1,4 +1,9 @@
-import { ADD_USER, GET_USERS, ADD_FOLLOWING } from '../reducers/usersReducer';
+import {
+  ADD_USER,
+  GET_USERS,
+  ADD_FOLLOWING,
+  REMOVE_FOLLOWING,
+} from '../reducers/usersReducer';
 import {
   collection,
   getDocs,
@@ -7,6 +12,7 @@ import {
   setDoc,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore';
 import { db } from '../../config/firebaseConfig';
 import { getAuth } from 'firebase/auth';
@@ -71,6 +77,26 @@ export const addFollowing = (followerId, following) => {
       });
       dispatch({
         type: ADD_FOLLOWING,
+        payload: {
+          followerId,
+          following,
+        },
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const removeFollowing = (followerId, following) => {
+  return async (dispatch) => {
+    const followingsDoc = doc(db, 'users', followerId);
+    try {
+      await updateDoc(followingsDoc, {
+        followings: arrayRemove(following),
+      });
+      dispatch({
+        type: REMOVE_FOLLOWING,
         payload: {
           followerId,
           following,
