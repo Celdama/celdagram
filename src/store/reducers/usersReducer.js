@@ -43,7 +43,16 @@ export const usersReducer = (state = initialState, action) => {
           : user;
       });
     case REMOVE_FOLLOWER:
-      return state;
+      return state.map((user) => {
+        return user.uid === action.payload.followingId
+          ? {
+              ...user,
+              followers: user.followers.filter(
+                (e) => e.uid !== action.payload.follower.uid
+              ),
+            }
+          : user;
+      });
     default:
       return state;
   }
