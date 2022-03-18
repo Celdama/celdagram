@@ -2,6 +2,7 @@ export const ADD_USER = 'ADD_USER';
 export const GET_USERS = 'GET_USERS';
 export const ADD_FOLLOWING = 'ADD_FOLLOWING';
 export const REMOVE_FOLLOWING = 'REMOVE_FOLLOWING';
+export const ADD_FOLLOWER = 'ADD_FOLLOWER';
 
 const initialState = [];
 
@@ -31,6 +32,8 @@ export const usersReducer = (state = initialState, action) => {
             }
           : user;
       });
+    case ADD_FOLLOWER:
+      return state;
     default:
       return state;
   }

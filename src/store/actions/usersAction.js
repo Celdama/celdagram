@@ -3,6 +3,7 @@ import {
   GET_USERS,
   ADD_FOLLOWING,
   REMOVE_FOLLOWING,
+  ADD_FOLLOWER,
 } from '../reducers/usersReducer';
 import {
   collection,
@@ -100,6 +101,26 @@ export const removeFollowing = (followerId, following) => {
         payload: {
           followerId,
           following,
+        },
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const addFollower = (followingId, follower) => {
+  return async (dispatch) => {
+    const followersDoc = doc(db, 'users', followingId);
+    try {
+      await updateDoc(followersDoc, {
+        followers: arrayUnion(follower),
+      });
+      dispatch({
+        type: ADD_FOLLOWER,
+        payload: {
+          followingId,
+          follower,
         },
       });
     } catch (err) {
