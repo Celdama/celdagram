@@ -4,6 +4,7 @@ import {
   ADD_FOLLOWING,
   REMOVE_FOLLOWING,
   ADD_FOLLOWER,
+  REMOVE_FOLLOWER,
 } from '../reducers/usersReducer';
 import {
   collection,
@@ -118,6 +119,26 @@ export const addFollower = (followingId, follower) => {
       });
       dispatch({
         type: ADD_FOLLOWER,
+        payload: {
+          followingId,
+          follower,
+        },
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const removeFollower = (followingId, follower) => {
+  return async (dispatch) => {
+    const followersDoc = doc(db, 'users', followingId);
+    try {
+      await updateDoc(followersDoc, {
+        followers: arrayRemove(follower),
+      });
+      dispatch({
+        type: REMOVE_FOLLOWER,
         payload: {
           followingId,
           follower,
