@@ -7,31 +7,22 @@ import { usersSelector } from '../../store/selectors/usersSelector';
 import { PostStore } from '../Post';
 import { Wrapper, Content } from './timeline.style';
 
-export const Timeline = ({ posts, authUser, currentUser }) => {
-  // console.log(currentUser.followings);
-  // console.log(posts.userId);
-
+export const Timeline = ({ posts, currentUser }) => {
   const followings = currentUser && currentUser.followings;
 
   const postsContent = posts.filter((post) =>
     followings.some((e) => e.uid === post.userId)
   );
 
-  console.log(!postsContent);
-
   return (
     <Wrapper>
       <Content>
-        {/* {posts &&
-          postsContent.map((post, index) => (
-            <PostStore key={index} post={post} />
-          ))} */}
-        {!postsContent ? (
+        {postsContent.length > 0 ? (
           postsContent.map((post, index) => (
             <PostStore key={index} post={post} />
           ))
         ) : (
-          <p>you need to follow</p>
+          <p>you need to follow someone to see post</p>
         )}
       </Content>
     </Wrapper>
