@@ -19,23 +19,25 @@ export const Profile = ({ users, id, posts, currentUser }) => {
   const userPosts = posts.filter((post) => post.userId === user.uid);
 
   const handleAddFollowing = (currentUser, userToFollow) => {
-    dispatch(addFollowing(currentUser.uid, userToFollow));
+    const { avatar, uid, username } = currentUser;
+    dispatch(addFollowing(uid, userToFollow));
     dispatch(
       addFollower(userToFollow.uid, {
-        avatar: currentUser.avatar,
-        uid: currentUser.uid,
-        username: currentUser.username,
+        avatar,
+        uid,
+        username,
       })
     );
   };
 
   const handleRemoveFollowing = (currentUser, userToUnfollow) => {
-    dispatch(removeFollowing(currentUser.uid, userToUnfollow));
+    const { avatar, uid, username } = currentUser;
+    dispatch(removeFollowing(uid, userToUnfollow));
     dispatch(
       removeFollower(userToUnfollow.uid, {
-        avatar: currentUser.avatar,
-        uid: currentUser.uid,
-        username: currentUser.username,
+        avatar,
+        uid,
+        username,
       })
     );
   };
