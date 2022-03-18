@@ -33,7 +33,14 @@ export const usersReducer = (state = initialState, action) => {
           : user;
       });
     case ADD_FOLLOWER:
-      return state;
+      return state.map((user) => {
+        return user.uid === action.payload.followingId
+          ? {
+              ...user,
+              followers: [...user.followers, action.payload.follower],
+            }
+          : user;
+      });
     default:
       return state;
   }
