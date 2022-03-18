@@ -1,14 +1,21 @@
 import React from 'react';
 import { UserAvatar } from '../UserAvatar';
-import { addFollowing } from '../../store/actions/usersAction';
+import { addFollower, addFollowing } from '../../store/actions/usersAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { usersSelector } from '../../store/selectors/usersSelector';
 
 export const SuggestionList = ({ authUser, suggestions, currentUser }) => {
   const dispatch = useDispatch();
 
-  const handleAddFollowing = (authUserId, userId) => {
-    dispatch(addFollowing(authUserId, userId));
+  const handleAddFollowing = (authUser, userToFollow) => {
+    dispatch(addFollowing(authUser.uid, userToFollow));
+    dispatch(
+      addFollower(userToFollow.uid, {
+        avatar: authUser.photoURL,
+        uid: authUser.uid,
+        username: authUser.displayName,
+      })
+    );
   };
 
   const suggestionsContent = suggestions.map(({ uid, avatar, username }) => {
@@ -18,7 +25,7 @@ export const SuggestionList = ({ authUser, suggestions, currentUser }) => {
           <UserAvatar id={uid} url={avatar} name={username} size={30} />
           <button
             onClick={() =>
-              handleAddFollowing(authUser.uid, {
+              handleAddFollowing(authUser, {
                 avatar,
                 uid,
                 username,
