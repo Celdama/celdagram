@@ -41,7 +41,7 @@ export const Profile = ({ users, id, posts, currentUser }) => {
         <div>
           <div className='user'>
             <h4>{user && user.username}</h4>
-            {socialBtn}
+            {user !== currentUser && socialBtn}
           </div>
           <div className='social'>
             <span>
