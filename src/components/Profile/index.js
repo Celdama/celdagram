@@ -1,14 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { Wrapper, Photo, UserInfo, UserPhotos } from './profile.style';
 
-export const Profile = ({ users, id, posts }) => {
+export const Profile = ({ users, id, posts, authUser, currentUser }) => {
   const user = users.filter((user) => user.uid === id)[0];
 
   const userPosts = posts.filter((post) => post.userId === user.uid);
+
+  const socialBtn =
+    currentUser && !currentUser.followings.some((e) => e.uid === id) ? (
+      <button>follow</button>
+    ) : (
+      <button>unfollow</button>
+    );
 
   return (
     <Wrapper>
@@ -17,7 +25,7 @@ export const Profile = ({ users, id, posts }) => {
         <div>
           <div className='user'>
             <h4>{user && user.username}</h4>
-            <button>Follow</button>
+            {socialBtn}
           </div>
           <div className='social'>
             <span>
@@ -41,6 +49,17 @@ export const ProfileStore = () => {
   const { id } = useParams();
   const users = useSelector(usersSelector);
   const posts = useSelector(postsSelector);
+  const authUser = useSelector(authSelector);
 
-  return <Profile users={users} id={id} posts={posts} />;
+  const currentUser = users.filter((user) => user.uid === authUser.uid)[0];
+
+  return (
+    <Profile
+      users={users}
+      id={id}
+      posts={posts}
+      authUser={authUser}
+      currentUser={currentUser}
+    />
+  );
 };
