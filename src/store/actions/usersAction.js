@@ -62,12 +62,12 @@ export const addUser = (data) => {
 // ONE ACTION TO ADD FOLLOW
 // ONE ACTION TO REMOVE FOLLOW
 // 2 BUTTON (FOLLOW / UNFOLLOW FOR EACH ACTION)
-export const toggleFollow = (followerId, followingId) => {
+export const toggleFollow = (followerId, following) => {
   return async (dispatch) => {
     const followingsDoc = doc(db, 'users', followerId);
     try {
       await updateDoc(followingsDoc, {
-        followings: arrayUnion(followingId),
+        followings: arrayUnion({ following }),
       });
       dispatch({
         type: TOGGLE_FOLLOW,

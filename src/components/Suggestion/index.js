@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 
 export const SuggestionList = ({ authUser, suggestions }) => {
   const dispatch = useDispatch();
-  console.log(authUser);
 
   const toggleUserFollow = (authUserId, userId) => {
     dispatch(toggleFollow(authUserId, userId));
@@ -20,7 +19,15 @@ export const SuggestionList = ({ authUser, suggestions }) => {
             return (
               <div key={uid}>
                 <UserAvatar id={uid} url={avatar} name={username} size={30} />
-                <button onClick={() => toggleUserFollow(authUser.uid, uid)}>
+                <button
+                  onClick={() =>
+                    toggleUserFollow(authUser.uid, {
+                      avatar,
+                      uid,
+                      username,
+                    })
+                  }
+                >
                   Follow
                 </button>
               </div>
