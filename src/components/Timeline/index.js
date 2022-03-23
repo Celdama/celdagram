@@ -5,39 +5,21 @@ import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { AuthContent } from '../AuthContent';
 import { VisitorContent } from '../VisitorContent';
-
-import { PostStore } from '../Post';
 import { Wrapper, Content } from './timeline.style';
 
 export const Timeline = ({ posts, currentUser }) => {
-  // const followings = currentUser && currentUser.followings;
-
-  // const postsContent =
-  //   followings &&
-  //   posts.filter((post) => followings.some((e) => e.uid === post.userId));
-
   return (
     <Wrapper>
       <Content>
-        {currentUser !== undefined ? (
+        {currentUser ? (
           <AuthContent posts={posts} currentUser={currentUser} />
         ) : (
           <VisitorContent posts={posts} />
         )}
-        {/* {postsContent && postsContent.length > 0 ? (
-          postsContent.map((post, index) => (
-            <PostStore key={index} post={post} />
-          ))
-        ) : (
-          <p>you need to follow someone to see post</p>
-        )} */}
       </Content>
     </Wrapper>
   );
 };
-
-// AuthContent />
-// VisitorContent />
 
 export const TimelineStore = () => {
   const posts = useSelector(postsSelector);
