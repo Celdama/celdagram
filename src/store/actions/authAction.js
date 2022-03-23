@@ -75,7 +75,6 @@ export const logOutUser = () => {
       await signOut(auth);
       dispatch({
         type: LOGOUT_USER,
-        payload: {},
       });
     } catch (err) {
       return console.log(err);
