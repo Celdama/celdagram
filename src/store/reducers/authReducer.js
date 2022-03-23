@@ -24,7 +24,8 @@ export const authReducer = (state = initialState, action) => {
     case UPDATE_USER:
       return state;
     case MONITOR_AUTH_STATE:
-      return { ...state, ...action.payload };
+      const currentUser = { ...action.payload };
+      return { ...state, ...currentUser };
     case LOGIN_USER:
       const loginUser = {
         email: action.payload.email,
