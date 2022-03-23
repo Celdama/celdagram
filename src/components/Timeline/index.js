@@ -4,14 +4,13 @@ import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { AuthContent } from '../AuthContent';
+import { VisitorContent } from '../VisitorContent';
 
 import { PostStore } from '../Post';
 import { Wrapper, Content } from './timeline.style';
 
 export const Timeline = ({ posts, currentUser }) => {
   // const followings = currentUser && currentUser.followings;
-  console.log(currentUser);
-  console.log(posts);
 
   // const postsContent =
   //   followings &&
@@ -23,7 +22,7 @@ export const Timeline = ({ posts, currentUser }) => {
         {currentUser !== undefined ? (
           <AuthContent posts={posts} currentUser={currentUser} />
         ) : (
-          <p>log</p>
+          <VisitorContent posts={posts} />
         )}
         {/* {postsContent && postsContent.length > 0 ? (
           postsContent.map((post, index) => (
