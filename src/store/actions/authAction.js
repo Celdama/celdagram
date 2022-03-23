@@ -62,7 +62,6 @@ export const updateUser = (username, avatar) => {
       });
       dispatch({
         type: UPDATE_USER,
-        payload: {},
       });
     } catch (err) {
       return console.log(err);

@@ -9,9 +9,15 @@ const initialState = {};
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_USER:
-      return { ...state, ...action.payload };
+      const { email, uid } = action.payload;
+      const registerUser = {
+        email,
+        uid,
+      };
+
+      return { ...state, ...registerUser };
     case UPDATE_USER:
-      return { ...state, ...action.payload };
+      return state;
     case MONITOR_AUTH_STATE:
       return { ...state, ...action.payload };
     case LOGIN_USER:
