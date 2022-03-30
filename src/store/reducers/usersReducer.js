@@ -62,7 +62,16 @@ export const usersReducer = (state = initialState, action) => {
           : user;
       });
     case REMOVE_LIKED_POST:
-      return state;
+      return state.map((user) => {
+        return user.uid === action.payload.currentUserId
+          ? {
+              ...user,
+              likes: user.likes.filter(
+                (item) => item !== action.payload.postId
+              ),
+            }
+          : user;
+      });
     default:
       return state;
   }
