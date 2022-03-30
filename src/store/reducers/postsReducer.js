@@ -15,7 +15,11 @@ export const postsReducer = (state = initialState, action) => {
           : post;
       });
     case ADD_LIKE:
-      return state;
+      return state.map((post) => {
+        return post.id === action.payload.postId
+          ? { ...post, likes: [...post.likes, action.payload.data] }
+          : post;
+      });
     default:
       return state;
   }
