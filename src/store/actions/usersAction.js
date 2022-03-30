@@ -155,7 +155,7 @@ export const addLikedPost = (currentUserId, postId) => {
         likes: arrayUnion(postId),
       });
       dispatch({
-        ADD_LIKED_POST,
+        type: ADD_LIKED_POST,
         payload: {
           currentUserId,
           postId,

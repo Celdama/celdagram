@@ -78,24 +78,13 @@ export const Post = ({
   };
 
   const addLike = (post) => {
-    // console.log(post);
-    // 1ere étape : ajouter l'id du post liké dans le tableau des post likés de l'user en question
     addLikedPostToFirebase(currentUser.uid, post.id);
-    // shadowLikesUser.push(post.id);
-    // console.log(shadowLikesUser);
 
-    // 2eme étape : ajouter les info de l'user dans le tableaux des likes du post en question
-    // const shadowPostLikes = post.likes;
-    const data = {
+    const userWhoLike = {
       userId: currentUser.uid,
       username: currentUser.username,
     };
-    addUserLikeToFirebase(data, post.id);
-    // shadowPostLikes.push({
-    //   userId: currentUser.uid,
-    //   username: currentUser.username,
-    // });
-    // console.log(shadowPostLikes);
+    addUserLikeToFirebase(userWhoLike, post.id);
   };
 
   return (
