@@ -1,6 +1,7 @@
 export const GET_POSTS = 'GET_POSTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_LIKE = 'ADD_LIKE';
+export const REMOVE_LIKE = 'REMOVE_LIKE';
 
 const initialState = [];
 
@@ -20,6 +21,8 @@ export const postsReducer = (state = initialState, action) => {
           ? { ...post, likes: [...post.likes, action.payload.data] }
           : post;
       });
+    case REMOVE_LIKE:
+      return state;
     default:
       return state;
   }
