@@ -6,7 +6,7 @@ import {
   addLike,
   removeLike,
 } from '../../store/actions/postsAction';
-import { addLikedPost } from '../../store/actions/usersAction';
+import { addLikedPost, removeLikedPost } from '../../store/actions/usersAction';
 import { UserAvatar } from '../UserAvatar';
 import {
   Wrapper,
@@ -31,6 +31,7 @@ export const Post = ({
   addUserLikeToFirebase,
   addCommentToFirebase,
   removeUserLikeFromFirebase,
+  removeLikedPostFromFirebase,
   users,
   authUser,
 }) => {
@@ -99,6 +100,7 @@ export const Post = ({
     };
 
     removeUserLikeFromFirebase(userWhoDislike, post.id);
+    removeLikedPostFromFirebase(currentUser.uid, post.id);
   };
 
   const likesIcons = currentUser.likes.includes(post.id) ? (
@@ -190,12 +192,20 @@ export const PostStore = ({ post }) => {
     [dispatch]
   );
 
+  const removeLikedPostFromFirebase = useCallback(
+    (userId, postId) => {
+      dispatch(removeLikedPost(userId, postId));
+    },
+    [dispatch]
+  );
+
   return (
     <Post
       addUserLikeToFirebase={addUserLikeToFirebase}
       addLikedPostToFirebase={addLikedPostToFirebase}
       addCommentToFirebase={addCommentToFirebase}
       removeUserLikeFromFirebase={removeUserLikeFromFirebase}
+      removeLikedPostFromFirebase={removeLikedPostFromFirebase}
       authUser={authUser}
       post={post}
       users={users}
