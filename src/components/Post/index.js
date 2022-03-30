@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import formatDistance from 'date-fns/formatDistance';
 import { addComment, addLike } from '../../store/actions/postsAction';
+import { addLikedPost } from '../../store/actions/usersAction';
 import { UserAvatar } from '../UserAvatar';
 import {
   Wrapper,
@@ -22,6 +23,7 @@ import { authSelector } from '../../store/selectors/authSelector';
 
 export const Post = ({
   post,
+  addLikedPostToFirebase,
   addUserLikeToFirebase,
   addCommentToFirebase,
   users,
@@ -78,7 +80,7 @@ export const Post = ({
   const addLike = (post) => {
     // console.log(post);
     // 1ere étape : ajouter l'id du post liké dans le tableau des post likés de l'user en question
-    const shadowLikesUser = currentUser.likes;
+    addLikedPostToFirebase(currentUser.uid, post.id);
     // shadowLikesUser.push(post.id);
     // console.log(shadowLikesUser);
 
@@ -175,9 +177,17 @@ export const PostStore = ({ post }) => {
     [dispatch]
   );
 
+  const addLikedPostToFirebase = useCallback(
+    (userId, postId) => {
+      dispatch(addLikedPost(userId, postId));
+    },
+    [dispatch]
+  );
+
   return (
     <Post
       addUserLikeToFirebase={addUserLikeToFirebase}
+      addLikedPostToFirebase={addLikedPostToFirebase}
       addCommentToFirebase={addCommentToFirebase}
       authUser={authUser}
       post={post}
