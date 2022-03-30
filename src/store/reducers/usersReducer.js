@@ -4,6 +4,7 @@ export const ADD_FOLLOWING = 'ADD_FOLLOWING';
 export const REMOVE_FOLLOWING = 'REMOVE_FOLLOWING';
 export const ADD_FOLLOWER = 'ADD_FOLLOWER';
 export const REMOVE_FOLLOWER = 'REMOVE_FOLLOWER';
+export const ADD_LIKED_POST = 'ADD_LIKED_POST';
 
 const initialState = [];
 
@@ -53,6 +54,8 @@ export const usersReducer = (state = initialState, action) => {
             }
           : user;
       });
+    case ADD_LIKED_POST:
+      return state;
     default:
       return state;
   }
