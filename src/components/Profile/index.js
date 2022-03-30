@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -11,12 +11,31 @@ import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { Wrapper, Photo, UserInfo, UserPhotos } from './profile.style';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../config/firebaseConfig';
+import { nanoid } from 'nanoid';
 
 export const Profile = ({ users, id, posts, currentUser }) => {
+  const [photo, setPhoto] = useState(null);
+  const [uploadPhotoImg, setUploadPhotoImg] = useState(false);
+  const [postData, setPostData] = useState({
+    description: '',
+    photoUrl: '',
+    photoName: '',
+    userId: '',
+    likes: [],
+    comment: [],
+  });
   const dispatch = useDispatch();
   const user = users.filter((user) => user.uid === id)[0];
 
   const userPosts = posts.filter((post) => post.userId === user.uid);
+
+  useEffect(() => {
+    if (uploadPhotoImg) {
+      console.log('tes');
+    }
+  }, [uploadPhotoImg]);
 
   const handleAddFollowing = (currentUser, userToFollow) => {
     const { uid, avatar, username } = currentUser;
@@ -70,6 +89,47 @@ export const Profile = ({ users, id, posts, currentUser }) => {
       </button>
     );
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setPostData((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
+  console.log(user.uid);
+
+  const handlePhotoChange = (e) => {
+    if (e.target.files[0]) {
+      setPhoto(e.target.files[0]);
+    }
+  };
+
+  const handleAddPost = async (e) => {
+    e.preventDefault();
+    const photoId = nanoid();
+    const photoRef = ref(storage, `${photoId}-photo`);
+
+    try {
+      await uploadBytes(photoRef, photo);
+      const url = await getDownloadURL(photoRef);
+      setPostData((prevState) => {
+        return {
+          ...prevState,
+          photoUrl: url,
+          photoName: `${photoId}-photo`,
+          userId: user.uid,
+        };
+      });
+      setUploadPhotoImg(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Wrapper>
       <UserInfo>
@@ -93,6 +153,21 @@ export const Profile = ({ users, id, posts, currentUser }) => {
           <Photo key={index} imgUrl={post.photoURL} />
         ))}
       </UserPhotos>
+      <form>
+        <div>
+          <label htmlFor='description'>Description</label>
+          <input type='text' name='description' onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor='photo'>Photo</label>
+          <input type='file' name='photo' onChange={handlePhotoChange} />
+        </div>
+        <div>
+          <button type='button' onClick={handleAddPost}>
+            Add Post
+          </button>
+        </div>
+      </form>
     </Wrapper>
   );
 };
