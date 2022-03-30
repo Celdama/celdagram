@@ -1,7 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import formatDistance from 'date-fns/formatDistance';
-import { addComment, addLike } from '../../store/actions/postsAction';
+import {
+  addComment,
+  addLike,
+  removeLike,
+} from '../../store/actions/postsAction';
 import { addLikedPost } from '../../store/actions/usersAction';
 import { UserAvatar } from '../UserAvatar';
 import {
@@ -26,6 +30,7 @@ export const Post = ({
   addLikedPostToFirebase,
   addUserLikeToFirebase,
   addCommentToFirebase,
+  removeUserLikeFromFirebase,
   users,
   authUser,
 }) => {
@@ -88,7 +93,12 @@ export const Post = ({
   };
 
   const removeLike = (post) => {
-    console.log('removce');
+    const userWhoDislike = {
+      userId: currentUser.uid,
+      username: currentUser.username,
+    };
+
+    removeUserLikeFromFirebase(userWhoDislike, post.id);
   };
 
   const likesIcons = currentUser.likes.includes(post.id) ? (
@@ -173,11 +183,19 @@ export const PostStore = ({ post }) => {
     [dispatch]
   );
 
+  const removeUserLikeFromFirebase = useCallback(
+    (data, postId) => {
+      dispatch(removeLike(data, postId));
+    },
+    [dispatch]
+  );
+
   return (
     <Post
       addUserLikeToFirebase={addUserLikeToFirebase}
       addLikedPostToFirebase={addLikedPostToFirebase}
       addCommentToFirebase={addCommentToFirebase}
+      removeUserLikeFromFirebase={removeUserLikeFromFirebase}
       authUser={authUser}
       post={post}
       users={users}
