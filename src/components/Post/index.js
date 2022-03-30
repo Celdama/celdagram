@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import formatDistance from 'date-fns/formatDistance';
-import { addComment } from '../../store/actions/postsAction';
+import { addComment, addLike } from '../../store/actions/postsAction';
 import { UserAvatar } from '../UserAvatar';
 import {
   Wrapper,
@@ -20,7 +20,13 @@ import { refactorDateString } from '../../Helpers/refactorDateString';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { authSelector } from '../../store/selectors/authSelector';
 
-export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
+export const Post = ({
+  post,
+  addLikeToFirebase,
+  addCommentToFirebase,
+  users,
+  authUser,
+}) => {
   const [formData, setFormData] = useState({
     author: authUser && authUser.displayName,
     comment: '',
@@ -77,12 +83,17 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
     // console.log(shadowLikesUser);
 
     // 2eme étape : ajouter les info de l'user dans le tableaux des likes du post en question
-    const shadowPostLikes = post.likes;
-    shadowPostLikes.push({
+    // const shadowPostLikes = post.likes;
+    const data = {
       userId: currentUser.uid,
       username: currentUser.username,
-    });
-    console.log(shadowPostLikes);
+    };
+    addLikeToFirebase(data, post.id);
+    // shadowPostLikes.push({
+    //   userId: currentUser.uid,
+    //   username: currentUser.username,
+    // });
+    // console.log(shadowPostLikes);
   };
 
   return (
@@ -157,8 +168,16 @@ export const PostStore = ({ post }) => {
     [dispatch, authUser.uid]
   );
 
+  const addLikeToFirebase = useCallback(
+    (data, postId) => {
+      dispatch(addLike(data, postId));
+    },
+    [dispatch]
+  );
+
   return (
     <Post
+      addLikeToFirebase={addLikeToFirebase}
       addCommentToFirebase={addCommentToFirebase}
       authUser={authUser}
       post={post}
