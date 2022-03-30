@@ -2,11 +2,14 @@ export const GET_POSTS = 'GET_POSTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_USER_LIKE = 'ADD_USER_LIKE';
 export const REMOVE_USER_LIKE = 'REMOVE_USER_LIKE';
+export const ADD_POST = 'ADD_POST';
 
 const initialState = [];
 
 export const postsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_POST:
+      return state;
     case GET_POSTS:
       return [...action.payload];
     case ADD_COMMENT:
