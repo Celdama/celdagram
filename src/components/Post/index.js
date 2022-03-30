@@ -22,7 +22,7 @@ import { authSelector } from '../../store/selectors/authSelector';
 
 export const Post = ({
   post,
-  addLikeToFirebase,
+  addUserLikeToFirebase,
   addCommentToFirebase,
   users,
   authUser,
@@ -88,7 +88,7 @@ export const Post = ({
       userId: currentUser.uid,
       username: currentUser.username,
     };
-    addLikeToFirebase(data, post.id);
+    addUserLikeToFirebase(data, post.id);
     // shadowPostLikes.push({
     //   userId: currentUser.uid,
     //   username: currentUser.username,
@@ -168,7 +168,7 @@ export const PostStore = ({ post }) => {
     [dispatch, authUser.uid]
   );
 
-  const addLikeToFirebase = useCallback(
+  const addUserLikeToFirebase = useCallback(
     (data, postId) => {
       dispatch(addLike(data, postId));
     },
@@ -177,7 +177,7 @@ export const PostStore = ({ post }) => {
 
   return (
     <Post
-      addLikeToFirebase={addLikeToFirebase}
+      addUserLikeToFirebase={addUserLikeToFirebase}
       addCommentToFirebase={addCommentToFirebase}
       authUser={authUser}
       post={post}
