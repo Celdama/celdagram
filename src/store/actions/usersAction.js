@@ -5,6 +5,7 @@ import {
   REMOVE_FOLLOWING,
   ADD_FOLLOWER,
   REMOVE_FOLLOWER,
+  ADD_LIKED_POST,
 } from '../reducers/usersReducer';
 import {
   collection,
@@ -66,10 +67,6 @@ export const addUser = (data) => {
   };
 };
 
-// INSTEAD TOGGLE FOLLOW
-// ONE ACTION TO ADD FOLLOW
-// ONE ACTION TO REMOVE FOLLOW
-// 2 BUTTON (FOLLOW / UNFOLLOW FOR EACH ACTION)
 export const addFollowing = (followerId, following) => {
   return async (dispatch) => {
     const followingsDoc = doc(db, 'users', followerId);
@@ -142,6 +139,26 @@ export const removeFollower = (followingId, follower) => {
         payload: {
           followingId,
           follower,
+        },
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const addLikedPost = (currentUserId, postId) => {
+  return async (dispatch) => {
+    const userDoc = doc(db, 'users', currentUserId);
+    try {
+      await updateDoc(userDoc, {
+        likes: arrayUnion(postId),
+      });
+      dispatch({
+        ADD_LIKED_POST,
+        payload: {
+          currentUserId,
+          postId,
         },
       });
     } catch (err) {
