@@ -103,11 +103,12 @@ export const Post = ({
     removeLikedPostFromFirebase(currentUser.uid, post.id);
   };
 
-  const likesIcons = currentUser.likes.includes(post.id) ? (
-    <HeartIconSolid onClick={() => removeLike(post)} className='icon like' />
-  ) : (
-    <HeartIcon onClick={() => addLike(post)} className='icon not-like' />
-  );
+  const likesIcons =
+    currentUser && currentUser.likes.includes(post.id) ? (
+      <HeartIconSolid onClick={() => removeLike(post)} className='icon like' />
+    ) : (
+      <HeartIcon onClick={() => addLike(post)} className='icon not-like' />
+    );
 
   return (
     <Wrapper>
