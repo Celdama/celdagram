@@ -26,6 +26,9 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
     comment: '',
   });
 
+  const currentUser = users.filter((user) => user.uid === authUser.uid)[0];
+  // console.log(currentUser.likes);
+
   const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
   const { comments, photoURL, likes } = post;
@@ -66,6 +69,22 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
     });
   };
 
+  const addLike = (post) => {
+    // console.log(post);
+    // 1ere étape : ajouter l'id du post liké dans le tableau des post likés de l'user en question
+    const shadowLikesUser = currentUser.likes;
+    // shadowLikesUser.push(post.id);
+    // console.log(shadowLikesUser);
+
+    // 2eme étape : ajouter les info de l'user dans le tableaux des likes du post en question
+    const shadowPostLikes = post.likes;
+    shadowPostLikes.push({
+      userId: currentUser.uid,
+      username: currentUser.username,
+    });
+    console.log(shadowPostLikes);
+  };
+
   return (
     <Wrapper>
       <AvatarWrapper>
@@ -81,9 +100,15 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
         {!!authUser.email && (
           <IconsWrapper>
             {!!likes.length ? (
-              <HeartIconSolid className='icon like' />
+              <HeartIconSolid
+                onClick={() => addLike(post)}
+                className='icon like'
+              />
             ) : (
-              <HeartIcon className='icon not-like' />
+              <HeartIcon
+                onClick={() => addLike(post)}
+                className='icon not-like'
+              />
             )}
             <ChatIcon className='icon' />
           </IconsWrapper>
