@@ -87,6 +87,16 @@ export const Post = ({
     addUserLikeToFirebase(userWhoLike, post.id);
   };
 
+  const removeLike = (post) => {
+    console.log('removce');
+  };
+
+  const likesIcons = currentUser.likes.includes(post.id) ? (
+    <HeartIconSolid onClick={() => removeLike(post)} className='icon like' />
+  ) : (
+    <HeartIcon onClick={() => addLike(post)} className='icon not-like' />
+  );
+
   return (
     <Wrapper>
       <AvatarWrapper>
@@ -101,17 +111,7 @@ export const Post = ({
       <ContentPost>
         {!!authUser.email && (
           <IconsWrapper>
-            {!!likes.length ? (
-              <HeartIconSolid
-                onClick={() => addLike(post)}
-                className='icon like'
-              />
-            ) : (
-              <HeartIcon
-                onClick={() => addLike(post)}
-                className='icon not-like'
-              />
-            )}
+            {likesIcons}
             <ChatIcon className='icon' />
           </IconsWrapper>
         )}
