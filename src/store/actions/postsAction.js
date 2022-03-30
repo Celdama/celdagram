@@ -5,16 +5,32 @@ import {
   arrayUnion,
   updateDoc,
   arrayRemove,
+  addDoc,
 } from 'firebase/firestore';
 import { db } from '../../config/firebaseConfig';
 import {
   GET_POSTS,
+  ADD_POST,
   ADD_COMMENT,
   ADD_USER_LIKE,
   REMOVE_USER_LIKE,
 } from '../reducers/postsReducer';
 
 const postsCollectionRef = collection(db, 'posts');
+
+export const addPost = (data) => {
+  return async (dispatch) => {
+    try {
+      await addDoc(postsCollectionRef, data);
+      dispatch({
+        type: ADD_POST,
+        payload: data,
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
 
 export const getPosts = () => {
   return async (dispatch) => {

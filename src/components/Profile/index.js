@@ -100,8 +100,6 @@ export const Profile = ({ users, id, posts, currentUser }) => {
     });
   };
 
-  console.log(user.uid);
-
   const handlePhotoChange = (e) => {
     if (e.target.files[0]) {
       setPhoto(e.target.files[0]);
