@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import formatDistance from 'date-fns/formatDistance';
 import {
   addComment,
-  addLike,
-  removeLike,
+  addUserLike,
+  removeUserLike,
 } from '../../store/actions/postsAction';
 import { addLikedPost, removeLikedPost } from '../../store/actions/usersAction';
 import { UserAvatar } from '../UserAvatar';
@@ -173,7 +173,7 @@ export const PostStore = ({ post }) => {
 
   const addUserLikeToFirebase = useCallback(
     (data, postId) => {
-      dispatch(addLike(data, postId));
+      dispatch(addUserLike(data, postId));
     },
     [dispatch]
   );
@@ -187,7 +187,7 @@ export const PostStore = ({ post }) => {
 
   const removeUserLikeFromFirebase = useCallback(
     (data, postId) => {
-      dispatch(removeLike(data, postId));
+      dispatch(removeUserLike(data, postId));
     },
     [dispatch]
   );

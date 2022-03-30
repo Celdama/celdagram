@@ -10,8 +10,8 @@ import { db } from '../../config/firebaseConfig';
 import {
   GET_POSTS,
   ADD_COMMENT,
-  ADD_LIKE,
-  REMOVE_LIKE,
+  ADD_USER_LIKE,
+  REMOVE_USER_LIKE,
 } from '../reducers/postsReducer';
 
 const postsCollectionRef = collection(db, 'posts');
@@ -51,7 +51,7 @@ export const addComment = (data, postId) => {
   };
 };
 
-export const addLike = (data, postId) => {
+export const addUserLike = (data, postId) => {
   return async (dispatch) => {
     const postDoc = doc(db, 'posts', postId);
     try {
@@ -59,7 +59,7 @@ export const addLike = (data, postId) => {
         likes: arrayUnion(data),
       });
       dispatch({
-        type: ADD_LIKE,
+        type: ADD_USER_LIKE,
         payload: {
           data,
           postId,
@@ -71,7 +71,7 @@ export const addLike = (data, postId) => {
   };
 };
 
-export const removeLike = (data, postId) => {
+export const removeUserLike = (data, postId) => {
   return async (dispatch) => {
     const postDoc = doc(db, 'posts', postId);
     try {
@@ -79,7 +79,7 @@ export const removeLike = (data, postId) => {
         likes: arrayRemove(data),
       });
       dispatch({
-        type: REMOVE_LIKE,
+        type: REMOVE_USER_LIKE,
         payload: {
           data,
           postId,

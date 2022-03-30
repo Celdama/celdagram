@@ -1,7 +1,7 @@
 export const GET_POSTS = 'GET_POSTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
-export const ADD_LIKE = 'ADD_LIKE';
-export const REMOVE_LIKE = 'REMOVE_LIKE';
+export const ADD_USER_LIKE = 'ADD_USER_LIKE';
+export const REMOVE_USER_LIKE = 'REMOVE_USER_LIKE';
 
 const initialState = [];
 
@@ -15,13 +15,13 @@ export const postsReducer = (state = initialState, action) => {
           ? { ...post, comments: [...post.comments, action.payload.data] }
           : post;
       });
-    case ADD_LIKE:
+    case ADD_USER_LIKE:
       return state.map((post) => {
         return post.id === action.payload.postId
           ? { ...post, likes: [...post.likes, action.payload.data] }
           : post;
       });
-    case REMOVE_LIKE:
+    case REMOVE_USER_LIKE:
       return state.map((post) => {
         return post.id === action.payload.postId
           ? {
