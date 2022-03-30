@@ -6,7 +6,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { db } from '../../config/firebaseConfig';
-import { GET_POSTS, ADD_COMMENT } from '../reducers/postsReducer';
+import { GET_POSTS, ADD_COMMENT, ADD_LIKE } from '../reducers/postsReducer';
 
 const postsCollectionRef = collection(db, 'posts');
 
@@ -34,6 +34,26 @@ export const addComment = (data, postId) => {
       });
       dispatch({
         type: ADD_COMMENT,
+        payload: {
+          data,
+          postId,
+        },
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const addLike = (data, postId) => {
+  return async (dispatch) => {
+    const postDoc = doc(db, 'posts', postId);
+    try {
+      await updateDoc(postDoc, {
+        likes: arrayUnion(data),
+      });
+      dispatch({
+        type: ADD_LIKE,
         payload: {
           data,
           postId,
