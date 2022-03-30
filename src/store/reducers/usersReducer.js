@@ -5,6 +5,7 @@ export const REMOVE_FOLLOWING = 'REMOVE_FOLLOWING';
 export const ADD_FOLLOWER = 'ADD_FOLLOWER';
 export const REMOVE_FOLLOWER = 'REMOVE_FOLLOWER';
 export const ADD_LIKED_POST = 'ADD_LIKED_POST';
+export const REMOVE_LIKED_POST = 'REMOVE_LIKED_POST';
 
 const initialState = [];
 
@@ -60,6 +61,8 @@ export const usersReducer = (state = initialState, action) => {
           ? { ...user, likes: [...user.likes, action.payload.postId] }
           : user;
       });
+    case REMOVE_LIKED_POST:
+      return state;
     default:
       return state;
   }
