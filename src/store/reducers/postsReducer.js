@@ -22,7 +22,16 @@ export const postsReducer = (state = initialState, action) => {
           : post;
       });
     case REMOVE_LIKE:
-      return state;
+      return state.map((post) => {
+        return post.id === action.payload.postId
+          ? {
+              ...post,
+              likes: post.likes.filter(
+                (item) => item.userId !== action.payload.data.userId
+              ),
+            }
+          : post;
+      });
     default:
       return state;
   }
