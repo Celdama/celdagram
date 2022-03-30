@@ -6,6 +6,7 @@ import {
   ADD_FOLLOWER,
   REMOVE_FOLLOWER,
   ADD_LIKED_POST,
+  REMOVE_LIKED_POST,
 } from '../reducers/usersReducer';
 import {
   collection,
@@ -156,6 +157,26 @@ export const addLikedPost = (currentUserId, postId) => {
       });
       dispatch({
         type: ADD_LIKED_POST,
+        payload: {
+          currentUserId,
+          postId,
+        },
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const removeLikedPost = (currentUserId, postId) => {
+  return async (dispatch) => {
+    const userDoc = doc(db, 'users', currentUserId);
+    try {
+      await updateDoc(userDoc, {
+        likes: arrayRemove(postId),
+      });
+      dispatch({
+        type: REMOVE_LIKED_POST,
         payload: {
           currentUserId,
           postId,
