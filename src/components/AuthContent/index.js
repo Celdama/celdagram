@@ -12,7 +12,6 @@ export const AuthContent = ({ posts, currentUser }) => {
         post.userId === currentUser.uid
     );
 
-  console.log(postsContent);
   return (
     <>
       {postsContent && postsContent.length > 0 ? (
