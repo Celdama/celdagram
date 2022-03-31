@@ -12,15 +12,14 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  h4 {
+    font-size: 0.9rem;
+  }
 `;
 
 export const Avatar = styled.img`
   width: ${({ size }) => `${size}px`};
   height: ${({ size }) => `${size}px`};
   border-radius: ${({ size }) => `${size / 2}px`};
-  /* margin-right: 0.8rem; */
-`;
-
-export const Name = styled.h4`
-  font-size: 0.9rem;
 `;
