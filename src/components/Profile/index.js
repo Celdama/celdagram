@@ -6,6 +6,7 @@ import {
   removeFollowing,
   addFollower,
   removeFollower,
+  addNewPostId,
 } from '../../store/actions/usersAction';
 import { addPost } from '../../store/actions/postsAction';
 import { authSelector } from '../../store/selectors/authSelector';
@@ -22,6 +23,7 @@ export const Profile = ({
   posts,
   currentUser,
   addPostToFirebase,
+  addNewPostIdInUserPosts,
 }) => {
   const [photo, setPhoto] = useState(null);
   const [uploadPhotoImg, setUploadPhotoImg] = useState(false);
@@ -42,6 +44,7 @@ export const Profile = ({
     if (uploadPhotoImg) {
       console.log(postData);
       addPostToFirebase(postData);
+      addNewPostIdInUserPosts(user.uid, postData.photoId);
     }
   }, [uploadPhotoImg]);
 
@@ -195,6 +198,13 @@ export const ProfileStore = () => {
     [dispatch]
   );
 
+  const addNewPostIdInUserPosts = useCallback(
+    (currentUserId, postId) => {
+      dispatch(addNewPostId(currentUserId, postId));
+    },
+    [dispatch]
+  );
+
   return (
     <Profile
       users={users}
@@ -202,6 +212,7 @@ export const ProfileStore = () => {
       posts={posts}
       currentUser={currentUser}
       addPostToFirebase={addPostToFirebase}
+      addNewPostIdInUserPosts={addNewPostIdInUserPosts}
     />
   );
 };
