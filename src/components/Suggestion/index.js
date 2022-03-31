@@ -3,6 +3,7 @@ import { UserAvatar } from '../UserAvatar';
 import { addFollower, addFollowing } from '../../store/actions/usersAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { usersSelector } from '../../store/selectors/usersSelector';
+import { Wrapper, SuggestionsListWrapper, FollowBtn } from './suggestion.style';
 
 export const SuggestionList = ({ authUser, suggestions, currentUser }) => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export const SuggestionList = ({ authUser, suggestions, currentUser }) => {
       return (
         <div key={uid}>
           <UserAvatar id={uid} url={avatar} name={username} size={30} />
-          <button
+          <FollowBtn
             onClick={() =>
               handleAddFollowing(authUser, {
                 avatar,
@@ -33,7 +34,7 @@ export const SuggestionList = ({ authUser, suggestions, currentUser }) => {
             }
           >
             Follow
-          </button>
+          </FollowBtn>
         </div>
       );
     } else {
@@ -42,10 +43,12 @@ export const SuggestionList = ({ authUser, suggestions, currentUser }) => {
   });
 
   return (
-    <div className='content-user-suggestion'>
+    <Wrapper>
       <h5>Suggestions for you</h5>
-      <div className='suggestion-user'>{suggestions && suggestionsList}</div>
-    </div>
+      <SuggestionsListWrapper>
+        {suggestions && suggestionsList}
+      </SuggestionsListWrapper>
+    </Wrapper>
   );
 };
 
