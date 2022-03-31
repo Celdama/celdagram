@@ -1,9 +1,17 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { UploadIcon, XIcon } from '@heroicons/react/outline';
-import { Wrapper } from './addPost.style';
+import {
+  Wrapper,
+  Container,
+  PreviewUpload,
+  PreviewImgContainer,
+  PreviewTxtContainer,
+  CancelBtnContainer,
+  Form,
+  ShareBtn,
+} from './addPost.style';
 import { useDispatch, useSelector } from 'react-redux';
 import { usersSelector } from '../../store/selectors/usersSelector';
-import { postsSelector } from '../../store/selectors/postsSelector';
 import { authSelector } from '../../store/selectors/authSelector';
 import { addPost } from '../../store/actions/postsAction';
 import { addNewPostId } from '../../store/actions/usersAction';
@@ -104,30 +112,30 @@ export const AddPost = ({
     setPreviewLoad(!previewLoad);
     wrapperImg.current.classList.toggle('active');
   };
+
   return (
     <Wrapper>
       <h1>New post</h1>
-      <div className='container'>
-        <div
-          className='wrapper'
+      <Container>
+        <PreviewUpload
           onClick={!previewLoad ? defaultBtnActive : undefined}
           ref={wrapperImg}
         >
-          <div className='image'>
-            {previewLoad && <img ref={imgPreview} src='' alt='' />}
-          </div>
-          <div className='content'>
-            <div className='icon'>
-              <UploadIcon style={{ height: '70px' }} />
+          <PreviewImgContainer>
+            {previewLoad && <img ref={imgPreview} src='' alt='preview post' />}
+          </PreviewImgContainer>
+          <PreviewTxtContainer>
+            <UploadIcon style={{ height: '70px' }} />
+            <div>
+              <p>No file chosen, yet.</p>
+              <p>Click to browse.</p>
             </div>
-            <div className='text'>No file chosen, yet.</div>
-            <div className='text'>Click to browse.</div>
-          </div>
-          <div id='cancel-btn' onClick={resetPhoto}>
-            <XIcon style={{ height: '16px', padding: '0' }} />
-          </div>
-        </div>
-        <form>
+          </PreviewTxtContainer>
+          <CancelBtnContainer id='cancel-btn' onClick={resetPhoto}>
+            <XIcon style={{ height: '16px' }} />
+          </CancelBtnContainer>
+        </PreviewUpload>
+        <Form>
           <input
             ref={inputFile}
             id='default-btn'
@@ -144,20 +152,19 @@ export const AddPost = ({
               name='description'
               onChange={handleChange}
             />
-            <button type='button' onClick={handleAddPost}>
+            <ShareBtn type='button' onClick={handleAddPost}>
               Share
-            </button>
+            </ShareBtn>
           </div>
           <div></div>
-        </form>
-      </div>
+        </Form>
+      </Container>
     </Wrapper>
   );
 };
 
 export const AddPostStore = () => {
   const users = useSelector(usersSelector);
-  const posts = useSelector(postsSelector);
   const authUser = useSelector(authSelector);
   const dispatch = useDispatch();
 

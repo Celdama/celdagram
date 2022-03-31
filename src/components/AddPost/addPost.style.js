@@ -10,123 +10,92 @@ export const Wrapper = styled.div`
     font-size: 18px;
   }
 
-  .container {
-    height: 350px;
-    width: 450px;
+  .active {
+    border: none;
+  }
 
-    .wrapper.active {
-      border: none;
-    }
+  .active:hover #cancel-btn {
+    opacity: 1;
+  }
+`;
 
-    .wrapper.active:hover #cancel-btn {
-      opacity: 1;
-    }
+export const Container = styled.div`
+  height: 350px;
+  width: 450px;
+`;
 
-    .wrapper {
-      cursor: pointer;
-      position: relative;
-      height: 300px;
-      width: 100%;
-      border-radius: 10px;
-      background: transparent;
-      border: 2px dashed #c2cdda;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+export const PreviewUpload = styled.div`
+  cursor: pointer;
+  position: relative;
+  height: 300px;
+  width: 100%;
+  border-radius: 10px;
+  background: transparent;
+  border: 2px dashed #c2cdda;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`;
 
-      .image {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
+export const PreviewImgContainer = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
 
-        img {
-          height: 100%;
-          width: 100%;
-          object-fit: cover;
-        }
-      }
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+`;
 
-      .icon {
-        font-size: 100px;
-        color: #000;
-      }
+export const PreviewTxtContainer = styled.div`
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #000;
+    font-weight: 500;
+  }
+`;
 
-      .text {
-        font-size: 16px;
-        color: #000;
-        font-weight: 500;
-      }
+export const CancelBtnContainer = styled.div`
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background-color: #fff;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  width: 22px;
+  cursor: pointer;
+  opacity: 0;
+`;
 
-      #cancel-btn {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        background-color: #fff;
-        border-radius: 11px;
-        display: flex;
-        /* margin: auto; */
-        align-items: center;
-        justify-content: center;
-        height: 22px;
-        width: 22px;
-        cursor: pointer;
-        opacity: 0;
-        /* display: none; */
-      }
+export const Form = styled.form`
+  .caption {
+    margin-top: 20px;
+    display: flex;
 
-      .file-name {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding: 8px 0;
-        font-size: 18px;
-        color: #fff;
-        background: linear-gradient(135deg, #3a8ffe 0%, #9658fe 100%);
-      }
-    }
-
-    #custom-btn {
-      margin-top: 30px;
-      width: 100%;
+    input {
       outline: none;
-      height: 50px;
-      display: block;
-      border: none;
-      border-radius: 25px;
-      color: #fff;
-      font-size: 18px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      background: linear-gradient(135deg, #3a8ffe 0%, #9658fe 100%);
-    }
-
-    .caption {
-      margin-top: 20px;
-      display: flex;
-
-      input {
-        outline: none;
-        width: 100%;
-        border: none;
-        background-color: transparent;
-        padding: 2.5px;
-      }
-    }
-
-    button {
+      width: 100%;
       border: none;
       background-color: transparent;
-      /* background-color: #184e77; */
-      color: #184e77;
-      font-weight: bold;
-      border: none;
-      padding: 0.18rem 0.5rem;
-      border-radius: 4px;
-      cursor: pointer;
+      padding: 2.5px;
     }
   }
+`;
+
+export const ShareBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  color: #184e77;
+  font-weight: bold;
+  padding: 0.18rem 0.5rem;
+  cursor: pointer;
 `;
