@@ -6,8 +6,13 @@ export const AuthContent = ({ posts, currentUser }) => {
 
   const postsContent =
     followings &&
-    posts.filter((post) => followings.some((e) => e.uid === post.userId));
+    posts.filter(
+      (post) =>
+        followings.some((e) => e.uid === post.userId) ||
+        post.userId === currentUser.uid
+    );
 
+  console.log(postsContent);
   return (
     <>
       {postsContent && postsContent.length > 0 ? (
