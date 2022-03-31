@@ -12,7 +12,7 @@ import { monitorAuthState } from './store/actions/authAction';
 import { RequireAuth } from './Helpers/requireAuth';
 import { LogInStore } from './auth/LogIn';
 import { ProfileStore } from './components/Profile';
-import { AddPost } from './components/AddPost';
+import { AddPostStore } from './components/AddPost';
 export const App = () => {
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ export const App = () => {
             <Route path='/profile/:id' element={<ProfileStore />} />
             <Route path='/signup' element={<SignUpStore />} />
             <Route path='/login' element={<LogInStore />} />
-            <Route path='/new-post' element={<AddPost />} />
+            <Route path='/new-post' element={<AddPostStore />} />
           </Routes>
           {/* <Home /> */}
         </Main>

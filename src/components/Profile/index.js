@@ -1,4 +1,3 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -6,46 +5,17 @@ import {
   removeFollowing,
   addFollower,
   removeFollower,
-  addNewPostId,
 } from '../../store/actions/usersAction';
-import { addPost } from '../../store/actions/postsAction';
 import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { Wrapper, Photo, UserInfo, UserPhotos } from './profile.style';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { storage } from '../../config/firebaseConfig';
-import { nanoid } from 'nanoid';
 
-export const Profile = ({
-  users,
-  id,
-  posts,
-  currentUser,
-  addPostToFirebase,
-  addNewPostIdInUserPosts,
-}) => {
-  const [photo, setPhoto] = useState(null);
-  const [uploadPhotoImg, setUploadPhotoImg] = useState(false);
-  const [postData, setPostData] = useState({
-    description: '',
-    photoURL: '',
-    userId: '',
-    likes: [],
-    comments: [],
-  });
+export const Profile = ({ users, id, posts, currentUser }) => {
   const dispatch = useDispatch();
   const user = users.filter((user) => user.uid === id)[0];
 
   const userPosts = posts.filter((post) => post.userId === user.uid);
-
-  useEffect(() => {
-    if (uploadPhotoImg) {
-      console.log(postData);
-      addPostToFirebase(postData);
-      addNewPostIdInUserPosts(user.uid, postData.photoId);
-    }
-  }, [uploadPhotoImg]);
 
   const handleAddFollowing = (currentUser, userToFollow) => {
     const { uid, avatar, username } = currentUser;
@@ -99,45 +69,6 @@ export const Profile = ({
       </button>
     );
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setPostData((prevState) => {
-      return {
-        ...prevState,
-        [name]: value,
-      };
-    });
-  };
-
-  const handlePhotoChange = (e) => {
-    if (e.target.files[0]) {
-      setPhoto(e.target.files[0]);
-    }
-  };
-
-  const handleAddPost = async (e) => {
-    e.preventDefault();
-    const photoId = nanoid();
-    const photoRef = ref(storage, `${photoId}-photo`);
-
-    try {
-      await uploadBytes(photoRef, photo);
-      const url = await getDownloadURL(photoRef);
-      setPostData((prevState) => {
-        return {
-          ...prevState,
-          photoURL: url,
-          photoId,
-          userId: user.uid,
-        };
-      });
-      setUploadPhotoImg(true);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <Wrapper>
       <UserInfo>
@@ -161,21 +92,6 @@ export const Profile = ({
           <Photo key={index} imgUrl={post.photoURL} />
         ))}
       </UserPhotos>
-      <form>
-        <div>
-          <label htmlFor='description'>Description</label>
-          <input type='text' name='description' onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor='photo'>Photo</label>
-          <input type='file' name='photo' onChange={handlePhotoChange} />
-        </div>
-        <div>
-          <button type='button' onClick={handleAddPost}>
-            Add Post
-          </button>
-        </div>
-      </form>
     </Wrapper>
   );
 };
@@ -189,28 +105,7 @@ export const ProfileStore = () => {
 
   const currentUser = users.filter((user) => user.uid === authUser.uid)[0];
 
-  const addPostToFirebase = useCallback(
-    (data) => {
-      dispatch(addPost({ ...data }));
-    },
-    [dispatch]
-  );
-
-  const addNewPostIdInUserPosts = useCallback(
-    (currentUserId, postId) => {
-      dispatch(addNewPostId(currentUserId, postId));
-    },
-    [dispatch]
-  );
-
   return (
-    <Profile
-      users={users}
-      id={id}
-      posts={posts}
-      currentUser={currentUser}
-      addPostToFirebase={addPostToFirebase}
-      addNewPostIdInUserPosts={addNewPostIdInUserPosts}
-    />
+    <Profile users={users} id={id} posts={posts} currentUser={currentUser} />
   );
 };

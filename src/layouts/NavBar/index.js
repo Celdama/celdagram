@@ -1,11 +1,6 @@
 import React, { useCallback } from 'react';
 import { Wrapper, Content } from './navbar.style';
-import {
-  HomeIcon,
-  LogoutIcon,
-  PlusCircleIcon,
-  PlusIcon,
-} from '@heroicons/react/outline';
+import { HomeIcon, LogoutIcon, PlusIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
