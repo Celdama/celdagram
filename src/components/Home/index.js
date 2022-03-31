@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import {
   authSelector,
@@ -11,7 +10,9 @@ import { UserAvatar } from '../UserAvatar';
 import { Wrapper, Content, ContentUser } from './home.style';
 
 export const Home = ({ isAuth, authUser, users }) => {
-  const suggestionsContent = users.filter((user) => user.uid !== authUser.uid);
+  const suggestionsList = users.filter(({ uid }) => uid !== authUser.uid);
+
+  const { uid, photoURL, displayName } = authUser;
 
   return (
     <Wrapper>
@@ -20,14 +21,10 @@ export const Home = ({ isAuth, authUser, users }) => {
         <ContentUser>
           {isAuth && (
             <>
-              <UserAvatar
-                id={authUser && authUser.uid}
-                url={authUser && authUser.photoURL}
-                name={authUser && authUser.displayName}
-              />
+              <UserAvatar id={uid} url={photoURL} name={displayName} />
               <SuggestionListStore
                 authUser={authUser}
-                suggestions={suggestionsContent}
+                suggestions={suggestionsList}
               />
             </>
           )}
