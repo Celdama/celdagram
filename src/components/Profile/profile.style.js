@@ -13,6 +13,7 @@ export const UserInfo = styled.div`
 
   .avatar {
     height: 100px;
+    width: 100px;
     border-radius: 50px;
   }
 
