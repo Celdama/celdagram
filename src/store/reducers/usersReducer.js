@@ -74,7 +74,14 @@ export const usersReducer = (state = initialState, action) => {
           : user;
       });
     case ADD_NEW_POST_ID:
-      return state;
+      return state.map((user) => {
+        return user.uid === action.payload.userId
+          ? {
+              ...user,
+              posts: [...user.posts, action.payload.postId],
+            }
+          : user;
+      });
     default:
       return state;
   }
