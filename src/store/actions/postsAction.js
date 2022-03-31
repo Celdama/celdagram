@@ -6,6 +6,7 @@ import {
   updateDoc,
   arrayRemove,
   addDoc,
+  setDoc,
 } from 'firebase/firestore';
 import { db } from '../../config/firebaseConfig';
 import {
@@ -19,12 +20,16 @@ import {
 const postsCollectionRef = collection(db, 'posts');
 
 export const addPost = (data) => {
+  // ICI UTILISE L'ID PROVENANT DE LA PHOTO COMME ID DE REFERENCE DANS FIREBASE VOIR setDOc de userAction
   return async (dispatch) => {
     try {
-      await addDoc(postsCollectionRef, data);
+      await setDoc(doc(db, 'posts', data.photoId), {
+        ...data,
+        date: new Date(),
+      });
       dispatch({
         type: ADD_POST,
-        payload: data,
+        payload: { ...data, date: new Date() },
       });
     } catch (err) {
       return console.log(err);

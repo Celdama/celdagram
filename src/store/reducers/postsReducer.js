@@ -9,7 +9,7 @@ const initialState = [];
 export const postsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
-      return state;
+      return [...state, action.payload];
     case GET_POSTS:
       return [...action.payload];
     case ADD_COMMENT:

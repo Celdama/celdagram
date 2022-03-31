@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -7,6 +7,7 @@ import {
   addFollower,
   removeFollower,
 } from '../../store/actions/usersAction';
+import { addPost } from '../../store/actions/postsAction';
 import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
@@ -15,7 +16,13 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebaseConfig';
 import { nanoid } from 'nanoid';
 
-export const Profile = ({ users, id, posts, currentUser }) => {
+export const Profile = ({
+  users,
+  id,
+  posts,
+  currentUser,
+  addPostToFirebase,
+}) => {
   const [photo, setPhoto] = useState(null);
   const [uploadPhotoImg, setUploadPhotoImg] = useState(false);
   const [postData, setPostData] = useState({
@@ -33,7 +40,8 @@ export const Profile = ({ users, id, posts, currentUser }) => {
 
   useEffect(() => {
     if (uploadPhotoImg) {
-      console.log('tes');
+      console.log(postData);
+      addPostToFirebase(postData);
     }
   }, [uploadPhotoImg]);
 
@@ -118,6 +126,7 @@ export const Profile = ({ users, id, posts, currentUser }) => {
         return {
           ...prevState,
           photoUrl: url,
+          photoId,
           photoName: `${photoId}-photo`,
           userId: user.uid,
         };
@@ -175,10 +184,24 @@ export const ProfileStore = () => {
   const users = useSelector(usersSelector);
   const posts = useSelector(postsSelector);
   const authUser = useSelector(authSelector);
+  const dispatch = useDispatch();
 
   const currentUser = users.filter((user) => user.uid === authUser.uid)[0];
 
+  const addPostToFirebase = useCallback(
+    (data) => {
+      dispatch(addPost({ ...data }));
+    },
+    [dispatch]
+  );
+
   return (
-    <Profile users={users} id={id} posts={posts} currentUser={currentUser} />
+    <Profile
+      users={users}
+      id={id}
+      posts={posts}
+      currentUser={currentUser}
+      addPostToFirebase={addPostToFirebase}
+    />
   );
 };
