@@ -1,18 +1,28 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   monitorAuthState,
   registerUser,
   updateUser,
 } from '../../store/actions/authAction';
+import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../store/actions/usersAction';
 
 export const SignUp = ({ registerUserInFirebase }) => {
+  const [redirect, setRedirect] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
     avatar: '',
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (redirect) {
+      return navigate('/');
+    }
   });
 
   const handleChange = (e) => {
@@ -28,33 +38,54 @@ export const SignUp = ({ registerUserInFirebase }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await registerUserInFirebase(formData);
-    } catch (err) {
-      console.log(err);
-    }
+    await registerUserInFirebase(formData);
+    setRedirect(!redirect);
   };
+
+  const { username, email, password, avatar } = formData;
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div>
           <label>Username</label>
-          <input onChange={handleChange} type='text' name='username' />
+          <input
+            onChange={handleChange}
+            value={username}
+            type='text'
+            name='username'
+          />
         </div>
         <div>
           <label>Email</label>
-          <input onChange={handleChange} type='email' name='email' />
+          <input
+            onChange={handleChange}
+            value={email}
+            type='email'
+            name='email'
+          />
         </div>
         <div>
           <label>Password</label>
-          <input onChange={handleChange} type='password' name='password' />
+          <input
+            onChange={handleChange}
+            value={password}
+            type='password'
+            name='password'
+          />
         </div>
         <div>
           <label>Avatar</label>
-          <input onChange={handleChange} type='text' name='avatar' />
+          <input
+            onChange={handleChange}
+            value={avatar}
+            type='text'
+            name='avatar'
+          />
         </div>
-        <button>Sign up</button>
+        <button type='button' onClick={handleSubmit}>
+          Sign up
+        </button>
       </form>
     </div>
   );
