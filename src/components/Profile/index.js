@@ -29,11 +29,10 @@ export const Profile = ({
   const [uploadPhotoImg, setUploadPhotoImg] = useState(false);
   const [postData, setPostData] = useState({
     description: '',
-    photoUrl: '',
-    photoName: '',
+    photoURL: '',
     userId: '',
     likes: [],
-    comment: [],
+    comments: [],
   });
   const dispatch = useDispatch();
   const user = users.filter((user) => user.uid === id)[0];
@@ -128,9 +127,8 @@ export const Profile = ({
       setPostData((prevState) => {
         return {
           ...prevState,
-          photoUrl: url,
+          photoURL: url,
           photoId,
-          photoName: `${photoId}-photo`,
           userId: user.uid,
         };
       });
