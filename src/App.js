@@ -10,7 +10,7 @@ import { HomeStore } from './components/Home';
 import { SignUpStore } from './auth/SignUp';
 import { monitorAuthState } from './store/actions/authAction';
 import { RequireAuth } from './Helpers/requireAuth';
-import { LogInStore } from './auth/LogIn';
+import { LoginStore } from './auth/Login';
 import { ProfileStore } from './components/Profile';
 import { AddPostStore } from './components/AddPost';
 export const App = () => {
@@ -31,7 +31,7 @@ export const App = () => {
             <Route exact path='/' element={<HomeStore />} />
             <Route path='/profile/:id' element={<ProfileStore />} />
             <Route path='/signup' element={<SignUpStore />} />
-            <Route path='/login' element={<LogInStore />} />
+            <Route path='/login' element={<LoginStore />} />
             <Route path='/new-post' element={<AddPostStore />} />
           </Routes>
           {/* <Home /> */}

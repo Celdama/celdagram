@@ -1,12 +1,23 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { logInUser } from '../../store/actions/authAction';
 
-export const LogIn = ({ loginUserInFirebase }) => {
+export const Login = ({ loginUserInFirebase }) => {
+  const [redirect, setRedirect] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  const { email, password } = formData;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (redirect) {
+      return navigate('/');
+    }
+  }, [redirect, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,27 +30,40 @@ export const LogIn = ({ loginUserInFirebase }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    loginUserInFirebase(formData.email, formData.password);
+    await loginUserInFirebase(email, password);
+    setRedirect(!redirect);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div>
         <label>Email</label>
-        <input onChange={handleChange} type='email' name='email' />
+        <input
+          onChange={handleChange}
+          value={email}
+          type='email'
+          name='email'
+        />
       </div>
       <div>
         <label>Password</label>
-        <input onChange={handleChange} type='password' name='password' />
+        <input
+          onChange={handleChange}
+          email={password}
+          type='password'
+          name='password'
+        />
       </div>
-      <button>log in</button>
+      <button type='button' onClick={handleSubmit}>
+        Login
+      </button>
     </form>
   );
 };
 
-export const LogInStore = () => {
+export const LoginStore = () => {
   const dispatch = useDispatch();
 
   const loginUserInFirebase = useCallback(
@@ -49,5 +73,5 @@ export const LogInStore = () => {
     [dispatch]
   );
 
-  return <LogIn loginUserInFirebase={loginUserInFirebase} />;
+  return <Login loginUserInFirebase={loginUserInFirebase} />;
 };
