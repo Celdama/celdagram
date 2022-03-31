@@ -7,8 +7,6 @@ export const UserAvatar = ({ id, url, name, size = 50 }) => {
     <Wrapper>
       <Link to={`/profile/${id && id}`}>
         <Avatar src={url} alt='avatar' size={size} />
-      </Link>
-      <Link to={`/profile/${id && id}`}>
         <Name>{name}</Name>
       </Link>
     </Wrapper>

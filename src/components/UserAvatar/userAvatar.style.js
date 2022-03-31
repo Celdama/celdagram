@@ -7,13 +7,18 @@ export const Wrapper = styled.div`
   a {
     text-decoration: none;
     color: black;
+    gap: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
 export const Avatar = styled.img`
   width: ${({ size }) => `${size}px`};
-  border-radius: 25px;
-  margin-right: 0.8rem;
+  height: ${({ size }) => `${size}px`};
+  border-radius: ${({ size }) => `${size / 2}px`};
+  /* margin-right: 0.8rem; */
 `;
 
 export const Name = styled.h4`
