@@ -7,6 +7,7 @@ import {
   REMOVE_FOLLOWER,
   ADD_LIKED_POST,
   REMOVE_LIKED_POST,
+  ADD_NEW_POST_ID,
 } from '../reducers/usersReducer';
 import {
   collection,
@@ -177,6 +178,26 @@ export const removeLikedPost = (currentUserId, postId) => {
       });
       dispatch({
         type: REMOVE_LIKED_POST,
+        payload: {
+          currentUserId,
+          postId,
+        },
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const addNewPostId = (currentUserId, postId) => {
+  return async (dispatch) => {
+    const userDoc = doc(db, 'users', currentUserId);
+    try {
+      await updateDoc(userDoc, {
+        posts: arrayUnion(postId),
+      });
+      dispatch({
+        type: ADD_NEW_POST_ID,
         payload: {
           currentUserId,
           postId,
