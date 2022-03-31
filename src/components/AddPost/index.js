@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const index = () => {
+export const AddPost = () => {
   const handleChange = () => {};
 
   const handlePhotoChange = () => {};
