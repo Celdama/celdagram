@@ -27,7 +27,7 @@ export const NavBar = ({ isAuth, authUser, handleLogOut }) => {
                 <LogoutIcon className='icon' />
               </li>
               <Link to={`/profile/${authUser.uid}`}>
-                <img src={authUser && authUser.photoURL} alt='' />
+                <img src={authUser && authUser.photoURL} alt='avatar' />
               </Link>
             </>
           ) : (

@@ -30,6 +30,7 @@ export const Content = styled.div`
 
     img {
       height: 22px;
+      width: 22px;
       border-radius: 11px;
 
       :hover {
