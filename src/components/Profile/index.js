@@ -13,7 +13,7 @@ import { usersSelector } from '../../store/selectors/usersSelector';
 import { UserAvatar } from '../UserAvatar';
 import { Wrapper, Photo, UserInfo, UserPhotos } from './profile.style';
 
-export const Profile = ({ userProfile, id, posts, userLoggedIn }) => {
+export const Profil = ({ userProfile, id, posts, userLoggedIn }) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -132,7 +132,7 @@ export const ProfileStore = () => {
   const userLoggedIn = users.filter((user) => user.uid === authUser.uid)[0];
 
   return (
-    <Profile
+    <Profil
       userProfile={userProfile}
       id={id}
       posts={posts}
