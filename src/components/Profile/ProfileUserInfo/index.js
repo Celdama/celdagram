@@ -7,9 +7,8 @@ export const ProfileUserInfo = ({
   currentProfileId,
   userProfile,
   userPosts,
-  userLoggedIn,
 }) => {
-  const { avatar, uid, username, followers, followings } = userProfile || {};
+  const { avatar, username, followers, followings } = userProfile || {};
 
   return (
     <Wrapper>
@@ -22,13 +21,11 @@ export const ProfileUserInfo = ({
       />
       <div>
         <div className='user'>
-          <h4>{userProfile.username}</h4>
-          {userProfile !== userLoggedIn && (
-            <SocialBtnStore
-              userProfile={userProfile}
-              currentProfileId={currentProfileId}
-            />
-          )}
+          <h4>{username}</h4>
+          <SocialBtnStore
+            userProfile={userProfile}
+            currentProfileId={currentProfileId}
+          />
         </div>
         <div className='social'>
           <span>

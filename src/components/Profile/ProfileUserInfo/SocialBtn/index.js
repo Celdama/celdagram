@@ -16,34 +16,20 @@ export const SocialBtn = ({
   handleAddFollow,
   handleRemoveFollow,
 }) => {
-  const { avatar, uid, username } = userProfile || {};
-
-  const userToFollowOrUnfollow = {
-    avatar,
-    uid,
-    username,
-  };
-
-  return (
+  return userProfile !== userLoggedIn ? (
     <div>
       {userLoggedIn &&
       !userLoggedIn.followings.some((e) => e.uid === currentProfileId) ? (
-        <button
-          onClick={() => handleAddFollow(userLoggedIn, userToFollowOrUnfollow)}
-        >
+        <button onClick={() => handleAddFollow(userLoggedIn, userProfile)}>
           follow
         </button>
       ) : (
-        <button
-          onClick={() =>
-            handleRemoveFollow(userLoggedIn, userToFollowOrUnfollow)
-          }
-        >
+        <button onClick={() => handleRemoveFollow(userLoggedIn, userProfile)}>
           unfollow
         </button>
       )}
     </div>
-  );
+  ) : null;
 };
 
 export const SocialBtnStore = ({ userProfile, currentProfileId }) => {
