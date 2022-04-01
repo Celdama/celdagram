@@ -1,13 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelector } from '../../../store/selectors/authSelector';
-import { usersSelector } from '../../../store/selectors/usersSelector';
 import { addComment } from '../../../store/actions/postsAction';
 import { Wrapper } from './addPostComment.style';
 
 export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
   const [formData, setFormData] = useState({
-    author: authUser && authUser.displayName,
+    author: authUser.displayName,
     comment: '',
   });
   const handleChange = (e) => {
@@ -25,7 +24,7 @@ export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
     e.preventDefault();
     addCommentToFirebase(formData, post.id);
     setFormData({
-      author: authUser && authUser.displayName,
+      author: authUser.displayName,
       comment: '',
     });
   };
@@ -47,7 +46,6 @@ export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
 
 export const AddPostCommentStore = ({ post }) => {
   const dispatch = useDispatch();
-  const users = useSelector(usersSelector);
   const authUser = useSelector(authSelector);
 
   const addCommentToFirebase = useCallback(
