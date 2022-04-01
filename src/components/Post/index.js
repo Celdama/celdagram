@@ -1,17 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import formatDistance from 'date-fns/formatDistance';
 import { addComment } from '../../store/actions/postsAction';
 import { UserAvatar } from '../UserAvatar';
 import {
   Wrapper,
   ContentPost,
-  CommentsWrapper,
-  DateWrapper,
   AddCommentWrapper,
   AvatarWrapper,
 } from './post.style';
-import { refactorDateString } from '../../Helpers/refactorDateString';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { authSelector } from '../../store/selectors/authSelector';
 
@@ -19,6 +15,7 @@ import { PostPhoto } from './PostPhoto';
 import { PostIconsStore } from './PostIcons';
 import { PostLikesCounter } from './PostLikesCounter';
 import { PostCommentsWrapper } from './PostCommentsWrapper';
+import { PostDate } from './PostDate';
 
 export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
   const [formData, setFormData] = useState({
@@ -29,7 +26,6 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
   const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
   const { comments, photoURL, likes } = post;
-  const date = formatDistance(new Date(), new Date(post.date.toDate()));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,9 +61,7 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
         {authUser.email && <PostIconsStore post={post} />}
         <PostLikesCounter likes={likes} />
         <PostCommentsWrapper comments={comments} />
-        <DateWrapper>
-          <span>{refactorDateString(date)}</span>
-        </DateWrapper>
+        <PostDate postDate={post.date} />
       </ContentPost>
       {!!authUser.email && (
         <AddCommentWrapper>

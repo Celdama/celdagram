@@ -21,13 +21,7 @@ export const ContentPost = styled.div`
   padding: 0.5rem 0.6rem;
 `;
 
-export const DateWrapper = styled.div`
-  padding: 0.4rem 0;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: #6c757d;
-`;
+export const DateWrapper = styled.div``;
 
 export const AddCommentWrapper = styled.div`
   margin: 0;
