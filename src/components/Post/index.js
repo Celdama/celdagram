@@ -65,15 +65,14 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
     });
   };
 
+  const { uid, avatar, username } = authorPost;
+
   return (
     <Wrapper>
       <AvatarWrapper>
-        <UserAvatar
-          id={authorPost && authorPost.uid}
-          url={authorPost && authorPost.avatar}
-          name={authorPost && authorPost.username}
-          size={30}
-        />
+        {authorPost && (
+          <UserAvatar id={uid} url={avatar} name={username} size={30} />
+        )}
       </AvatarWrapper>
       <PostPhoto url={photoURL} />
       <ContentPost>
