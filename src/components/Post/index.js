@@ -18,6 +18,7 @@ import { authSelector } from '../../store/selectors/authSelector';
 import { PostPhoto } from './PostPhoto';
 import { PostIconsStore } from './PostIcons';
 import { PostLikesCounter } from './PostLikesCounter';
+import { PostCommentsWrapper } from './PostCommentsWrapper';
 
 export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
   const [formData, setFormData] = useState({
@@ -29,15 +30,6 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
 
   const { comments, photoURL, likes } = post;
   const date = formatDistance(new Date(), new Date(post.date.toDate()));
-
-  const commentList = comments.map(({ author, comment }, index) => {
-    return (
-      <li key={index}>
-        <span className='author'>{author}</span>{' '}
-        <span className='comment'>{comment}</span>
-      </li>
-    );
-  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,7 +64,7 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
       <ContentPost>
         {authUser.email && <PostIconsStore post={post} />}
         <PostLikesCounter likes={likes} />
-        <CommentsWrapper>{commentList}</CommentsWrapper>
+        <PostCommentsWrapper comments={comments} />
         <DateWrapper>
           <span>{refactorDateString(date)}</span>
         </DateWrapper>

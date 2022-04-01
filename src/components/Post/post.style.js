@@ -21,21 +21,6 @@ export const ContentPost = styled.div`
   padding: 0.5rem 0.6rem;
 `;
 
-export const IconsWrapper = styled.div``;
-
-export const LikesWrapper = styled.div``;
-
-export const CommentsWrapper = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 0.9rem;
-
-  .author {
-    font-weight: bold;
-  }
-`;
-
 export const DateWrapper = styled.div`
   padding: 0.4rem 0;
   font-size: 0.68rem;
