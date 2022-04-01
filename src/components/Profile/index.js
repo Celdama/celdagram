@@ -1,35 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-  addFollowing,
-  removeFollowing,
-  addFollower,
-  removeFollower,
-} from '../../store/actions/usersAction';
+
 import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
-import { UserAvatar } from '../UserAvatar';
-import { Wrapper, Photo, UserInfo, UserPhotos } from './profile.style';
+import { Wrapper, Photo, UserPhotos } from './profile.style';
+import { ProfilUserInfoStore } from './ProfileUserInfo';
 
-export const Profil = ({ userProfile, id, posts, userLoggedIn }) => {
-  const dispatch = useDispatch();
+export const Profil = ({
+  userProfile,
+  currentProfileId,
+  posts,
+  userLoggedIn,
+}) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const userPosts = posts.filter((post) => post.userId === userProfile.uid);
-
-  const handleAddFollowing = (userLoggedIn, userToFollow) => {
-    const { uid, avatar, username } = userLoggedIn;
-    dispatch(addFollowing(uid, userToFollow));
-    dispatch(
-      addFollower(userToFollow.uid, {
-        avatar,
-        uid,
-        username,
-      })
-    );
-  };
 
   useEffect(() => {
     if (userProfile) {
@@ -37,80 +24,18 @@ export const Profil = ({ userProfile, id, posts, userLoggedIn }) => {
     }
   }, [userProfile]);
 
-  const handleRemoveFollowing = (userLoggedIn, userToUnfollow) => {
-    const { uid, avatar, username } = userLoggedIn;
-
-    dispatch(removeFollowing(userLoggedIn.uid, userToUnfollow));
-    dispatch(
-      removeFollower(userToUnfollow.uid, {
-        avatar,
-        uid,
-        username,
-      })
-    );
-  };
-
-  const { avatar, uid, username, followers, followings } = userProfile || {};
-
-  const socialBtn =
-    userLoggedIn && !userLoggedIn.followings.some((e) => e.uid === id) ? (
-      <button
-        onClick={() =>
-          handleAddFollowing(userLoggedIn, {
-            avatar,
-            uid,
-            username,
-          })
-        }
-      >
-        follow
-      </button>
-    ) : (
-      <button
-        onClick={() =>
-          handleRemoveFollowing(userLoggedIn, {
-            avatar,
-            uid,
-            username,
-          })
-        }
-      >
-        unfollow
-      </button>
-    );
-
   return (
     <Wrapper>
       {!isLoaded ? (
         <p>loading</p>
       ) : (
         <>
-          <UserInfo>
-            {userProfile && (
-              <UserAvatar
-                id={id}
-                url={avatar}
-                name={username}
-                size={100}
-                displayName={false}
-              />
-            )}
-            {userProfile && (
-              <div>
-                <div className='user'>
-                  <h4>{username}</h4>
-                  {userProfile !== userLoggedIn && socialBtn}
-                </div>
-                <div className='social'>
-                  <span>
-                    {userPosts.length} photo{userPosts.length > 1 ? 's' : ''}
-                  </span>
-                  <span>{followers.length} followers</span>
-                  <span>{followings.length} following</span>
-                </div>
-              </div>
-            )}
-          </UserInfo>
+          <ProfilUserInfoStore
+            userProfile={userProfile}
+            userPosts={userPosts}
+            userLoggedIn={userLoggedIn}
+            currentProfileId={currentProfileId}
+          />
           <UserPhotos>
             {userPosts.map((post, index) => (
               <Photo key={index} imgUrl={post.photoURL} />
@@ -134,7 +59,7 @@ export const ProfileStore = () => {
   return (
     <Profil
       userProfile={userProfile}
-      id={id}
+      currentProfileId={id}
       posts={posts}
       userLoggedIn={userLoggedIn}
     />
