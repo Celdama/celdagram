@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
 
   .icon {
     height: 1.25rem;
+    cursor: pointer;
   }
 
   .like {
