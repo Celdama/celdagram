@@ -21,18 +21,7 @@ export const ContentPost = styled.div`
   padding: 0.5rem 0.6rem;
 `;
 
-export const IconsWrapper = styled.div`
-  display: flex;
-  gap: 3px;
-
-  .icon {
-    height: 1.25rem;
-  }
-
-  .like {
-    color: red;
-  }
-`;
+export const IconsWrapper = styled.div``;
 
 export const LikesWrapper = styled.div`
   margin: 0.4rem 0;

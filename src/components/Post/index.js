@@ -1,42 +1,25 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import formatDistance from 'date-fns/formatDistance';
-import {
-  addComment,
-  addUserLike,
-  removeUserLike,
-} from '../../store/actions/postsAction';
-import { addLikedPost, removeLikedPost } from '../../store/actions/usersAction';
+import { addComment } from '../../store/actions/postsAction';
 import { UserAvatar } from '../UserAvatar';
 import {
   Wrapper,
-  Photo,
   ContentPost,
-  IconsWrapper,
   LikesWrapper,
   CommentsWrapper,
   DateWrapper,
   AddCommentWrapper,
   AvatarWrapper,
 } from './post.style';
-import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
 import { refactorDateString } from '../../Helpers/refactorDateString';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { authSelector } from '../../store/selectors/authSelector';
 
 import { PostPhoto } from './PostPhoto';
+import { PostIconsStore } from './PostIcons';
 
-export const Post = ({
-  post,
-  addLikedPostToFirebase,
-  addUserLikeToFirebase,
-  addCommentToFirebase,
-  removeUserLikeFromFirebase,
-  removeLikedPostFromFirebase,
-  users,
-  authUser,
-}) => {
+export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
   const [formData, setFormData] = useState({
     author: authUser && authUser.displayName,
     comment: '',
@@ -84,33 +67,6 @@ export const Post = ({
     });
   };
 
-  const addLike = (post) => {
-    addLikedPostToFirebase(currentUser.uid, post.id);
-
-    const userWhoLike = {
-      userId: currentUser.uid,
-      username: currentUser.username,
-    };
-    addUserLikeToFirebase(userWhoLike, post.id);
-  };
-
-  const removeLike = (post) => {
-    const userWhoDislike = {
-      userId: currentUser.uid,
-      username: currentUser.username,
-    };
-
-    removeUserLikeFromFirebase(userWhoDislike, post.id);
-    removeLikedPostFromFirebase(currentUser.uid, post.id);
-  };
-
-  const likesIcons =
-    currentUser && currentUser.likes.includes(post.id) ? (
-      <HeartIconSolid onClick={() => removeLike(post)} className='icon like' />
-    ) : (
-      <HeartIcon onClick={() => addLike(post)} className='icon not-like' />
-    );
-
   return (
     <Wrapper>
       <AvatarWrapper>
@@ -124,10 +80,7 @@ export const Post = ({
       <PostPhoto url={photoURL} />
       <ContentPost>
         {!!authUser.email && (
-          <IconsWrapper>
-            {likesIcons}
-            <ChatIcon className='icon' />
-          </IconsWrapper>
+          <PostIconsStore currentUser={currentUser} post={post} />
         )}
         <LikesWrapper>{likesContent}</LikesWrapper>
         <CommentsWrapper>{commentList}</CommentsWrapper>
@@ -173,41 +126,9 @@ export const PostStore = ({ post }) => {
     [dispatch, authUser.uid]
   );
 
-  const addUserLikeToFirebase = useCallback(
-    (data, postId) => {
-      dispatch(addUserLike(data, postId));
-    },
-    [dispatch]
-  );
-
-  const addLikedPostToFirebase = useCallback(
-    (userId, postId) => {
-      dispatch(addLikedPost(userId, postId));
-    },
-    [dispatch]
-  );
-
-  const removeUserLikeFromFirebase = useCallback(
-    (data, postId) => {
-      dispatch(removeUserLike(data, postId));
-    },
-    [dispatch]
-  );
-
-  const removeLikedPostFromFirebase = useCallback(
-    (userId, postId) => {
-      dispatch(removeLikedPost(userId, postId));
-    },
-    [dispatch]
-  );
-
   return (
     <Post
-      addUserLikeToFirebase={addUserLikeToFirebase}
-      addLikedPostToFirebase={addLikedPostToFirebase}
       addCommentToFirebase={addCommentToFirebase}
-      removeUserLikeFromFirebase={removeUserLikeFromFirebase}
-      removeLikedPostFromFirebase={removeLikedPostFromFirebase}
       authUser={authUser}
       post={post}
       users={users}
