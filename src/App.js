@@ -34,7 +34,6 @@ export const App = () => {
             <Route path='/login' element={<LoginStore />} />
             <Route path='/new-post' element={<AddPostStore />} />
           </Routes>
-          {/* <Home /> */}
         </Main>
         <GlobalStyle />
       </BrowserRouter>

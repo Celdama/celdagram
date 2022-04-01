@@ -17,7 +17,7 @@ export const SuggestionsListWrapper = styled.div`
   }
 `;
 
-export const FollowBtn = styled.btn`
+export const FollowBtn = styled.button`
   border: none;
   background-color: transparent;
   color: #184e77;

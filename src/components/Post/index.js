@@ -41,7 +41,6 @@ export const Post = ({
   });
 
   const currentUser = users.filter((user) => user.uid === authUser.uid)[0];
-  // console.log(currentUser.likes);
 
   const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
