@@ -9,16 +9,16 @@ import {
 import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
+import { UserAvatar } from '../UserAvatar';
 import { Wrapper, Photo, UserInfo, UserPhotos } from './profile.style';
 
-export const Profile = ({ users, id, posts, currentUser }) => {
+export const Profile = ({ userProfile, id, posts, userLoggedIn }) => {
   const dispatch = useDispatch();
-  const user = users.filter((user) => user.uid === id)[0];
 
-  const userPosts = posts.filter((post) => post.userId === user.uid);
+  const userPosts = posts.filter((post) => post.userId === userProfile.uid);
 
-  const handleAddFollowing = (currentUser, userToFollow) => {
-    const { uid, avatar, username } = currentUser;
+  const handleAddFollowing = (userLoggedIn, userToFollow) => {
+    const { uid, avatar, username } = userLoggedIn;
     dispatch(addFollowing(uid, userToFollow));
     dispatch(
       addFollower(userToFollow.uid, {
@@ -29,10 +29,10 @@ export const Profile = ({ users, id, posts, currentUser }) => {
     );
   };
 
-  const handleRemoveFollowing = (currentUser, userToUnfollow) => {
-    const { uid, avatar, username } = currentUser;
+  const handleRemoveFollowing = (userLoggedIn, userToUnfollow) => {
+    const { uid, avatar, username } = userLoggedIn;
 
-    dispatch(removeFollowing(currentUser.uid, userToUnfollow));
+    dispatch(removeFollowing(userLoggedIn.uid, userToUnfollow));
     dispatch(
       removeFollower(userToUnfollow.uid, {
         avatar,
@@ -43,13 +43,13 @@ export const Profile = ({ users, id, posts, currentUser }) => {
   };
 
   const socialBtn =
-    currentUser && !currentUser.followings.some((e) => e.uid === id) ? (
+    userLoggedIn && !userLoggedIn.followings.some((e) => e.uid === id) ? (
       <button
         onClick={() =>
-          handleAddFollowing(currentUser, {
-            avatar: user.avatar,
-            uid: user.uid,
-            username: user.username,
+          handleAddFollowing(userLoggedIn, {
+            avatar: userProfile.avatar,
+            uid: userProfile.uid,
+            username: userProfile.username,
           })
         }
       >
@@ -58,10 +58,10 @@ export const Profile = ({ users, id, posts, currentUser }) => {
     ) : (
       <button
         onClick={() =>
-          handleRemoveFollowing(currentUser, {
-            avatar: user.avatar,
-            uid: user.uid,
-            username: user.username,
+          handleRemoveFollowing(userLoggedIn, {
+            avatar: userProfile.avatar,
+            uid: userProfile.uid,
+            username: userProfile.username,
           })
         }
       >
@@ -72,20 +72,30 @@ export const Profile = ({ users, id, posts, currentUser }) => {
   return (
     <Wrapper>
       <UserInfo>
-        <img className='avatar' alt='avatar' src={user && user.avatar} />
-        <div>
-          <div className='user'>
-            <h4>{user && user.username}</h4>
-            {user !== currentUser && socialBtn}
+        {userProfile && (
+          <UserAvatar
+            id={id}
+            url={userProfile.avatar}
+            name={userProfile.username}
+            size={100}
+            displayName={false}
+          />
+        )}
+        {userProfile && (
+          <div>
+            <div className='user'>
+              <h4>{userProfile.username}</h4>
+              {userProfile !== userLoggedIn && socialBtn}
+            </div>
+            <div className='social'>
+              <span>
+                {userPosts.length} photo{userPosts.length > 1 ? 's' : ''}
+              </span>
+              <span>{userProfile.followers.length} followers</span>
+              <span>{userProfile.followings.length} following</span>
+            </div>
           </div>
-          <div className='social'>
-            <span>
-              {userPosts.length} photo{userPosts.length > 1 ? 's' : ''}
-            </span>
-            <span>{user && user.followers.length} followers</span>
-            <span>{user && user.followings.length} following</span>
-          </div>
-        </div>
+        )}
       </UserInfo>
       <UserPhotos>
         {userPosts.map((post, index) => (
@@ -101,11 +111,16 @@ export const ProfileStore = () => {
   const users = useSelector(usersSelector);
   const posts = useSelector(postsSelector);
   const authUser = useSelector(authSelector);
-  const dispatch = useDispatch();
 
-  const currentUser = users.filter((user) => user.uid === authUser.uid)[0];
+  const userProfile = users.filter((user) => user.uid === id)[0];
+  const userLoggedIn = users.filter((user) => user.uid === authUser.uid)[0];
 
   return (
-    <Profile users={users} id={id} posts={posts} currentUser={currentUser} />
+    <Profile
+      userProfile={userProfile}
+      id={id}
+      posts={posts}
+      userLoggedIn={userLoggedIn}
+    />
   );
 };
