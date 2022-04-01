@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Wrapper } from './postIcons.style';
 import { HeartIcon, ChatIcon } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addUserLike,
   removeUserLike,
@@ -11,6 +11,8 @@ import {
   addLikedPost,
   removeLikedPost,
 } from '../../../store/actions/usersAction';
+import { usersSelector } from '../../../store/selectors/usersSelector';
+import { authSelector } from '../../../store/selectors/authSelector';
 
 export const PostIcons = ({
   currentUser,
@@ -55,8 +57,10 @@ export const PostIcons = ({
   );
 };
 
-export const PostIconsStore = ({ currentUser, post }) => {
+export const PostIconsStore = ({ post }) => {
   const dispatch = useDispatch();
+  const users = useSelector(usersSelector);
+  const authUser = useSelector(authSelector);
 
   const addUserLikeToFirebase = useCallback(
     (data, postId) => {
@@ -85,6 +89,8 @@ export const PostIconsStore = ({ currentUser, post }) => {
     },
     [dispatch]
   );
+
+  const currentUser = users.filter((user) => user.uid === authUser.uid)[0];
 
   return (
     <PostIcons

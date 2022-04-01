@@ -25,8 +25,6 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
     comment: '',
   });
 
-  const currentUser = users.filter((user) => user.uid === authUser.uid)[0];
-
   const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
   const { comments, photoURL, likes } = post;
@@ -79,9 +77,7 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
       </AvatarWrapper>
       <PostPhoto url={photoURL} />
       <ContentPost>
-        {!!authUser.email && (
-          <PostIconsStore currentUser={currentUser} post={post} />
-        )}
+        {!!authUser.email && <PostIconsStore post={post} />}
         <LikesWrapper>{likesContent}</LikesWrapper>
         <CommentsWrapper>{commentList}</CommentsWrapper>
         <DateWrapper>
