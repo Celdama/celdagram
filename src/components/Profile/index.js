@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -14,6 +15,7 @@ import { Wrapper, Photo, UserInfo, UserPhotos } from './profile.style';
 
 export const Profile = ({ userProfile, id, posts, userLoggedIn }) => {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const userPosts = posts.filter((post) => post.userId === userProfile.uid);
 
@@ -29,6 +31,12 @@ export const Profile = ({ userProfile, id, posts, userLoggedIn }) => {
     );
   };
 
+  useEffect(() => {
+    if (userProfile) {
+      setIsLoaded(true);
+    }
+  }, [userProfile]);
+
   const handleRemoveFollowing = (userLoggedIn, userToUnfollow) => {
     const { uid, avatar, username } = userLoggedIn;
 
@@ -42,14 +50,16 @@ export const Profile = ({ userProfile, id, posts, userLoggedIn }) => {
     );
   };
 
+  const { avatar, uid, username, followers, followings } = userProfile || {};
+
   const socialBtn =
     userLoggedIn && !userLoggedIn.followings.some((e) => e.uid === id) ? (
       <button
         onClick={() =>
           handleAddFollowing(userLoggedIn, {
-            avatar: userProfile.avatar,
-            uid: userProfile.uid,
-            username: userProfile.username,
+            avatar,
+            uid,
+            username,
           })
         }
       >
@@ -59,9 +69,9 @@ export const Profile = ({ userProfile, id, posts, userLoggedIn }) => {
       <button
         onClick={() =>
           handleRemoveFollowing(userLoggedIn, {
-            avatar: userProfile.avatar,
-            uid: userProfile.uid,
-            username: userProfile.username,
+            avatar,
+            uid,
+            username,
           })
         }
       >
@@ -71,37 +81,43 @@ export const Profile = ({ userProfile, id, posts, userLoggedIn }) => {
 
   return (
     <Wrapper>
-      <UserInfo>
-        {userProfile && (
-          <UserAvatar
-            id={id}
-            url={userProfile.avatar}
-            name={userProfile.username}
-            size={100}
-            displayName={false}
-          />
-        )}
-        {userProfile && (
-          <div>
-            <div className='user'>
-              <h4>{userProfile.username}</h4>
-              {userProfile !== userLoggedIn && socialBtn}
-            </div>
-            <div className='social'>
-              <span>
-                {userPosts.length} photo{userPosts.length > 1 ? 's' : ''}
-              </span>
-              <span>{userProfile.followers.length} followers</span>
-              <span>{userProfile.followings.length} following</span>
-            </div>
-          </div>
-        )}
-      </UserInfo>
-      <UserPhotos>
-        {userPosts.map((post, index) => (
-          <Photo key={index} imgUrl={post.photoURL} />
-        ))}
-      </UserPhotos>
+      {!isLoaded ? (
+        <p>loading</p>
+      ) : (
+        <>
+          <UserInfo>
+            {userProfile && (
+              <UserAvatar
+                id={id}
+                url={avatar}
+                name={username}
+                size={100}
+                displayName={false}
+              />
+            )}
+            {userProfile && (
+              <div>
+                <div className='user'>
+                  <h4>{username}</h4>
+                  {userProfile !== userLoggedIn && socialBtn}
+                </div>
+                <div className='social'>
+                  <span>
+                    {userPosts.length} photo{userPosts.length > 1 ? 's' : ''}
+                  </span>
+                  <span>{followers.length} followers</span>
+                  <span>{followings.length} following</span>
+                </div>
+              </div>
+            )}
+          </UserInfo>
+          <UserPhotos>
+            {userPosts.map((post, index) => (
+              <Photo key={index} imgUrl={post.photoURL} />
+            ))}
+          </UserPhotos>
+        </>
+      )}
     </Wrapper>
   );
 };
