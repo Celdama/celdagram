@@ -6,7 +6,7 @@ import { authSelector } from '../../store/selectors/authSelector';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { Wrapper, Photo, UserPhotos } from './profile.style';
-import { ProfilUserInfoStore } from './ProfileUserInfo';
+import { ProfileUserInfo } from './ProfileUserInfo';
 
 export const Profil = ({
   userProfile,
@@ -30,7 +30,7 @@ export const Profil = ({
         <p>loading</p>
       ) : (
         <>
-          <ProfilUserInfoStore
+          <ProfileUserInfo
             userProfile={userProfile}
             userPosts={userPosts}
             userLoggedIn={userLoggedIn}
