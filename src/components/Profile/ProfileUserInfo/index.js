@@ -9,7 +9,7 @@ import {
   removeFollower,
 } from '../../../store/actions/usersAction';
 
-export const ProfilUserInfo = ({
+export const ProfileUserInfo = ({
   authUser,
   currentProfileId,
   userProfile,
@@ -50,7 +50,6 @@ export const ProfilUserInfo = ({
 
   return (
     <Wrapper>
-      {/* UserAvatar */}
       <UserAvatar
         id={userProfile.uid}
         url={avatar}
@@ -109,7 +108,7 @@ export const ProfilUserInfoStore = ({
   };
 
   return (
-    <ProfilUserInfo
+    <ProfileUserInfo
       userProfile={userProfile}
       userPosts={userPosts}
       userLoggedIn={userLoggedIn}
