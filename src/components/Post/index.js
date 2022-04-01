@@ -25,6 +25,8 @@ import { refactorDateString } from '../../Helpers/refactorDateString';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { authSelector } from '../../store/selectors/authSelector';
 
+import { PostPhoto } from './PostPhoto';
+
 export const Post = ({
   post,
   addLikedPostToFirebase,
@@ -119,7 +121,7 @@ export const Post = ({
           size={30}
         />
       </AvatarWrapper>
-      <Photo className='photo' src={photoURL} alt='pictures' />
+      <PostPhoto url={photoURL} />
       <ContentPost>
         {!!authUser.email && (
           <IconsWrapper>
