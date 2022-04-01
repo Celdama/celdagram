@@ -16,13 +16,13 @@ export const Wrapper = styled.div`
     padding: 0 0.6rem;
     border: none;
   }
+`;
 
-  button {
-    border: none;
-    font-size: 0.7rem;
-    background-color: transparent;
-    width: 10%;
-    color: #6c757d;
-    cursor: pointer;
-  }
+export const PostBtn = styled.button`
+  border: none;
+  font-size: 0.7rem;
+  background-color: transparent;
+  width: 10%;
+  color: #6c757d;
+  cursor: pointer;
 `;

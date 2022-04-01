@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelector } from '../../../store/selectors/authSelector';
 import { addComment } from '../../../store/actions/postsAction';
-import { Wrapper } from './addPostComment.style';
+import { Wrapper, PostBtn } from './addPostComment.style';
 
 export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
   const [formData, setFormData] = useState({
@@ -28,9 +28,10 @@ export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
       comment: '',
     });
   };
+
   return (
     <Wrapper>
-      <form onSubmit={handleAddComment}>
+      <form>
         <input
           type='text'
           name='comment'
@@ -38,7 +39,9 @@ export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
           value={formData.comment}
           placeholder='Add a comment...'
         />
-        <button>Post</button>
+        <PostBtn type='button' onClick={handleAddComment}>
+          Post
+        </PostBtn>
       </form>
     </Wrapper>
   );
