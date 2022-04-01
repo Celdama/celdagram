@@ -6,7 +6,6 @@ import { UserAvatar } from '../UserAvatar';
 import {
   Wrapper,
   ContentPost,
-  LikesWrapper,
   CommentsWrapper,
   DateWrapper,
   AddCommentWrapper,
@@ -18,6 +17,7 @@ import { authSelector } from '../../store/selectors/authSelector';
 
 import { PostPhoto } from './PostPhoto';
 import { PostIconsStore } from './PostIcons';
+import { PostLikesCounter } from './PostLikesCounter';
 
 export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
   const [formData, setFormData] = useState({
@@ -38,12 +38,6 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
       </li>
     );
   });
-
-  const likesContent = (
-    <span>
-      {likes.length} like{likes.length > 1 ? 's' : ''}
-    </span>
-  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,7 +71,7 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
       <PostPhoto url={photoURL} />
       <ContentPost>
         {authUser.email && <PostIconsStore post={post} />}
-        <LikesWrapper>{likesContent}</LikesWrapper>
+        <PostLikesCounter likes={likes} />
         <CommentsWrapper>{commentList}</CommentsWrapper>
         <DateWrapper>
           <span>{refactorDateString(date)}</span>

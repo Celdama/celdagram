@@ -23,12 +23,7 @@ export const ContentPost = styled.div`
 
 export const IconsWrapper = styled.div``;
 
-export const LikesWrapper = styled.div`
-  margin: 0.4rem 0;
-  padding: 0;
-  font-size: 0.9rem;
-  font-weight: bold;
-`;
+export const LikesWrapper = styled.div``;
 
 export const CommentsWrapper = styled.ul`
   margin: 0;
