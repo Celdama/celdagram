@@ -76,7 +76,7 @@ export const Post = ({ post, addCommentToFirebase, users, authUser }) => {
       </AvatarWrapper>
       <PostPhoto url={photoURL} />
       <ContentPost>
-        {!!authUser.email && <PostIconsStore post={post} />}
+        {authUser.email && <PostIconsStore post={post} />}
         <LikesWrapper>{likesContent}</LikesWrapper>
         <CommentsWrapper>{commentList}</CommentsWrapper>
         <DateWrapper>
