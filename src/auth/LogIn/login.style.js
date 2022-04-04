@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   outline: 1px solid red;
-  padding: 10px;
 `;
 
 export const Content = styled.div`
