@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logInUser } from '../../store/actions/authAction';
+import { Wrapper, Content, Form } from './login.style';
 
 export const Login = ({ loginUserInFirebase }) => {
   const [redirect, setRedirect] = useState(false);
@@ -37,29 +38,33 @@ export const Login = ({ loginUserInFirebase }) => {
   };
 
   return (
-    <form>
-      <div>
-        <label>Email</label>
-        <input
-          onChange={handleChange}
-          value={email}
-          type='email'
-          name='email'
-        />
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          onChange={handleChange}
-          email={password}
-          type='password'
-          name='password'
-        />
-      </div>
-      <button type='button' onClick={handleSubmit}>
-        Login
-      </button>
-    </form>
+    <Wrapper>
+      <Content>
+        <Form>
+          <div>
+            <label>Email</label>
+            <input
+              onChange={handleChange}
+              value={email}
+              type='email'
+              name='email'
+            />
+          </div>
+          <div>
+            <label>Password</label>
+            <input
+              onChange={handleChange}
+              email={password}
+              type='password'
+              name='password'
+            />
+          </div>
+          <button type='button' onClick={handleSubmit}>
+            Login
+          </button>
+        </Form>
+      </Content>
+    </Wrapper>
   );
 };
 

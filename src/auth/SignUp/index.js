@@ -10,6 +10,7 @@ import { addUser } from '../../store/actions/usersAction';
 
 export const SignUp = ({ registerUserInFirebase }) => {
   const [redirect, setRedirect] = useState(false);
+  const [uploadAvatar, setUploadAvatar] = useState(null);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -40,6 +41,12 @@ export const SignUp = ({ registerUserInFirebase }) => {
     e.preventDefault();
     await registerUserInFirebase(formData);
     setRedirect(!redirect);
+  };
+
+  const handleChangeAvatar = (e) => {
+    if (e.target.files[0]) {
+      setUploadAvatar(e.target.files[0]);
+    }
   };
 
   const { username, email, password, avatar } = formData;
@@ -82,6 +89,9 @@ export const SignUp = ({ registerUserInFirebase }) => {
             type='text'
             name='avatar'
           />
+        </div>
+        <div>
+          <input type='file' name='avatar' onChange={handleChangeAvatar} />
         </div>
         <button type='button' onClick={handleSubmit}>
           Sign up
