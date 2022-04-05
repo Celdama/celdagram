@@ -7,15 +7,18 @@ import {
 } from '../../store/actions/authAction';
 import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../store/actions/usersAction';
+import { storage } from '../../config/firebaseConfig';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { Wrapper, Content, SubContent } from './signup.style';
+import { Link } from 'react-router-dom';
 
 export const SignUp = ({ registerUserInFirebase }) => {
   const [redirect, setRedirect] = useState(false);
-  const [uploadAvatar, setUploadAvatar] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    avatar: '',
   });
 
   const navigate = useNavigate();
@@ -39,65 +42,73 @@ export const SignUp = ({ registerUserInFirebase }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await registerUserInFirebase(formData);
+
+    const avatarRef = ref(storage, `${username}-avatar`);
+
+    try {
+      await uploadBytes(avatarRef, avatar);
+      const url = await getDownloadURL(avatarRef);
+      await registerUserInFirebase(formData, url);
+    } catch (err) {
+      console.log(err);
+    }
     setRedirect(!redirect);
   };
 
   const handleChangeAvatar = (e) => {
     if (e.target.files[0]) {
-      setUploadAvatar(e.target.files[0]);
+      setAvatar(e.target.files[0]);
     }
   };
 
-  const { username, email, password, avatar } = formData;
+  const { username, email, password } = formData;
 
   return (
-    <div>
-      <form>
-        <div>
-          <label>Username</label>
-          <input
-            onChange={handleChange}
-            value={username}
-            type='text'
-            name='username'
-          />
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            onChange={handleChange}
-            value={email}
-            type='email'
-            name='email'
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            onChange={handleChange}
-            value={password}
-            type='password'
-            name='password'
-          />
-        </div>
-        <div>
-          <label>Avatar</label>
-          <input
-            onChange={handleChange}
-            value={avatar}
-            type='text'
-            name='avatar'
-          />
-        </div>
-        <div>
-          <input type='file' name='avatar' onChange={handleChangeAvatar} />
-        </div>
-        <button type='button' onClick={handleSubmit}>
-          Sign up
-        </button>
-      </form>
-    </div>
+    <Wrapper>
+      <Content>
+        <h1>Celdagram</h1>
+        <form>
+          <div>
+            <input
+              onChange={handleChange}
+              value={username}
+              type='text'
+              name='username'
+              placeholder='Username'
+            />
+          </div>
+          <div>
+            <input
+              onChange={handleChange}
+              value={email}
+              type='email'
+              name='email'
+              placeholder='Email adress'
+            />
+          </div>
+          <div>
+            <input
+              onChange={handleChange}
+              value={password}
+              type='password'
+              name='password'
+              placeholder='Password'
+            />
+          </div>
+          <div>
+            <input type='file' name='avatar' onChange={handleChangeAvatar} />
+          </div>
+          <button type='button' onClick={handleSubmit}>
+            Sign up
+          </button>
+        </form>
+      </Content>
+      <SubContent>
+        <p>
+          Already have an accout ? <Link to='/login'>Login</Link>
+        </p>
+      </SubContent>
+    </Wrapper>
   );
 };
 
@@ -105,9 +116,9 @@ export const SignUpStore = () => {
   const dispatch = useDispatch();
 
   const registerUserInFirebase = useCallback(
-    async ({ username, email, password, avatar }) => {
+    async ({ username, email, password }, url) => {
       await dispatch(registerUser(email, password));
-      await dispatch(updateUser(username, avatar));
+      await dispatch(updateUser(username, url));
       await dispatch(
         addUser({
           followers: [],

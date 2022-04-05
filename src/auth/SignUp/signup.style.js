@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-<<<<<<< HEAD:src/auth/Login/login.style.js
-  outline: 1px solid red;
-=======
   padding: 40px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
->>>>>>> add-storage-avatar:src/auth/LogIn/login.style.js
 `;
 
 export const Content = styled.div`
@@ -22,33 +18,34 @@ export const Content = styled.div`
   align-items: center;
   outline: 1px solid lightgray;
   border-radius: 2px;
+
   h1 {
     margin-bottom: 8px;
     font-size: 1.3rem;
   }
-`;
 
-export const Form = styled.form`
-  width: 100%;
-  input {
+  form {
     width: 100%;
-    background-color: #faf9fa;
-    border: 1px solid lightgray;
-    border-radius: 3px;
-    padding: 4px;
-    margin: 4px 0;
-  }
+    input {
+      width: 100%;
+      background-color: #faf9fa;
+      border: 1px solid lightgray;
+      border-radius: 3px;
+      padding: 4px;
+      margin: 4px 0;
+    }
 
-  button {
-    width: 100%;
-    border: none;
-    background-color: #184e77;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 3px;
-    padding: 4px;
-    margin-top: 4px;
-    cursor: pointer;
+    button {
+      width: 100%;
+      border: none;
+      background-color: #184e77;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 3px;
+      padding: 4px;
+      margin-top: 4px;
+      cursor: pointer;
+    }
   }
 `;
 
