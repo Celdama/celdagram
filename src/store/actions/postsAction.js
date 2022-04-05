@@ -5,8 +5,8 @@ import {
   arrayUnion,
   updateDoc,
   arrayRemove,
-  addDoc,
   setDoc,
+  deleteDoc,
 } from 'firebase/firestore';
 import { db } from '../../config/firebaseConfig';
 import {
@@ -15,12 +15,12 @@ import {
   ADD_COMMENT,
   ADD_USER_LIKE,
   REMOVE_USER_LIKE,
+  DELETE_POST,
 } from '../reducers/postsReducer';
 
 const postsCollectionRef = collection(db, 'posts');
 
 export const addPost = (data) => {
-  // ICI UTILISE L'ID PROVENANT DE LA PHOTO COMME ID DE REFERENCE DANS FIREBASE VOIR setDOc de userAction
   return async (dispatch) => {
     try {
       await setDoc(doc(db, 'posts', data.photoId), {
@@ -103,6 +103,22 @@ export const removeUserLike = (data, postId) => {
         type: REMOVE_USER_LIKE,
         payload: {
           data,
+          postId,
+        },
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const deletePost = (postId) => {
+  return async (dispatch) => {
+    try {
+      await deleteDoc(doc(db, 'posts', postId));
+      dispatch({
+        type: DELETE_POST,
+        payload: {
           postId,
         },
       });
