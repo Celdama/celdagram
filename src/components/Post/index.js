@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { UserAvatar } from '../UserAvatar';
 import { Wrapper, ContentPost, AvatarWrapper } from './post.style';
 import { usersSelector } from '../../store/selectors/usersSelector';
@@ -11,10 +12,15 @@ import { PostDate } from './PostDate';
 import { AddPostCommentStore } from './AddPostComment';
 
 export const Post = ({ post, users, authUser }) => {
+  const [showAllComments, setShowAllComments] = useState(false);
   const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
   const { comments, photoURL, likes } = post;
   const { uid, avatar, username } = authorPost;
+
+  const handleLoadAllComments = () => {
+    setShowAllComments(!showAllComments);
+  };
 
   return (
     <Wrapper>
@@ -33,7 +39,15 @@ export const Post = ({ post, users, authUser }) => {
             <span className='content'>{post.description}</span>
           </p>
         )}
-        <PostCommentsWrapper comments={comments} />
+        {comments.length > 4 && !showAllComments && (
+          <span className='show-all-comments' onClick={handleLoadAllComments}>
+            View all {comments.length} comments
+          </span>
+        )}
+        <PostCommentsWrapper
+          comments={comments}
+          showAllComments={showAllComments}
+        />
         <PostDate postDate={post.date} />
       </ContentPost>
       {authUser.email && <AddPostCommentStore post={post} />}

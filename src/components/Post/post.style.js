@@ -28,4 +28,11 @@ export const ContentPost = styled.div`
   .author {
     font-weight: bold;
   }
+
+  .show-all-comments {
+    font-size: 0.68rem;
+    color: #6c757d;
+    font-weight: bold;
+    cursor: pointer;
+  }
 `;
