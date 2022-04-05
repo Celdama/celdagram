@@ -58,4 +58,10 @@ export const SubContent = styled.div`
   outline: 1px solid lightgray;
   border-radius: 2px;
   font-size: 0.9rem;
+
+  a {
+    text-decoration: none;
+    color: #184e77;
+    font-weight: bold;
+  }
 `;
