@@ -10,6 +10,7 @@ import { addUser } from '../../store/actions/usersAction';
 import { storage } from '../../config/firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Wrapper, Content, SubContent } from './signup.style';
+import { Link } from 'react-router-dom';
 
 export const SignUp = ({ registerUserInFirebase }) => {
   const [redirect, setRedirect] = useState(false);
@@ -103,7 +104,9 @@ export const SignUp = ({ registerUserInFirebase }) => {
         </form>
       </Content>
       <SubContent>
-        <p>Already have an accout ? Login</p>
+        <p>
+          Already have an accout ? <Link to='/login'>Login</Link>
+        </p>
       </SubContent>
     </Wrapper>
   );

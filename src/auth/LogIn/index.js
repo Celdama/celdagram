@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logInUser } from '../../store/actions/authAction';
 import { Wrapper, Content, Form, SubContent } from './login.style';
+import { Link } from 'react-router-dom';
 
 export const Login = ({ loginUserInFirebase }) => {
   const [redirect, setRedirect] = useState(false);
@@ -67,7 +68,9 @@ export const Login = ({ loginUserInFirebase }) => {
         </Form>
       </Content>
       <SubContent>
-        <p>Don't have an account ? Sign up</p>
+        <p>
+          Don't have an account ? <Link to='/signup'>Sign up</Link>
+        </p>
       </SubContent>
     </Wrapper>
   );
