@@ -1,15 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-<<<<<<< HEAD:src/auth/Login/login.style.js
   outline: 1px solid red;
-=======
-  padding: 40px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
->>>>>>> add-storage-avatar:src/auth/LogIn/login.style.js
 `;
 
 export const Content = styled.div`
