@@ -3,6 +3,7 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_USER_LIKE = 'ADD_USER_LIKE';
 export const REMOVE_USER_LIKE = 'REMOVE_USER_LIKE';
 export const ADD_POST = 'ADD_POST';
+export const DELETE_POST = 'DELETE_POST';
 
 const initialState = [];
 
@@ -36,6 +37,8 @@ export const postsReducer = (state = initialState, action) => {
             }
           : post;
       });
+    case DELETE_POST:
+      return state;
     default:
       return state;
   }
