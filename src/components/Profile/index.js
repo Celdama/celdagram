@@ -8,6 +8,7 @@ import { ProfileUserInfo } from './ProfileUserInfo';
 import { HeartIcon, ChatIcon, TrashIcon } from '@heroicons/react/solid';
 import { deletePost } from '../../store/actions/postsAction';
 import { authSelector } from '../../store/selectors/authSelector';
+import { Modal } from '../Post/Modal';
 
 export const Profil = ({
   userProfile,
@@ -17,6 +18,8 @@ export const Profil = ({
   authUserId,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentPostId, setCurrentPostId] = useState(null);
 
   const userPosts = posts.filter((post) => post.userId === userProfile.uid);
 
@@ -28,6 +31,12 @@ export const Profil = ({
 
   const handleDeletePost = (id) => {
     deletePostFromFirebase(id);
+    setIsOpen(false);
+  };
+
+  const openModal = (id) => {
+    setIsOpen(true);
+    setCurrentPostId(id);
   };
 
   return (
@@ -54,7 +63,7 @@ export const Profil = ({
                     <span>{comments.length}</span>
                   </p>
                   {userId === authUserId && (
-                    <p onClick={() => handleDeletePost(id)}>
+                    <p onClick={() => openModal(id)}>
                       <TrashIcon className='trash-icon' />
                     </p>
                   )}
@@ -63,6 +72,11 @@ export const Profil = ({
               </PostWrapper>
             ))}
           </UserPhotos>
+
+          <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+            Are u sure ? u really want to delete this post ?
+            <button onClick={() => handleDeletePost(currentPostId)}>yes</button>
+          </Modal>
         </>
       )}
     </Wrapper>
