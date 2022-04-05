@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
-import { Wrapper, Photo, UserPhotos } from './profile.style';
+import { Wrapper, Photo, UserPhotos, PostWrapper } from './profile.style';
 import { ProfileUserInfo } from './ProfileUserInfo';
+import { HeartIcon, ChatIcon } from '@heroicons/react/solid';
 
 export const Profil = ({ userProfile, currentProfileId, posts }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -29,8 +30,20 @@ export const Profil = ({ userProfile, currentProfileId, posts }) => {
             currentProfileId={currentProfileId}
           />
           <UserPhotos>
-            {userPosts.map((post, index) => (
-              <Photo key={index} imgUrl={post.photoURL} />
+            {userPosts.map(({ id, likes, comments, photoURL }) => (
+              <PostWrapper key={id}>
+                <div className='stats'>
+                  <p>
+                    <HeartIcon />
+                    <span>{likes.length}</span>
+                  </p>
+                  <p>
+                    <ChatIcon />
+                    <span>{comments.length}</span>
+                  </p>
+                </div>
+                <Photo imgUrl={photoURL} />
+              </PostWrapper>
             ))}
           </UserPhotos>
         </>
