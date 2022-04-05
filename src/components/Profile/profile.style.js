@@ -44,6 +44,10 @@ export const PostWrapper = styled.div`
       height: 1.25rem;
     }
   }
+
+  .trash-icon {
+    cursor: pointer;
+  }
 `;
 
 export const Photo = styled.div`

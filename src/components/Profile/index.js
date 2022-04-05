@@ -5,14 +5,16 @@ import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { Wrapper, Photo, UserPhotos, PostWrapper } from './profile.style';
 import { ProfileUserInfo } from './ProfileUserInfo';
-import { HeartIcon, ChatIcon } from '@heroicons/react/solid';
+import { HeartIcon, ChatIcon, TrashIcon } from '@heroicons/react/solid';
 import { deletePost } from '../../store/actions/postsAction';
+import { authSelector } from '../../store/selectors/authSelector';
 
 export const Profil = ({
   userProfile,
   currentProfileId,
   posts,
   deletePostFromFirebase,
+  authUserId,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -25,7 +27,6 @@ export const Profil = ({
   }, [userProfile]);
 
   const handleDeletePost = (id) => {
-    console.log('delete this post', id);
     deletePostFromFirebase(id);
   };
 
@@ -41,7 +42,7 @@ export const Profil = ({
             currentProfileId={currentProfileId}
           />
           <UserPhotos>
-            {userPosts.map(({ id, likes, comments, photoURL }) => (
+            {userPosts.map(({ id, likes, comments, photoURL, userId }) => (
               <PostWrapper key={id}>
                 <div className='stats'>
                   <p>
@@ -52,7 +53,11 @@ export const Profil = ({
                     <ChatIcon />
                     <span>{comments.length}</span>
                   </p>
-                  <p onClick={() => handleDeletePost(id)}>delete post</p>
+                  {userId === authUserId && (
+                    <p onClick={() => handleDeletePost(id)}>
+                      <TrashIcon className='trash-icon' />
+                    </p>
+                  )}
                 </div>
                 <Photo imgUrl={photoURL} />
               </PostWrapper>
@@ -68,6 +73,7 @@ export const ProfileStore = () => {
   const { id } = useParams();
   const users = useSelector(usersSelector);
   const posts = useSelector(postsSelector);
+  const authUser = useSelector(authSelector);
   const dispatch = useDispatch();
 
   const userProfile = users.filter((user) => user.uid === id)[0];
@@ -85,6 +91,7 @@ export const ProfileStore = () => {
       currentProfileId={id}
       posts={posts}
       deletePostFromFirebase={deletePostFromFirebase}
+      authUserId={authUser.uid}
     />
   );
 };
