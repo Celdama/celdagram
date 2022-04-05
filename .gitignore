@@ -32,3 +32,4 @@ firestore.rules
 storage.rules
 build
 .firebase
+/config
