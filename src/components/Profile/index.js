@@ -18,6 +18,10 @@ export const Profil = ({ userProfile, currentProfileId, posts }) => {
     }
   }, [userProfile]);
 
+  const handleDeletePost = (id) => {
+    console.log('delete this post', id);
+  };
+
   return (
     <Wrapper>
       {!isLoaded ? (
@@ -41,6 +45,7 @@ export const Profil = ({ userProfile, currentProfileId, posts }) => {
                     <ChatIcon />
                     <span>{comments.length}</span>
                   </p>
+                  <p onClick={() => handleDeletePost(id)}>delete post</p>
                 </div>
                 <Photo imgUrl={photoURL} />
               </PostWrapper>
