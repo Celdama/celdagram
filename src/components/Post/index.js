@@ -16,6 +16,8 @@ export const Post = ({ post, users, authUser }) => {
   const { comments, photoURL, likes } = post;
   const { uid, avatar, username } = authorPost;
 
+  console.log(username);
+
   return (
     <Wrapper>
       <AvatarWrapper>
@@ -26,6 +28,9 @@ export const Post = ({ post, users, authUser }) => {
       <PostPhoto url={photoURL} />
       <ContentPost>
         {authUser.email && <PostIconsStore post={post} />}
+        <p>
+          {username} - {post.description}
+        </p>
         <PostLikesCounter likes={likes} />
         <PostCommentsWrapper comments={comments} />
         <PostDate postDate={post.date} />
