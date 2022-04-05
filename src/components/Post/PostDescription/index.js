@@ -1,10 +1,11 @@
 import React from 'react';
+import { Description } from './postDescription.style';
 
 export const PostDescription = ({ username, desc }) => {
   return (
-    <p>
-      <span>{username}</span>
+    <Description>
+      <span className='author'>{username}</span>
       <span>{desc}</span>
-    </p>
+    </Description>
   );
 };

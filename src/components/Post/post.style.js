@@ -20,15 +20,6 @@ export const Photo = styled.img`
 export const ContentPost = styled.div`
   padding: 0.5rem 0.6rem;
 
-  .desc {
-    font-size: 0.9rem;
-    margin: 0;
-  }
-
-  .author {
-    font-weight: bold;
-  }
-
   .show-all-comments {
     font-size: 0.68rem;
     color: #6c757d;

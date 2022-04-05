@@ -36,10 +36,6 @@ export const Post = ({ post, users, authUser }) => {
         <PostLikesCounter likes={likes} />
         {post.description && (
           <PostDescription username={username} desc={post.description} />
-          // <p className='desc'>
-          //   <span className='author'>{username}</span>{' '}
-          //   <span className='content'>{post.description}</span>
-          // </p>
         )}
         {comments.length > 4 && !showAllComments && (
           <span className='show-all-comments' onClick={handleLoadAllComments}>
