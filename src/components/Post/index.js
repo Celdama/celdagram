@@ -10,6 +10,7 @@ import { PostLikesCounter } from './PostLikesCounter';
 import { PostCommentsWrapper } from './PostCommentsWrapper';
 import { PostDate } from './PostDate';
 import { AddPostCommentStore } from './AddPostComment';
+import { PostDescription } from './PostDescription';
 
 export const Post = ({ post, users, authUser }) => {
   const [showAllComments, setShowAllComments] = useState(false);
@@ -34,10 +35,11 @@ export const Post = ({ post, users, authUser }) => {
         {authUser.email && <PostIconsStore post={post} />}
         <PostLikesCounter likes={likes} />
         {post.description && (
-          <p className='desc'>
-            <span className='author'>{username}</span>{' '}
-            <span className='content'>{post.description}</span>
-          </p>
+          <PostDescription username={username} desc={post.description} />
+          // <p className='desc'>
+          //   <span className='author'>{username}</span>{' '}
+          //   <span className='content'>{post.description}</span>
+          // </p>
         )}
         {comments.length > 4 && !showAllComments && (
           <span className='show-all-comments' onClick={handleLoadAllComments}>
