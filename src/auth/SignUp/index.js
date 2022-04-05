@@ -7,15 +7,16 @@ import {
 } from '../../store/actions/authAction';
 import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../store/actions/usersAction';
+import { storage } from '../../config/firebaseConfig';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export const SignUp = ({ registerUserInFirebase }) => {
   const [redirect, setRedirect] = useState(false);
-  const [uploadAvatar, setUploadAvatar] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    avatar: '',
   });
 
   const navigate = useNavigate();
@@ -39,17 +40,26 @@ export const SignUp = ({ registerUserInFirebase }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await registerUserInFirebase(formData);
+
+    const avatarRef = ref(storage, `${username}-avatar`);
+
+    try {
+      await uploadBytes(avatarRef, avatar);
+      const url = await getDownloadURL(avatarRef);
+      await registerUserInFirebase(formData, url);
+    } catch (err) {
+      console.log(err);
+    }
     setRedirect(!redirect);
   };
 
   const handleChangeAvatar = (e) => {
     if (e.target.files[0]) {
-      setUploadAvatar(e.target.files[0]);
+      setAvatar(e.target.files[0]);
     }
   };
 
-  const { username, email, password, avatar } = formData;
+  const { username, email, password } = formData;
 
   return (
     <div>
@@ -82,15 +92,6 @@ export const SignUp = ({ registerUserInFirebase }) => {
           />
         </div>
         <div>
-          <label>Avatar</label>
-          <input
-            onChange={handleChange}
-            value={avatar}
-            type='text'
-            name='avatar'
-          />
-        </div>
-        <div>
           <input type='file' name='avatar' onChange={handleChangeAvatar} />
         </div>
         <button type='button' onClick={handleSubmit}>
@@ -105,9 +106,9 @@ export const SignUpStore = () => {
   const dispatch = useDispatch();
 
   const registerUserInFirebase = useCallback(
-    async ({ username, email, password, avatar }) => {
+    async ({ username, email, password }, url) => {
       await dispatch(registerUser(email, password));
-      await dispatch(updateUser(username, avatar));
+      await dispatch(updateUser(username, url));
       await dispatch(
         addUser({
           followers: [],
