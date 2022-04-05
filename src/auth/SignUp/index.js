@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../store/actions/usersAction';
 import { storage } from '../../config/firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { Wrapper, Content, SubContent } from './signup.style';
 
 export const SignUp = ({ registerUserInFirebase }) => {
   const [redirect, setRedirect] = useState(false);
@@ -62,43 +63,49 @@ export const SignUp = ({ registerUserInFirebase }) => {
   const { username, email, password } = formData;
 
   return (
-    <div>
-      <form>
-        <div>
-          <label>Username</label>
-          <input
-            onChange={handleChange}
-            value={username}
-            type='text'
-            name='username'
-          />
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            onChange={handleChange}
-            value={email}
-            type='email'
-            name='email'
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            onChange={handleChange}
-            value={password}
-            type='password'
-            name='password'
-          />
-        </div>
-        <div>
-          <input type='file' name='avatar' onChange={handleChangeAvatar} />
-        </div>
-        <button type='button' onClick={handleSubmit}>
-          Sign up
-        </button>
-      </form>
-    </div>
+    <Wrapper>
+      <Content>
+        <h1>Celdagram</h1>
+        <form>
+          <div>
+            <input
+              onChange={handleChange}
+              value={username}
+              type='text'
+              name='username'
+              placeholder='Username'
+            />
+          </div>
+          <div>
+            <input
+              onChange={handleChange}
+              value={email}
+              type='email'
+              name='email'
+              placeholder='Email adress'
+            />
+          </div>
+          <div>
+            <input
+              onChange={handleChange}
+              value={password}
+              type='password'
+              name='password'
+              placeholder='Password'
+            />
+          </div>
+          <div>
+            <input type='file' name='avatar' onChange={handleChangeAvatar} />
+          </div>
+          <button type='button' onClick={handleSubmit}>
+            Sign up
+          </button>
+        </form>
+      </Content>
+      <SubContent>
+        <p>Already have an accout ? Login</p>
+      </SubContent>
+    </Wrapper>
   );
 };
 

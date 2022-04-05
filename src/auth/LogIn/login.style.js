@@ -1,25 +1,7 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  outline: 1px solid red;
-  padding: 10px;
-`;
+export const Wrapper = styled.div``;
 
-export const Content = styled.div`
-  outline: 1px solid blue;
-  display: flex;
-  justify-content: center;
-`;
+export const Content = styled.div``;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-
-  label {
-    color: red;
-
-    :hover {
-      color: blue;
-    }
-  }
-`;
+export const Form = styled.form``;
