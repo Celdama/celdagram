@@ -34,6 +34,8 @@ export const Profil = ({
     setIsOpen(false);
   };
 
+  console.log(currentPostId);
+
   const openModal = (id) => {
     setIsOpen(true);
     setCurrentPostId(id);
@@ -51,8 +53,8 @@ export const Profil = ({
             currentProfileId={currentProfileId}
           />
           <UserPhotos>
-            {userPosts.map(({ id, likes, comments, photoURL, userId }) => (
-              <PostWrapper key={id}>
+            {userPosts.map(({ photoId, likes, comments, photoURL, userId }) => (
+              <PostWrapper key={photoId}>
                 <div className='stats'>
                   <p>
                     <HeartIcon />
@@ -63,7 +65,7 @@ export const Profil = ({
                     <span>{comments.length}</span>
                   </p>
                   {userId === authUserId && (
-                    <p onClick={() => openModal(id)}>
+                    <p onClick={() => openModal(photoId)}>
                       <TrashIcon className='trash-icon' />
                     </p>
                   )}
@@ -75,7 +77,10 @@ export const Profil = ({
 
           <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
             Are u sure ? u really want to delete this post ?
-            <button onClick={() => handleDeletePost(currentPostId)}>yes</button>
+            <button onClick={() => handleDeletePost(currentPostId)}>
+              delete
+            </button>
+            <button onClick={() => setIsOpen(false)}>cancel</button>
           </Modal>
         </>
       )}
@@ -98,6 +103,8 @@ export const ProfileStore = () => {
     },
     [dispatch]
   );
+
+  // console.log(posts);
 
   return (
     <Profil

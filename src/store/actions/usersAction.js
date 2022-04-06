@@ -150,6 +150,7 @@ export const removeFollower = (followingId, follower) => {
 };
 
 export const addLikedPost = (currentUserId, postId) => {
+  console.log(postId);
   return async (dispatch) => {
     const userDoc = doc(db, 'users', currentUserId);
     try {

@@ -22,14 +22,15 @@ const postsCollectionRef = collection(db, 'posts');
 
 export const addPost = (data) => {
   return async (dispatch) => {
+    const date = new Date().toString();
     try {
       await setDoc(doc(db, 'posts', data.photoId), {
         ...data,
-        date: new Date(),
+        date,
       });
       dispatch({
         type: ADD_POST,
-        payload: { ...data, date: new Date() },
+        payload: { ...data, date },
       });
     } catch (err) {
       return console.log(err);
@@ -73,6 +74,7 @@ export const addComment = (data, postId) => {
 };
 
 export const addUserLike = (data, postId) => {
+  // console.log(data);
   return async (dispatch) => {
     const postDoc = doc(db, 'posts', postId);
     try {
@@ -114,6 +116,7 @@ export const removeUserLike = (data, postId) => {
 
 export const deletePost = (postId) => {
   return async (dispatch) => {
+    console.log(postId);
     try {
       await deleteDoc(doc(db, 'posts', postId));
       dispatch({

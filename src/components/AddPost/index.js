@@ -13,12 +13,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { authSelector } from '../../store/selectors/authSelector';
-import { addPost } from '../../store/actions/postsAction';
+import { addPost, getPosts } from '../../store/actions/postsAction';
 import { addNewPostId } from '../../store/actions/usersAction';
 import { nanoid } from 'nanoid';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
+import { getUsers } from '../../store/actions/usersAction';
 
 export const AddPost = ({
   currentUser,
@@ -51,7 +52,7 @@ export const AddPost = ({
 
   useEffect(() => {
     if (redirect) {
-      return navigate(`/profile/${currentUser.uid}`);
+      return navigate('/');
     }
   }, [redirect, navigate]);
 

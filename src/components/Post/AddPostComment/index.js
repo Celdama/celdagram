@@ -22,7 +22,7 @@ export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    addCommentToFirebase(formData, post.id);
+    addCommentToFirebase(formData, post.photoId);
     setFormData({
       author: authUser.displayName,
       comment: '',

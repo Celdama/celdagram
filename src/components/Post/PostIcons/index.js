@@ -22,14 +22,16 @@ export const PostIcons = ({
   removeUserLikeFromFirebase,
   removeLikedPostFromFirebase,
 }) => {
+  // console.log(post);
   const addLike = (post) => {
-    addLikedPostToFirebase(currentUser.uid, post.id);
+    console.log(post.photoId);
+    addLikedPostToFirebase(currentUser.uid, post.photoId);
 
     const userWhoLike = {
       userId: currentUser.uid,
       username: currentUser.username,
     };
-    addUserLikeToFirebase(userWhoLike, post.id);
+    addUserLikeToFirebase(userWhoLike, post.photoId);
   };
 
   const removeLike = (post) => {
@@ -38,12 +40,12 @@ export const PostIcons = ({
       username: currentUser.username,
     };
 
-    removeUserLikeFromFirebase(userWhoDislike, post.id);
-    removeLikedPostFromFirebase(currentUser.uid, post.id);
+    removeUserLikeFromFirebase(userWhoDislike, post.photoId);
+    removeLikedPostFromFirebase(currentUser.uid, post.photoId);
   };
 
   const likeIcon =
-    currentUser && currentUser.likes.includes(post.id) ? (
+    currentUser && currentUser.likes.includes(post.photoId) ? (
       <HeartIconSolid onClick={() => removeLike(post)} className='icon like' />
     ) : (
       <HeartIcon onClick={() => addLike(post)} className='icon not-like' />

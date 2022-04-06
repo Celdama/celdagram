@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   position: fixed;
-  inset: 0; /* inset sets all 4 values (top right bottom left) much like how we set padding, margin etc., */
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
@@ -14,13 +14,8 @@ export const Wrapper = styled.div`
   padding: 40px 20px 20px;
 
   .modal-content {
-    width: 70%;
-    height: 70%;
-    background-color: #282c34;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
+    width: 30%;
+    height: 30%;
+    background-color: #fff;
   }
 `;
