@@ -8,6 +8,7 @@ import {
   ADD_LIKED_POST,
   REMOVE_LIKED_POST,
   ADD_NEW_POST_ID,
+  REMOVE_POST_ID,
 } from '../reducers/usersReducer';
 import {
   collection,

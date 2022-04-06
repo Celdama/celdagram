@@ -7,6 +7,7 @@ export const REMOVE_FOLLOWER = 'REMOVE_FOLLOWER';
 export const ADD_LIKED_POST = 'ADD_LIKED_POST';
 export const REMOVE_LIKED_POST = 'REMOVE_LIKED_POST';
 export const ADD_NEW_POST_ID = 'ADD_NEW_POST_ID';
+export const REMOVE_POST_ID = 'REMOVE_POST_ID';
 
 const initialState = [];
 
@@ -82,6 +83,8 @@ export const usersReducer = (state = initialState, action) => {
             }
           : user;
       });
+    case REMOVE_POST_ID:
+      return state;
     default:
       return state;
   }
