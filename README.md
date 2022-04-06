@@ -40,6 +40,3 @@ see notebook
 - <Profile />
 - <Suggestion />
 ```
-
-TODO :
-ajouter la possibilité pour l'utilisateur d'upload un avatar à la création de son compte.

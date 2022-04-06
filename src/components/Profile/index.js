@@ -34,8 +34,6 @@ export const Profil = ({
     setIsOpen(false);
   };
 
-  console.log(currentPostId);
-
   const openModal = (id) => {
     setIsOpen(true);
     setCurrentPostId(id);

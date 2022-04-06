@@ -92,9 +92,14 @@ export const addFollowing = (followerId, following) => {
 export const removeFollowing = (followerId, following) => {
   return async (dispatch) => {
     const followingsDoc = doc(db, 'users', followerId);
+    const { avatar, uid, username } = following;
     try {
       await updateDoc(followingsDoc, {
-        followings: arrayRemove(following),
+        followings: arrayRemove({
+          avatar,
+          uid,
+          username,
+        }),
       });
       dispatch({
         type: REMOVE_FOLLOWING,

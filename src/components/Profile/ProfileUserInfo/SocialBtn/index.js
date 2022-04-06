@@ -40,13 +40,38 @@ export const SocialBtnStore = ({ userProfile, currentProfileId }) => {
   const userLoggedIn = users.filter((user) => user.uid === authUser.uid)[0];
 
   const handleAddFollow = (userLoggedIn, userToFollow) => {
-    dispatch(addFollowing(userLoggedIn.uid, userToFollow));
-    dispatch(addFollower(userToFollow.uid, userLoggedIn));
+    const { avatar, uid, username } = userToFollow;
+    dispatch(
+      addFollowing(userLoggedIn.uid, {
+        avatar,
+        uid,
+        username,
+      })
+    );
+    dispatch(
+      addFollower(userToFollow.uid, {
+        avatar: authUser.photoURL,
+        uid: authUser.uid,
+        username: authUser.displayName,
+      })
+    );
   };
 
   const handleRemoveFollow = (userLoggedIn, userToUnfollow) => {
-    dispatch(removeFollowing(userLoggedIn.uid, userToUnfollow));
-    dispatch(removeFollower(userToUnfollow.uid, userLoggedIn));
+    dispatch(
+      removeFollowing(userLoggedIn.uid, {
+        avatar: userToUnfollow.avatar,
+        uid: userToUnfollow.uid,
+        username: userToUnfollow.username,
+      })
+    );
+    dispatch(
+      removeFollower(userToUnfollow.uid, {
+        avatar: userLoggedIn.avatar,
+        uid: userLoggedIn.uid,
+        username: userLoggedIn.username,
+      })
+    );
   };
 
   return (
