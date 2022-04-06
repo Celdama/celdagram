@@ -215,3 +215,23 @@ export const addNewPostId = (currentUserId, postId) => {
     }
   };
 };
+
+export const removePostId = (currentUserId, postId) => {
+  return async (dispatch) => {
+    const userDoc = doc(db, 'users', currentUserId);
+    try {
+      await updateDoc(userDoc, {
+        posts: arrayRemove(postId),
+      });
+      dispatch({
+        type: REMOVE_POST_ID,
+        payload: {
+          currentUserId,
+          postId,
+        },
+      });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
