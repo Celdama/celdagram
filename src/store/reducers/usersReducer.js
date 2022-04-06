@@ -84,7 +84,16 @@ export const usersReducer = (state = initialState, action) => {
           : user;
       });
     case REMOVE_POST_ID:
-      return state;
+      return state.map((user) => {
+        return user.uid === action.payload.userId
+          ? {
+              ...user,
+              posts: user.posts.filter(
+                (item) => item !== action.payload.postId
+              ),
+            }
+          : user;
+      });
     default:
       return state;
   }
