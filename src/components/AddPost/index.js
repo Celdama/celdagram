@@ -179,8 +179,8 @@ export const AddPostStore = () => {
   );
 
   const addNewPostIdInUserPosts = useCallback(
-    (currentUserId, postId) => {
-      dispatch(addNewPostId(currentUserId, postId));
+    (currentUserId, photoId) => {
+      dispatch(addNewPostId(currentUserId, photoId));
     },
     [dispatch]
   );

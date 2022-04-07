@@ -75,17 +75,18 @@ export const usersReducer = (state = initialState, action) => {
           : user;
       });
     case ADD_NEW_POST_ID:
+      console.log(action.payload.photoId);
       return state.map((user) => {
-        return user.uid === action.payload.userId
+        return user.uid === action.payload.currentUserId
           ? {
               ...user,
-              posts: [...user.posts, action.payload.postId],
+              posts: [...user.posts, action.payload.photoId],
             }
           : user;
       });
     case REMOVE_POST_ID:
       return state.map((user) => {
-        return user.uid === action.payload.userId
+        return user.uid === action.payload.currentUserId
           ? {
               ...user,
               posts: user.posts.filter(

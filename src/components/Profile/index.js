@@ -9,6 +9,7 @@ import { HeartIcon, ChatIcon, TrashIcon } from '@heroicons/react/solid';
 import { deletePost } from '../../store/actions/postsAction';
 import { authSelector } from '../../store/selectors/authSelector';
 import { Modal } from '../Post/Modal';
+import { removePostId, getUsers } from '../../store/actions/usersAction';
 
 export const Profil = ({
   userProfile,
@@ -30,7 +31,7 @@ export const Profil = ({
   }, [userProfile]);
 
   const handleDeletePost = (id) => {
-    deletePostFromFirebase(id);
+    deletePostFromFirebase(authUserId, id);
     setIsOpen(false);
   };
 
@@ -96,13 +97,12 @@ export const ProfileStore = () => {
   const userProfile = users.filter((user) => user.uid === id)[0];
 
   const deletePostFromFirebase = useCallback(
-    (postId) => {
+    (authUserId, postId) => {
       dispatch(deletePost(postId));
+      dispatch(removePostId(authUserId, postId));
     },
     [dispatch]
   );
-
-  // console.log(posts);
 
   return (
     <Profil

@@ -116,7 +116,6 @@ export const removeUserLike = (data, postId) => {
 
 export const deletePost = (postId) => {
   return async (dispatch) => {
-    console.log(postId);
     try {
       await deleteDoc(doc(db, 'posts', postId));
       dispatch({

@@ -22,9 +22,7 @@ export const PostIcons = ({
   removeUserLikeFromFirebase,
   removeLikedPostFromFirebase,
 }) => {
-  // console.log(post);
   const addLike = (post) => {
-    console.log(post.photoId);
     addLikedPostToFirebase(currentUser.uid, post.photoId);
 
     const userWhoLike = {

@@ -196,18 +196,18 @@ export const removeLikedPost = (currentUserId, postId) => {
   };
 };
 
-export const addNewPostId = (currentUserId, postId) => {
+export const addNewPostId = (currentUserId, photoId) => {
   return async (dispatch) => {
     const userDoc = doc(db, 'users', currentUserId);
     try {
       await updateDoc(userDoc, {
-        posts: arrayUnion(postId),
+        posts: arrayUnion(photoId),
       });
       dispatch({
         type: ADD_NEW_POST_ID,
         payload: {
           currentUserId,
-          postId,
+          photoId,
         },
       });
     } catch (err) {
