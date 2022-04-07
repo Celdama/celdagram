@@ -4,7 +4,12 @@ import { NormalFilter } from '../NormalFilter';
 
 import '../instagram.min.css';
 
-export const Filter = ({ filterClass, setFilterClass, imgRef }) => {
+export const Filter = ({
+  filterClass,
+  // setFilterClass,
+  setPostData,
+  imgRef,
+}) => {
   useEffect(() => {
     const divImg = imgRef.current;
     divImg.style.filter = '';
@@ -20,158 +25,48 @@ export const Filter = ({ filterClass, setFilterClass, imgRef }) => {
       class: 'filter-aden',
     },
     {
-      name: 'Amaro',
-      class: 'filter-amaro',
+      name: 'Clarendon',
+      class: 'filter-clarendon',
     },
     {
-      name: 'Ashby',
-      class: 'filter-ashby',
+      name: 'Crema',
+      class: 'filter-crema',
     },
-    // {
-    //   name: 'Brannan',
-    //   class: 'filter-brannan',
-    // },
-    // {
-    //   name: 'Brooklyn',
-    //   class: 'filter-brooklyn',
-    // },
-    // {
-    //   name: 'Charmes',
-    //   class: 'filter-charmes',
-    // },
-    // {
-    //   name: 'Clarendon',
-    //   class: 'filter-clarendon',
-    // },
-    // {
-    //   name: 'Crema',
-    //   class: 'filter-crema',
-    // },
-    // {
-    //   name: 'Dogpatch',
-    //   class: 'filter-dogpatch',
-    // },
-    // {
-    //   name: 'Earlybird',
-    //   class: 'filter-earlybird',
-    // },
-    // {
-    //   name: 'Gingham',
-    //   class: 'filter-gingham',
-    // },
-    // {
-    //   name: 'Ginza',
-    //   class: 'filter-ginza',
-    // },
-    // {
-    //   name: 'Hafe',
-    //   class: 'filter-hafe',
-    // },
-    // {
-    //   name: 'Helena',
-    //   class: 'filter-helena',
-    // },
-    // {
-    //   name: 'Hudson',
-    //   class: 'filter-Inkwell',
-    // },
-    // {
-    //   name: 'Inkwell',
-    //   class: 'filter-inkwell',
-    // },
-    // {
-    //   name: 'Kelvin',
-    //   class: 'filter-kelvin',
-    // },
-    // {
-    //   name: 'Lark',
-    //   class: 'filter-lark',
-    // },
-    // {
-    //   name: 'Lo-fi',
-    //   class: 'filter-lofi',
-    // },
-    // {
-    //   name: 'Ludwing',
-    //   class: 'filter-ludwing',
-    // },
-    // {
-    //   name: 'Maven',
-    //   class: 'filter-maven',
-    // },
-    // {
-    //   name: 'Mayfair',
-    //   class: 'filter-mayfair',
-    // },
-    // {
-    //   name: 'Moon',
-    //   class: 'filter-moon',
-    // },
-    // {
-    //   name: 'Nashville',
-    //   class: 'filter-nashvile',
-    // },
-    // {
-    //   name: 'Perpetua',
-    //   class: 'filter-perpetua',
-    // },
-    // {
-    //   name: 'Poprocket',
-    //   class: 'filter-poprocket',
-    // },
-    // {
-    //   name: 'Reyes',
-    //   class: 'filter-reyes',
-    // },
-    // {
-    //   name: 'Rise',
-    //   class: 'filter-rise',
-    // },
-    // {
-    //   name: 'Sierra',
-    //   class: 'filter-sierra',
-    // },
-    // {
-    //   name: 'Skyline',
-    //   class: 'filter-skyline',
-    // },
-    // {
-    //   name: 'Slumber',
-    //   class: 'filter-slumber',
-    // },
-    // {
-    //   name: 'Stinson',
-    //   class: 'filter-stinson',
-    // },
-    // {
-    //   name: 'Sutro',
-    //   class: 'filter-sutro',
-    // },
-    // {
-    //   name: 'Toaster',
-    //   class: 'filter-toaster',
-    // },
-    // {
-    //   name: 'Valencia',
-    //   class: 'filter-valencia',
-    // },
-    // {
-    //   name: 'Vesper',
-    //   class: 'filter-vesper',
-    // },
-    // {
-    //   name: 'Walden',
-    //   class: 'filter-walden',
-    // },
-    // {
-    //   name: 'Willow',
-    //   class: 'filter-willow',
-    // },
-    // {
-    //   name: 'X-Pro II',
-    //   class: 'filter-xpro-ii',
-    // },
+    {
+      name: 'Gingham',
+      class: 'filter-gingham',
+    },
+    {
+      name: 'Lark',
+      class: 'filter-lark',
+    },
+    {
+      name: 'Ludwing',
+      class: 'filter-ludwing',
+    },
+    {
+      name: 'Moon',
+      class: 'filter-moon',
+    },
+    {
+      name: 'Perpetua',
+      class: 'filter-perpetua',
+    },
+    {
+      name: 'Reyes',
+      class: 'filter-reyes',
+    },
+    {
+      name: 'Slumber',
+      class: 'filter-slumber',
+    },
+    {
+      name: 'Willow',
+      class: 'filter-willow',
+    },
   ];
+
+  console.log(filters.length);
 
   return (
     <FiltersStyles>
@@ -182,7 +77,15 @@ export const Filter = ({ filterClass, setFilterClass, imgRef }) => {
               className={`filter-item ${
                 filterClass === filter.class ? 'filter-item--selected' : ''
               }`}
-              onClick={() => setFilterClass(filter.class)}
+              // onClick={() => setFilterClass(filter.class)}
+              onClick={() =>
+                setPostData((prevState) => {
+                  return {
+                    ...prevState,
+                    filterClass: filter.class,
+                  };
+                })
+              }
             >
               <div className='filter-item__img'>
                 <img

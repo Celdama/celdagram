@@ -52,26 +52,28 @@ export const Profil = ({
             currentProfileId={currentProfileId}
           />
           <UserPhotos>
-            {userPosts.map(({ photoId, likes, comments, photoURL, userId }) => (
-              <PostWrapper key={photoId}>
-                <div className='stats'>
-                  <p>
-                    <HeartIcon />
-                    <span>{likes.length}</span>
-                  </p>
-                  <p>
-                    <ChatIcon />
-                    <span>{comments.length}</span>
-                  </p>
-                  {userId === authUserId && (
-                    <p onClick={() => openModal(photoId)}>
-                      <TrashIcon className='trash-icon' />
+            {userPosts.map(
+              ({ photoId, likes, comments, photoURL, userId, filterClass }) => (
+                <PostWrapper key={photoId}>
+                  <div className='stats'>
+                    <p>
+                      <HeartIcon />
+                      <span>{likes.length}</span>
                     </p>
-                  )}
-                </div>
-                <Photo imgUrl={photoURL} />
-              </PostWrapper>
-            ))}
+                    <p>
+                      <ChatIcon />
+                      <span>{comments.length}</span>
+                    </p>
+                    {userId === authUserId && (
+                      <p onClick={() => openModal(photoId)}>
+                        <TrashIcon className='trash-icon' />
+                      </p>
+                    )}
+                  </div>
+                  <Photo className={filterClass} imgUrl={photoURL} />
+                </PostWrapper>
+              )
+            )}
           </UserPhotos>
 
           <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>

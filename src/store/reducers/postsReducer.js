@@ -37,14 +37,6 @@ export const postsReducer = (state = initialState, action) => {
           : post;
       });
     case DELETE_POST:
-      // GET USER USELESS, LE SEUL VERITABLE PB EST QUE J4ENVOIE
-      // L'ID DU POST CREE COMME CA DANS LE TABLEAU POST. DONC
-      // QUAND JE FILTRE (POUR LE SUPPRIMER) IMPOSSIBLE DE LE COMPARER
-      // AVEC L'ID DU POST A SUPPRIMER.
-      // IL FAUT QUE JE CREER UN OBJET, QUAND JAJOUTE UN POST {id: PostId, desc: Post.desc}
-      // ET QUE JAJOUET CET OBJET AU TABLEAU POST, JE POURRAIS ENSUITE LE FILTRER POUR LE SUPPRIMEr
-      // ET NAURAIS PAS BESOIN DE FAIRE UN CALL A FIREBASE POUR GETUSERS() DANS
-      // L'OPTIQUE DE R2CUP2RER DES DONNEES MAJ
       return state.filter((post) => {
         return post.photoId !== action.payload.postId;
       });

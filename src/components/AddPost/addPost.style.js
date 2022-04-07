@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   height: 60vh;
   place-items: center;
   text-align: center;
-  outline: 1px solid red;
 
   h1 {
     font-size: 18px;
@@ -23,7 +22,6 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   height: 400px;
   width: 100%;
-  outline: 1px solid green;
   display: flex;
 
   .form-post-wrapper {

@@ -35,7 +35,7 @@ export const AddPost = ({
   const [redirect, setRedirect] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [uploadPhotoImg, setUploadPhotoImg] = useState(false);
-  const [filterClass, setFilterClass] = useState('filter-original');
+  // const [filterClass, setFilterClass] = useState('');
 
   const [postData, setPostData] = useState({
     description: '',
@@ -43,11 +43,12 @@ export const AddPost = ({
     userId: '',
     likes: [],
     comments: [],
-    // postClassName: filterClass,
+    filterClass: '',
   });
-  const [postURL, setPostURL] = useState('');
+  // const [postURL, setPostURL] = useState('');
 
-  console.log(filterClass);
+  console.log(postData);
+  // console.log(filterClass);
 
   useEffect(() => {
     if (uploadPhotoImg) {
@@ -136,7 +137,7 @@ export const AddPost = ({
                 <img
                   ref={imgPreview}
                   src=''
-                  className={filterClass}
+                  className={postData.filterClass}
                   alt='preview post'
                 />
               )}
@@ -183,10 +184,11 @@ export const AddPost = ({
           </div>
           {previewLoad && (
             <Filter
-              filterClass={filterClass}
-              setFilterClass={setFilterClass}
+              filterClass={postData.filterClass}
+              // setFilterClass={setFilterClass}
+              setPostData={setPostData}
               imgRef={imgPreview}
-              url={postURL}
+              // url={postURL}
             />
           )}
         </div>

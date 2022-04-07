@@ -14,9 +14,12 @@ import { PostDescription } from './PostDescription';
 
 export const Post = ({ post, users, authUser }) => {
   const [showAllComments, setShowAllComments] = useState(false);
+  console.log('---');
+  console.log(post);
+  console.log('---');
   const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
-  const { comments, photoURL, likes } = post;
+  const { comments, photoURL, likes, filterClass } = post;
   const { uid, avatar, username } = authorPost;
 
   const handleLoadAllComments = () => {
@@ -30,7 +33,7 @@ export const Post = ({ post, users, authUser }) => {
           <UserAvatar id={uid} url={avatar} name={username} size={30} />
         )}
       </AvatarWrapper>
-      <PostPhoto url={photoURL} />
+      <PostPhoto url={photoURL} filter={filterClass} />
       <ContentPost>
         {authUser.email && <PostIconsStore post={post} />}
         <PostLikesCounter likes={likes} />
