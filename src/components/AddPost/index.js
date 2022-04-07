@@ -20,6 +20,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { getUsers } from '../../store/actions/usersAction';
+import { Filter } from '../TestFilter/Filter';
 
 export const AddPost = ({
   currentUser,
@@ -34,13 +35,19 @@ export const AddPost = ({
   const [redirect, setRedirect] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [uploadPhotoImg, setUploadPhotoImg] = useState(false);
+  const [filterClass, setFilterClass] = useState('filter-original');
+
   const [postData, setPostData] = useState({
     description: '',
     photoURL: '',
     userId: '',
     likes: [],
     comments: [],
+    // postClassName: filterClass,
   });
+  const [postURL, setPostURL] = useState('');
+
+  console.log(filterClass);
 
   useEffect(() => {
     if (uploadPhotoImg) {
@@ -90,6 +97,7 @@ export const AddPost = ({
     try {
       await uploadBytes(photoRef, photo);
       const url = await getDownloadURL(photoRef);
+
       setPostData((prevState) => {
         return {
           ...prevState,
@@ -118,47 +126,70 @@ export const AddPost = ({
     <Wrapper>
       <h1>New post</h1>
       <Container>
-        <PreviewUpload
-          onClick={!previewLoad ? defaultBtnActive : undefined}
-          ref={wrapperImg}
-        >
-          <PreviewImgContainer>
-            {previewLoad && <img ref={imgPreview} src='' alt='preview post' />}
-          </PreviewImgContainer>
-          <PreviewTxtContainer>
-            <UploadIcon style={{ height: '70px' }} />
-            <div>
-              <p>No file chosen, yet.</p>
-              <p>Click to browse.</p>
-            </div>
-          </PreviewTxtContainer>
-          <CancelBtnContainer id='cancel-btn' onClick={resetPhoto}>
-            <XIcon style={{ height: '16px' }} />
-          </CancelBtnContainer>
-        </PreviewUpload>
-        <Form>
-          <input
-            ref={inputFile}
-            id='default-btn'
-            type='file'
-            hidden
-            onChange={handlePhotoChange}
-          />
-          <div className='caption'>
+        <div className='form-post-wrapper'>
+          <PreviewUpload
+            onClick={!previewLoad ? defaultBtnActive : undefined}
+            ref={wrapperImg}
+          >
+            <PreviewImgContainer>
+              {previewLoad && (
+                <img
+                  ref={imgPreview}
+                  src=''
+                  className={filterClass}
+                  alt='preview post'
+                />
+              )}
+            </PreviewImgContainer>
+            <PreviewTxtContainer>
+              <UploadIcon style={{ height: '70px' }} />
+              <div>
+                <p>No file chosen, yet.</p>
+                <p>Click to browse.</p>
+              </div>
+            </PreviewTxtContainer>
+            <CancelBtnContainer id='cancel-btn' onClick={resetPhoto}>
+              <XIcon style={{ height: '16px' }} />
+            </CancelBtnContainer>
+          </PreviewUpload>
+          <Form>
             <input
-              rows={2}
-              placeholder='Write a caption...'
-              maxLength='140'
-              type='text'
-              name='description'
-              onChange={handleChange}
+              ref={inputFile}
+              id='default-btn'
+              type='file'
+              hidden
+              onChange={handlePhotoChange}
             />
-            <ShareBtn type='button' onClick={handleAddPost}>
-              Share
-            </ShareBtn>
+            <div className='caption'>
+              <input
+                rows={2}
+                placeholder='Write a caption...'
+                maxLength='140'
+                type='text'
+                name='description'
+                onChange={handleChange}
+              />
+              <ShareBtn type='button' onClick={handleAddPost}>
+                Share
+              </ShareBtn>
+            </div>
+            <div></div>
+          </Form>
+        </div>
+        <div className='filter-container'>
+          <div className='filter-container-nav'>
+            <span>Filter</span>
+            <span>Settings</span>
           </div>
-          <div></div>
-        </Form>
+          {previewLoad && (
+            <Filter
+              filterClass={filterClass}
+              setFilterClass={setFilterClass}
+              imgRef={imgPreview}
+              url={postURL}
+            />
+          )}
+        </div>
       </Container>
     </Wrapper>
   );

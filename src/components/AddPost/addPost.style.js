@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   height: 60vh;
   place-items: center;
   text-align: center;
+  outline: 1px solid red;
 
   h1 {
     font-size: 18px;
@@ -20,14 +21,36 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  height: 350px;
-  width: 450px;
+  height: 400px;
+  width: 100%;
+  outline: 1px solid green;
+  display: flex;
+
+  .form-post-wrapper {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .filter-container {
+    width: 35%;
+    .filter-container-nav {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      outline: 1px solid black;
+
+      span {
+        width: 50%;
+      }
+    }
+  }
 `;
 
 export const PreviewUpload = styled.div`
   cursor: pointer;
   position: relative;
-  height: 300px;
+  height: 350px;
   width: 100%;
   border-radius: 10px;
   background: transparent;

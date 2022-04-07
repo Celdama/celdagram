@@ -13,6 +13,8 @@ import { RequireAuth } from './Helpers/requireAuth';
 import { LoginStore } from './auth/Login';
 import { ProfileStore } from './components/Profile';
 import { AddPostStore } from './components/AddPost';
+import { TestFilter } from './components/TestFilter';
+
 export const App = () => {
   const dispatch = useDispatch();
 
@@ -33,6 +35,7 @@ export const App = () => {
             <Route path='/signup' element={<SignUpStore />} />
             <Route path='/login' element={<LoginStore />} />
             <Route path='/new-post' element={<AddPostStore />} />
+            <Route path='/test' element={<TestFilter />} />
           </Routes>
         </Main>
         <GlobalStyle />
