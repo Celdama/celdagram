@@ -1,19 +1,32 @@
 import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import 'sanitize.css';
 
 export const GlobalStyle = createGlobalStyle`
-  :root {}
+	:root {
+		--white: #fff;
+		--borderGray: #D3D3D3;
+		--inputBgColor: #faf9fa;
+		--mainBlue: #184e77;
+
+
+	}
+	html { 
+		font-size: 62.5%;
+		font-size: .625em; 
+	} 
 
   * {
     box-sizing: border-box;
     font-family: sans-serif;
-  }
+	}
 
-  body {
-    background-color: #f5f3f4;
-  }
+	body {
+		background-color: #f5f3f4;
+		font-size: 1.6rem;
+	}
 
-   .filter-item {
+.filter-item {
         cursor: pointer;
         width: 100px;
         /* height: 100px; */

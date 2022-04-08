@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { addUser } from '../../store/actions/usersAction';
 import { storage } from '../../config/firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { Wrapper, Content, SubContent } from './signup.style';
 import { Link } from 'react-router-dom';
+import { Wrapper, Content, Form, FormBtn, SubFormContent } from '../auth.style';
 
 export const SignUp = ({ registerUserInFirebase }) => {
   const [redirect, setRedirect] = useState(false);
@@ -67,7 +67,7 @@ export const SignUp = ({ registerUserInFirebase }) => {
     <Wrapper>
       <Content>
         <h1>Celdagram</h1>
-        <form>
+        <Form>
           <div>
             <input
               onChange={handleChange}
@@ -98,16 +98,16 @@ export const SignUp = ({ registerUserInFirebase }) => {
           <div>
             <input type='file' name='avatar' onChange={handleChangeAvatar} />
           </div>
-          <button type='button' onClick={handleSubmit}>
+          <FormBtn type='button' onClick={handleSubmit}>
             Sign up
-          </button>
-        </form>
+          </FormBtn>
+        </Form>
       </Content>
-      <SubContent>
+      <SubFormContent>
         <p>
           Already have an accout ? <Link to='/login'>Login</Link>
         </p>
-      </SubContent>
+      </SubFormContent>
     </Wrapper>
   );
 };

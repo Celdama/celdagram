@@ -45,10 +45,6 @@ export const AddPost = ({
     comments: [],
     filterClass: '',
   });
-  // const [postURL, setPostURL] = useState('');
-
-  console.log(postData);
-  // console.log(filterClass);
 
   useEffect(() => {
     if (uploadPhotoImg) {

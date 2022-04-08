@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logInUser } from '../../store/actions/authAction';
-import { Wrapper, Content, Form, SubContent } from './login.style';
 import { Link } from 'react-router-dom';
+import { Wrapper, Content, Form, FormBtn, SubFormContent } from '../auth.style';
 
 export const Login = ({ loginUserInFirebase }) => {
   const [redirect, setRedirect] = useState(false);
@@ -61,16 +61,16 @@ export const Login = ({ loginUserInFirebase }) => {
               placeholder='Password'
             />
           </div>
-          <button type='button' onClick={handleSubmit}>
+          <FormBtn type='button' onClick={handleSubmit}>
             Login
-          </button>
+          </FormBtn>
         </Form>
       </Content>
-      <SubContent>
+      <SubFormContent>
         <p>
           Don't have an account ? <Link to='/signup'>Sign up</Link>
         </p>
-      </SubContent>
+      </SubFormContent>
     </Wrapper>
   );
 };
