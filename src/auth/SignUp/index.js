@@ -42,7 +42,6 @@ export const SignUp = ({ registerUserInFirebase }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const avatarRef = ref(storage, `${username}-avatar`);
 
     try {
