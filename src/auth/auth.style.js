@@ -39,7 +39,7 @@ export const Form = styled.form`
 export const FormBtn = styled.button`
   width: 100%;
   border: none;
-  background-color: #184e77;
+  background-color: var(--mainBlue);
   color: #fff;
   font-weight: bold;
   border-radius: 3px;
