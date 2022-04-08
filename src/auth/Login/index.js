@@ -42,7 +42,6 @@ export const Login = ({ loginUserInFirebase }) => {
     <Wrapper>
       <Content>
         <h1>Celdagram</h1>
-
         <Form>
           <div>
             <input
