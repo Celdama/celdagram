@@ -66,8 +66,6 @@ export const Filter = ({
     },
   ];
 
-  console.log(filters.length);
-
   return (
     <FiltersStyles>
       {filters.map((filter, index) => {

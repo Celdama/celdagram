@@ -27,6 +27,7 @@ export const PostWrapper = styled.div`
     position: absolute;
     top: 45%;
     width: 70%;
+    z-index: 10;
   }
 
   :hover {
