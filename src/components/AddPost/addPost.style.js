@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   text-align: center;
 
   h1 {
-    font-size: 18px;
+    font-size: 1.8rem;
   }
 
   .active {
@@ -19,8 +19,8 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Container = styled.div`
-  height: 400px;
+export const Content = styled.div`
+  height: 40rem;
   width: 100%;
   display: flex;
 
@@ -36,7 +36,7 @@ export const Container = styled.div`
       width: 100%;
       display: flex;
       justify-content: center;
-      outline: 1px solid black;
+      outline: 1px solid var(--black);
 
       span {
         width: 50%;
@@ -48,11 +48,11 @@ export const Container = styled.div`
 export const PreviewUpload = styled.div`
   cursor: pointer;
   position: relative;
-  height: 350px;
+  height: 35rem;
   width: 100%;
   border-radius: 10px;
   background: transparent;
-  border: 2px dashed #c2cdda;
+  border: 2px dashed var(--previewUploadBorder);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,30 +76,30 @@ export const PreviewImgContainer = styled.div`
 export const PreviewTxtContainer = styled.div`
   p {
     margin: 0;
-    font-size: 14px;
-    color: #000;
+    font-size: 1.4rem;
+    color: var(--black);
     font-weight: 500;
   }
 `;
 
 export const CancelBtnContainer = styled.div`
   position: absolute;
-  right: 15px;
-  top: 15px;
-  background-color: #fff;
+  right: 1.5rem;
+  top: 1.5rem;
+  background-color: var(--white);
   border-radius: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 22px;
-  width: 22px;
+  height: 2.2rem;
+  width: 2.2rem;
   cursor: pointer;
   opacity: 0;
 `;
 
 export const Form = styled.form`
   .caption {
-    margin-top: 20px;
+    margin-top: 2rem;
     display: flex;
 
     input {
@@ -107,7 +107,7 @@ export const Form = styled.form`
       width: 100%;
       border: none;
       background-color: transparent;
-      padding: 2.5px;
+      padding: 0.25rem;
     }
   }
 `;
@@ -115,7 +115,7 @@ export const Form = styled.form`
 export const ShareBtn = styled.button`
   border: none;
   background-color: transparent;
-  color: #184e77;
+  color: var(--mainBlue);
   font-weight: bold;
   padding: 0.18rem 0.5rem;
   cursor: pointer;

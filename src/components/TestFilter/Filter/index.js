@@ -8,10 +8,10 @@ export const Filter = ({
   filterClass,
   // setFilterClass,
   setPostData,
-  imgRef,
+  imgPreview,
 }) => {
   useEffect(() => {
-    const divImg = imgRef.current;
+    const divImg = imgPreview.current;
     divImg.style.filter = '';
   }, [filterClass]);
 

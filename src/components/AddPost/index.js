@@ -2,9 +2,9 @@ import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { UploadIcon, XIcon } from '@heroicons/react/outline';
 import {
   Wrapper,
-  Container,
+  Content,
   PreviewUpload,
-  PreviewImgContainer,
+  // PreviewImgContainer,
   PreviewTxtContainer,
   CancelBtnContainer,
   Form,
@@ -13,14 +13,14 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { usersSelector } from '../../store/selectors/usersSelector';
 import { authSelector } from '../../store/selectors/authSelector';
-import { addPost, getPosts } from '../../store/actions/postsAction';
+import { addPost } from '../../store/actions/postsAction';
 import { addNewPostId } from '../../store/actions/usersAction';
 import { nanoid } from 'nanoid';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../config/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
-import { getUsers } from '../../store/actions/usersAction';
 import { Filter } from '../TestFilter/Filter';
+import { PreviewImgContainer } from './addPost.style';
 
 export const AddPost = ({
   currentUser,
@@ -35,8 +35,6 @@ export const AddPost = ({
   const [redirect, setRedirect] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [uploadPhotoImg, setUploadPhotoImg] = useState(false);
-  // const [filterClass, setFilterClass] = useState('');
-
   const [postData, setPostData] = useState({
     description: '',
     photoURL: '',
@@ -93,12 +91,12 @@ export const AddPost = ({
 
     try {
       await uploadBytes(photoRef, photo);
-      const url = await getDownloadURL(photoRef);
+      const photoURL = await getDownloadURL(photoRef);
 
       setPostData((prevState) => {
         return {
           ...prevState,
-          photoURL: url,
+          photoURL,
           photoId,
           userId: currentUser.uid,
         };
@@ -122,7 +120,7 @@ export const AddPost = ({
   return (
     <Wrapper>
       <h1>New post</h1>
-      <Container>
+      <Content>
         <div className='form-post-wrapper'>
           <PreviewUpload
             onClick={!previewLoad ? defaultBtnActive : undefined}
@@ -181,14 +179,12 @@ export const AddPost = ({
           {previewLoad && (
             <Filter
               filterClass={postData.filterClass}
-              // setFilterClass={setFilterClass}
               setPostData={setPostData}
-              imgRef={imgPreview}
-              // url={postURL}
+              imgPreview={imgPreview}
             />
           )}
         </div>
-      </Container>
+      </Content>
     </Wrapper>
   );
 };

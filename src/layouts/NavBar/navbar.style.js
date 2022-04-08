@@ -5,7 +5,7 @@ export const Wrapper = styled.nav`
 `;
 
 export const Content = styled.div`
-  max-width: 48rem;
+  max-width: 68rem;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;

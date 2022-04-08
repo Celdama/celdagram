@@ -1,16 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
-import styled from 'styled-components';
 import 'sanitize.css';
 
 export const GlobalStyle = createGlobalStyle`
 	:root {
+    --black: #000;
 		--white: #fff;
 		--borderGray: #D3D3D3;
 		--inputBgColor: #faf9fa;
+        --previewUploadBorder: #c2cdda;
 		--mainBlue: #184e77;
-
-
 	}
+
 	html { 
 		font-size: 62.5%;
 		font-size: .625em; 
