@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   transition: all 0.3s ease-in-out;
   overflow: hidden;
   z-index: 999;
-  padding: 40px 20px 20px;
+  padding: 4rem 2rem 2rem;
 
   .modal-content {
     padding: 3rem 2rem;
