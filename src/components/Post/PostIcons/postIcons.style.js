@@ -5,11 +5,11 @@ export const Wrapper = styled.div`
   gap: 3px;
 
   .icon {
-    height: 1.25rem;
+    height: 1.7rem;
     cursor: pointer;
   }
 
   .like {
-    color: red;
+    color: var(--redColor);
   }
 `;
