@@ -5,7 +5,7 @@ export const PostCommentsWrapper = ({ comments, showAllComments }) => {
   const commentsList = comments.map(({ author, comment }, index) => {
     return (
       <li key={index}>
-        <span className='author'>{author}</span>{' '}
+        <span className='author'>{author}</span>
         <span className='comment'>{comment}</span>
       </li>
     );
@@ -16,7 +16,7 @@ export const PostCommentsWrapper = ({ comments, showAllComments }) => {
     .map(({ author, comment }, index) => {
       return (
         <li key={index}>
-          <span className='author'>{author}</span>{' '}
+          <span className='author'>{author}</span>
           <span className='comment'>{comment}</span>
         </li>
       );

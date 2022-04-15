@@ -6,6 +6,11 @@ export const Wrapper = styled.ul`
   list-style: none;
   font-size: 1.2rem;
 
+  li {
+    display: flex;
+    gap: 4px;
+  }
+
   .author {
     font-weight: bold;
   }

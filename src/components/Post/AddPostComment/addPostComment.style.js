@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
     padding: 0 0.6rem;
     border: none;
     outline: none;
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 `;
 
@@ -25,6 +25,6 @@ export const PostBtn = styled.button`
   background-color: transparent;
   width: 10%;
   color: var(--darkGray);
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
 `;
