@@ -21,7 +21,7 @@ export const ContentPost = styled.div`
   padding: 0.5rem 0.6rem;
 
   .show-all-comments {
-    font-size: 0.68rem;
+    font-size: 1.2rem;
     color: #6c757d;
     font-weight: bold;
     cursor: pointer;
