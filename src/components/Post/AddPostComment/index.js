@@ -29,6 +29,8 @@ export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
     });
   };
 
+  const { comment } = formData;
+
   return (
     <Wrapper>
       <form>
@@ -36,7 +38,7 @@ export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
           type='text'
           name='comment'
           onChange={handleChange}
-          value={formData.comment}
+          value={comment}
           placeholder='Add a comment...'
         />
         <PostBtn type='button' onClick={handleAddComment}>
