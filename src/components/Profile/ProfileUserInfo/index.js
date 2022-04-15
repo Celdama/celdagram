@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper } from './profileUserInfo.style';
+import { Wrapper, UserInfo, UserSocialInfo } from './profileUserInfo.style';
 import { UserAvatar } from '../../UserAvatar';
 import { SocialBtnStore } from './SocialBtn';
 
@@ -20,20 +20,20 @@ export const ProfileUserInfo = ({
         displayName={false}
       />
       <div>
-        <div className='user'>
+        <UserInfo>
           <h4>{username}</h4>
           <SocialBtnStore
             userProfile={userProfile}
             currentProfileId={currentProfileId}
           />
-        </div>
-        <div className='social'>
+        </UserInfo>
+        <UserSocialInfo>
           <span>
             {userPosts.length} photo{userPosts.length > 1 ? 's' : ''}
           </span>
           <span>{followers.length} followers</span>
           <span>{followings.length} following</span>
-        </div>
+        </UserSocialInfo>
       </div>
     </Wrapper>
   );

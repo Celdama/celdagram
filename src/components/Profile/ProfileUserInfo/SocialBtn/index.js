@@ -8,6 +8,7 @@ import {
   removeFollowing,
   removeFollower,
 } from '../../../../store/actions/usersAction';
+import { FollowUnfollowBtn } from './socialBtn.style';
 
 export const SocialBtn = ({
   userProfile,
@@ -20,13 +21,17 @@ export const SocialBtn = ({
     <div>
       {userLoggedIn &&
       !userLoggedIn.followings.some((e) => e.uid === currentProfileId) ? (
-        <button onClick={() => handleAddFollow(userLoggedIn, userProfile)}>
+        <FollowUnfollowBtn
+          onClick={() => handleAddFollow(userLoggedIn, userProfile)}
+        >
           follow
-        </button>
+        </FollowUnfollowBtn>
       ) : (
-        <button onClick={() => handleRemoveFollow(userLoggedIn, userProfile)}>
+        <FollowUnfollowBtn
+          onClick={() => handleRemoveFollow(userLoggedIn, userProfile)}
+        >
           unfollow
-        </button>
+        </FollowUnfollowBtn>
       )}
     </div>
   ) : null;
