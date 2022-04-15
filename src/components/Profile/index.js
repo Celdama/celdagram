@@ -77,7 +77,7 @@ export const Profil = ({
                       </p>
                     )}
                   </div>
-                  <Photo className={filterClass} imgUrl={photoURL} />
+                  <Photo className={`post ${filterClass}`} imgUrl={photoURL} />
                 </PostWrapper>
               )
             )}

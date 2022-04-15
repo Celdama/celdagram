@@ -18,7 +18,6 @@ export const NavBar = ({ isAuth, authUser, handleLogOut }) => {
           <Link to='/'>
             <HomeIcon className='icon' />
           </Link>
-          <Link to='/test'>test</Link>
           {isAuth ? (
             <>
               <Link to={`/new-post`}>

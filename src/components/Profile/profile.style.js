@@ -1,16 +1,14 @@
 import styled from 'styled-components';
+import breakpoints from '../../Helpers/breakpoints';
 
-export const Wrapper = styled.div`
-  font-size: 0.9rem;
-`;
+export const Wrapper = styled.div``;
 
 export const UserPhotos = styled.div`
-  outline: 1px solid red;
   padding: 1.2rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-gap: 20px;
+  grid-auto-flow: dense;
 `;
 
 export const PostWrapper = styled.div`
@@ -18,46 +16,65 @@ export const PostWrapper = styled.div`
   flex-direction: column;
   position: relative;
   align-items: center;
-  color: white;
+  color: var(--white);
+
+  &::before {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 
   .stats {
     display: flex;
     justify-content: space-around;
     opacity: 0;
-    gap: 20px;
     position: absolute;
     top: 45%;
     width: 70%;
     z-index: 10;
+    font-size: 1.8rem;
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      svg {
+        height: 2rem;
+      }
+
+      .trash-icon {
+        cursor: pointer;
+      }
+    }
   }
 
   :hover {
-    opacity: 0.9;
+    &::before {
+      opacity: 1;
+    }
     .stats {
       opacity: 1;
     }
   }
-
-  p {
-    display: flex;
-    gap: 10px;
-
-    svg {
-      height: 1.25rem;
-    }
-  }
-
-  .trash-icon {
-    cursor: pointer;
-  }
 `;
 
 export const Photo = styled.div`
-  height: 340px;
-  width: 240px;
+  height: 540px;
+  width: 100%;
   background-image: ${({ imgUrl }) => `url(${imgUrl})`};
   background-position: center;
   background-size: cover;
+
+  @media screen and (min-width: 500px) {
+    height: 340px;
+  }
 `;
 
 export const DefaultBtn = styled.button`
