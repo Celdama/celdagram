@@ -6,7 +6,8 @@ export const GlobalStyle = createGlobalStyle`
     --black: #000;
 		--white: #fff;
 		--borderGray: #D3D3D3;
-    --darkGray: #6c757d;
+    --redColor: #c81448;
+    --darkGray: #6c757d
 		--inputBgColor: #faf9fa;
     --previewUploadBorder: #c2cdda;
 		--mainBlue: #184e77;

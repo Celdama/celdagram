@@ -58,3 +58,21 @@ export const Photo = styled.div`
   background-position: center;
   background-size: cover;
 `;
+
+export const DefaultBtn = styled.button`
+  padding: 0.5rem 0.4rem;
+  border: none;
+  border-radius: 4px;
+  color: var(--white);
+  text-transform: capitalize;
+  cursor: pointer;
+  font-size: 1.1rem;
+`;
+
+export const DeleteBtn = styled(DefaultBtn)`
+  background-color: var(--redColor);
+`;
+
+export const EditBtn = styled(DefaultBtn)`
+  background-color: var(--mainBlue);
+`;

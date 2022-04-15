@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { postsSelector } from '../../store/selectors/postsSelector';
 import { usersSelector } from '../../store/selectors/usersSelector';
-import { Wrapper, Photo, UserPhotos, PostWrapper } from './profile.style';
+import {
+  Wrapper,
+  Photo,
+  UserPhotos,
+  PostWrapper,
+  DeleteBtn,
+  EditBtn,
+} from './profile.style';
 import { ProfileUserInfo } from './ProfileUserInfo';
 import { HeartIcon, ChatIcon, TrashIcon } from '@heroicons/react/solid';
 import { deletePost } from '../../store/actions/postsAction';
@@ -77,11 +84,13 @@ export const Profil = ({
           </UserPhotos>
 
           <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-            Are u sure ? u really want to delete this post ?
-            <button onClick={() => handleDeletePost(currentPostId)}>
-              delete
-            </button>
-            <button onClick={() => setIsOpen(false)}>cancel</button>
+            <p>Do you really want to delete this post ?</p>
+            <div>
+              <DeleteBtn onClick={() => handleDeletePost(currentPostId)}>
+                delete
+              </DeleteBtn>
+              <EditBtn onClick={() => setIsOpen(false)}>cancel</EditBtn>
+            </div>
           </Modal>
         </>
       )}

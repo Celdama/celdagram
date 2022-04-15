@@ -14,9 +14,7 @@ import { PostDescription } from './PostDescription';
 
 export const Post = ({ post, users, authUser }) => {
   const [showAllComments, setShowAllComments] = useState(false);
-  console.log('---');
-  console.log(post);
-  console.log('---');
+
   const authorPost = users.filter((user) => user.uid === post.userId)[0];
 
   const { comments, photoURL, likes, filterClass } = post;

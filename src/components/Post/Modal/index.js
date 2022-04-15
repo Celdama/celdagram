@@ -16,7 +16,6 @@ export const Modal = ({ children, isOpen, handleClose }) => {
   return (
     <ReactPortal wrapperId='react-portal-modal-container'>
       <Wrapper>
-        {/* <button onClick={handleClose}>close</button> */}
         <div className='modal-content'>{children}</div>
       </Wrapper>
     </ReactPortal>

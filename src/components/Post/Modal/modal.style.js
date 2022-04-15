@@ -14,8 +14,17 @@ export const Wrapper = styled.div`
   padding: 40px 20px 20px;
 
   .modal-content {
-    width: 30%;
-    height: 30%;
-    background-color: #fff;
+    padding: 3rem 2rem;
+    border-radius: 4px;
+    width: 70%;
+    max-width: 35rem;
+    background-color: var(--white);
+    text-align: center;
+
+    div {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
   }
 `;
