@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
 `;
 
 export const UserPhotos = styled.div`
+  outline: 1px solid red;
   padding: 1.2rem 0;
   display: flex;
   flex-wrap: wrap;
