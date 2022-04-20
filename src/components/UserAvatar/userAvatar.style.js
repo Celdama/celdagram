@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 
   a {
     text-decoration: none;
-    color: black;
+    color: var(--black);
     gap: 8px;
     display: flex;
     justify-content: center;
@@ -14,7 +14,8 @@ export const Wrapper = styled.div`
   }
 
   h4 {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    text-transform: lowercase;
   }
 `;
 
