@@ -15,11 +15,11 @@ export const NavBar = ({ isAuth, authUser, handleLogOut }) => {
       <Content className='content'>
         <Link to='/'>Celdagram</Link>
         <ul>
-          <Link to='/'>
-            <HomeIcon className='icon' />
-          </Link>
           {isAuth ? (
             <>
+              <Link to='/'>
+                <HomeIcon className='icon' />
+              </Link>
               <Link to={`/new-post`}>
                 <PlusIcon className='icon' />
               </Link>
@@ -32,7 +32,7 @@ export const NavBar = ({ isAuth, authUser, handleLogOut }) => {
             </>
           ) : (
             <>
-              <Link to='/login'>login</Link>
+              <Link to='/login'>Log in</Link>
               <Link to='/signup'>Sign up</Link>
             </>
           )}

@@ -13,7 +13,7 @@ export const Content = styled.div`
 
   a {
     text-decoration: none;
-    color: #000;
+    color: var(--black);
   }
 
   ul {
@@ -21,21 +21,15 @@ export const Content = styled.div`
     gap: 1rem;
 
     .icon {
-      height: 1.25rem;
-
-      :hover {
-        cursor: pointer;
-      }
+      height: 1.8rem;
+      cursor: pointer;
     }
 
     img {
-      height: 22px;
-      width: 22px;
-      border-radius: 11px;
-
-      :hover {
-        cursor: pointer;
-      }
+      height: 28px;
+      width: 28px;
+      border-radius: 14px;
+      cursor: pointer;
     }
   }
 `;
