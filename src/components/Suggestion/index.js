@@ -37,9 +37,8 @@ export const SuggestionList = ({ authUser, suggestions, currentUser }) => {
           </FollowBtn>
         </div>
       );
-    } else {
-      return null;
     }
+    return null;
   });
 
   return (

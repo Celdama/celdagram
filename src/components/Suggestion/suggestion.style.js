@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   h5 {
     margin-bottom: 0.4rem;
-    color: gray;
+    color: var(--darkGray);
   }
 `;
 
@@ -20,8 +20,8 @@ export const SuggestionsListWrapper = styled.div`
 export const FollowBtn = styled.button`
   border: none;
   background-color: transparent;
-  color: #184e77;
+  color: var(--mainBlue);
   font-weight: bold;
-  font-size: 0.7rem;
+  font-size: 1rem;
   cursor: pointer;
 `;
