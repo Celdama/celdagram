@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.article`
-  width: 504px;
   margin-bottom: 3rem;
   outline: 1px solid var(--borderGray);
   background-color: var(--white);
@@ -10,11 +9,6 @@ export const Wrapper = styled.article`
 
 export const AvatarWrapper = styled.div`
   padding: 0 0.6rem;
-`;
-
-export const Photo = styled.img`
-  width: 100%;
-  height: 600px;
 `;
 
 export const ContentPost = styled.div`
