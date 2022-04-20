@@ -30,20 +30,17 @@ export const GlobalStyle = createGlobalStyle`
 
 .filter-item {
         cursor: pointer;
+        outline: 1px solid white;
         width: 100px;
-        /* height: 100px; */
-        margin: auto;
-        /* padding: 10px; */
+        height: 100%;
         border-radius: 6px;
+        background-color: white;
     }
     .filter-item__img {
-        /* width: 120px; */
-        /* height: 120px; */
         margin: auto;
         img {
-            margin-top: 4px;
             width: 100%;
-            height: 90px;
+            height: 80px;
             object-fit: cover;
             border-radius: 6px;
         }
@@ -52,11 +49,11 @@ export const GlobalStyle = createGlobalStyle`
         p {
             font-size: 1.125rem;
             text-align: center;
-            padding: 0.2rem;
-            margin-top: 0.4rem
+            padding: 0.1rem;
+            margin: 0.4rem
         }
     }
     .filter-item--selected {
-        background-color: var(--deep-dark);
+        background-color: rgba(0,0,0, 0.05);
     }
 `;

@@ -168,14 +168,9 @@ export const AddPost = ({
                 Share
               </ShareBtn>
             </div>
-            <div></div>
           </Form>
         </div>
         <div className='filter-container'>
-          <div className='filter-container-nav'>
-            <span>Filter</span>
-            <span>Settings</span>
-          </div>
           {previewLoad && (
             <Filter
               filterClass={postData.filterClass}

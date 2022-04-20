@@ -70,12 +70,11 @@ export const Filter = ({
     <FiltersStyles>
       {filters.map((filter, index) => {
         return (
-          <div key={index}>
+          <div className='filter-wrapper' key={index}>
             <div
               className={`filter-item ${
                 filterClass === filter.class ? 'filter-item--selected' : ''
               }`}
-              // onClick={() => setFilterClass(filter.class)}
               onClick={() =>
                 setPostData((prevState) => {
                   return {

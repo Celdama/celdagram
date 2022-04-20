@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import breakpoint from '../../Helpers/breakpoints';
 
 export const Wrapper = styled.div`
   display: grid;
-  height: 60vh;
   place-items: center;
   text-align: center;
 
@@ -20,27 +20,34 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  height: 40rem;
-  width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  @media screen and (min-width: ${breakpoint.sm}) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
 
   .form-post-wrapper {
-    width: 65%;
+    background-color: aliceblue;
+    width: 100%;
+    max-width: 520px;
+
     display: flex;
     flex-direction: column;
   }
 
   .filter-container {
-    width: 35%;
-    .filter-container-nav {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      outline: 1px solid var(--black);
+    max-width: 500px;
+    margin-top: 2rem;
 
-      span {
-        width: 50%;
-      }
+    @media screen and (min-width: ${breakpoint.sm}) {
+      width: 350px;
+      margin-top: 0;
+      margin-left: 2rem;
     }
   }
 `;
@@ -48,7 +55,7 @@ export const Content = styled.div`
 export const PreviewUpload = styled.div`
   cursor: pointer;
   position: relative;
-  height: 35rem;
+  height: 65rem;
   width: 100%;
   border-radius: 10px;
   background: transparent;
