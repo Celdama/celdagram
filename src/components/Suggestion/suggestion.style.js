@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   h5 {
-    margin-bottom: 0.4rem;
+    margin-bottom: 1.2rem;
     color: var(--darkGray);
   }
 `;

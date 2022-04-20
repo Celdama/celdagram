@@ -23,7 +23,7 @@ export const SuggestionList = ({ authUser, suggestions, currentUser }) => {
     if (!currentUser.followings.some((follow) => follow.uid === uid)) {
       return (
         <div key={uid}>
-          <UserAvatar id={uid} url={avatar} name={username} size={30} />
+          <UserAvatar id={uid} url={avatar} name={username} size={40} />
           <FollowBtn
             onClick={() =>
               handleAddFollowing(authUser, {
