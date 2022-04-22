@@ -20,18 +20,21 @@ export const PostCommentsWrapper = ({
     );
   });
 
-  console.log(comments);
-
   const slicedCommentsList = comments
     .slice(0, 3)
-    .map(({ author, comment, authorId }, index) => {
+    .map(({ author, comment, authorId, uid }, index) => {
       return (
         <li key={index}>
           <div>
             <span className='author'>{author}</span>{' '}
             <span className='comment'>{comment}</span>
           </div>
-          {authorId === authUser.uid && <TrashIcon className='icon' />}
+          {authorId === authUser.uid && (
+            <TrashIcon
+              className='icon'
+              onClick={() => deleteCommentFromFirebase(uid)}
+            />
+          )}
         </li>
       );
     });

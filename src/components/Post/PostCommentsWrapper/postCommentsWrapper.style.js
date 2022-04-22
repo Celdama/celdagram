@@ -14,6 +14,7 @@ export const Wrapper = styled.ul`
 
     .icon {
       height: 1.4rem;
+      cursor: pointer;
     }
   }
 
