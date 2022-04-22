@@ -16,6 +16,7 @@ import {
   ADD_USER_LIKE,
   REMOVE_USER_LIKE,
   DELETE_POST,
+  DELETE_COMMENT,
 } from '../reducers/postsReducer';
 
 const postsCollectionRef = collection(db, 'posts');
@@ -67,6 +68,16 @@ export const addComment = (data, postId) => {
           postId,
         },
       });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const deleteComment = (commentId) => {
+  return async (dispatch) => {
+    console.log(commentId);
+    try {
     } catch (err) {
       return console.log(err);
     }
