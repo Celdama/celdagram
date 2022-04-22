@@ -10,7 +10,9 @@ import { UserAvatar } from '../UserAvatar';
 import { Wrapper, Content, ContentUser } from './home.style';
 
 export const Home = ({ isAuth, authUser, users }) => {
-  const suggestionsList = users.filter(({ uid }) => uid !== authUser.uid);
+  const suggestionsList = users
+    .filter(({ uid }) => uid !== authUser.uid)
+    .slice(0, 3);
 
   const { uid, photoURL, displayName } = authUser;
 
