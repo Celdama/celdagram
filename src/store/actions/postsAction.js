@@ -74,7 +74,6 @@ export const addComment = (data, postId) => {
 };
 
 export const addUserLike = (data, postId) => {
-  // console.log(data);
   return async (dispatch) => {
     const postDoc = doc(db, 'posts', postId);
     try {

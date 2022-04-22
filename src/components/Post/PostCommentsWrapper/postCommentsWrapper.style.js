@@ -11,9 +11,9 @@ export const Wrapper = styled.ul`
     gap: 4px;
     align-items: center;
     justify-content: space-between;
+
     .icon {
       height: 1.4rem;
-      /* justify-self: flex-end; */
     }
   }
 
