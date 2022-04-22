@@ -3,7 +3,6 @@ import { PostStore } from '../Post';
 
 export const AuthContent = ({ posts, currentUser }) => {
   const followings = currentUser && currentUser.followings;
-  console.log(posts);
 
   const postsContent =
     followings &&
