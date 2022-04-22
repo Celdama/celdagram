@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Wrapper } from './postCommentsWrapper.style';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authSelector } from '../../../store/selectors/authSelector';
 import { TrashIcon } from '@heroicons/react/solid';
+import { deleteComment } from '../../../store/actions/postsAction';
 
 export const PostCommentsWrapper = ({
   comments,
   showAllComments,
   authUser,
+  deleteCommentFromFirebase,
 }) => {
   const commentsList = comments.map(({ author, comment }, index) => {
     return (
@@ -17,6 +19,8 @@ export const PostCommentsWrapper = ({
       </li>
     );
   });
+
+  console.log(comments);
 
   const slicedCommentsList = comments
     .slice(0, 3)
@@ -39,12 +43,21 @@ export const PostCommentsWrapper = ({
 
 export const PostCommentsWrapperStore = ({ comments, showAllComments }) => {
   const authUser = useSelector(authSelector);
+  const dispatch = useDispatch();
+
+  const deleteCommentFromFirebase = useCallback(
+    (commentId) => {
+      dispatch(deleteComment(commentId));
+    },
+    [dispatch]
+  );
 
   return (
     <PostCommentsWrapper
       authUser={authUser}
       comments={comments}
       showAllComments={showAllComments}
+      deleteCommentFromFirebase={deleteCommentFromFirebase}
     />
   );
 };
