@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { PostPhoto } from './PostPhoto';
 import { PostIconsStore } from './PostIcons';
 import { PostLikesCounter } from './PostLikesCounter';
-import { PostCommentsWrapper } from './PostCommentsWrapper';
+import { PostCommentsWrapperStore } from './PostCommentsWrapper';
 import { PostDate } from './PostDate';
 import { AddPostCommentStore } from './AddPostComment';
 import { PostDescription } from './PostDescription';
@@ -43,7 +43,7 @@ export const Post = ({ post, users, authUser }) => {
             View all {comments.length} comments
           </span>
         )}
-        <PostCommentsWrapper
+        <PostCommentsWrapperStore
           comments={comments}
           showAllComments={showAllComments}
         />
