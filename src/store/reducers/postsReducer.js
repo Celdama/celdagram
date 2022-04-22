@@ -21,7 +21,16 @@ export const postsReducer = (state = initialState, action) => {
           : post;
       });
     case DELETE_COMMENT:
-      return state;
+      return state.map((post) => {
+        return post.id === action.payload.postId
+          ? {
+              ...post,
+              comments: post.comments.filter(
+                (item) => item.uid !== action.payload.data.uid
+              ),
+            }
+          : post;
+      });
     case ADD_USER_LIKE:
       return state.map((post) => {
         return post.id === action.payload.postId

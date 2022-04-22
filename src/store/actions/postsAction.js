@@ -76,7 +76,6 @@ export const addComment = (data, postId) => {
 
 export const deleteComment = (data, postId) => {
   return async (dispatch) => {
-    console.log(data);
     const postDoc = doc(db, 'posts', postId);
     try {
       await updateDoc(postDoc, {
