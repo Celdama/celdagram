@@ -74,11 +74,21 @@ export const addComment = (data, postId) => {
   };
 };
 
-export const deleteComment = (commentId) => {
+export const deleteComment = (data, postId) => {
   return async (dispatch) => {
-    console.log(commentId);
-
+    console.log(data);
+    const postDoc = doc(db, 'posts', postId);
     try {
+      await updateDoc(postDoc, {
+        comments: arrayRemove(data),
+      });
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: {
+          data,
+          postId,
+        },
+      });
     } catch (err) {
       return console.log(err);
     }

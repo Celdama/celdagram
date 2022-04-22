@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authSelector } from '../../../store/selectors/authSelector';
 import { addComment } from '../../../store/actions/postsAction';
 import { Wrapper, PostBtn } from './addPostComment.style';
+import { nanoid } from 'nanoid';
 
 export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,14 @@ export const AddPostComment = ({ authUser, post, addCommentToFirebase }) => {
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    addCommentToFirebase(formData, post.photoId);
+    addCommentToFirebase(
+      {
+        ...formData,
+        uid: nanoid(),
+        postId: post.photoId,
+      },
+      post.photoId
+    );
     setFormData({
       author: authUser.displayName,
       comment: '',
