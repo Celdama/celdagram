@@ -32,7 +32,6 @@ export const Content = styled.div`
   }
 
   .form-post-wrapper {
-    background-color: aliceblue;
     width: 100%;
     max-width: 520px;
 
