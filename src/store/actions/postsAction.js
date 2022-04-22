@@ -77,6 +77,7 @@ export const addComment = (data, postId) => {
 export const deleteComment = (commentId) => {
   return async (dispatch) => {
     console.log(commentId);
+
     try {
     } catch (err) {
       return console.log(err);

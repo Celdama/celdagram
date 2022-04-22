@@ -20,9 +20,11 @@ export const PostCommentsWrapper = ({
     );
   });
 
+  console.log(comments);
+
   const slicedCommentsList = comments
     .slice(0, 3)
-    .map(({ author, comment, authorId, uid }, index) => {
+    .map(({ author, comment, authorId, uid, postId }, index) => {
       return (
         <li key={index}>
           <div>
@@ -32,7 +34,7 @@ export const PostCommentsWrapper = ({
           {authorId === authUser.uid && (
             <TrashIcon
               className='icon'
-              onClick={() => deleteCommentFromFirebase(uid)}
+              onClick={() => deleteCommentFromFirebase(uid, postId)}
             />
           )}
         </li>
@@ -49,8 +51,8 @@ export const PostCommentsWrapperStore = ({ comments, showAllComments }) => {
   const dispatch = useDispatch();
 
   const deleteCommentFromFirebase = useCallback(
-    (commentId) => {
-      dispatch(deleteComment(commentId));
+    (commentId, postId) => {
+      dispatch(deleteComment(commentId, postId));
     },
     [dispatch]
   );
