@@ -42,5 +42,5 @@ see notebook
 ```
 
 - [] check design mobile
-- [] find font
+- [x] find font
 - [] check user path

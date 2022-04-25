@@ -1,12 +1,17 @@
 import styled from 'styled-components';
+import breakpoints from '../../../Helpers/breakpoints';
 
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  padding: 1.2rem 5rem;
+  padding: 1.2rem 0rem;
   border-bottom: 1px solid var(--borderGray);
   gap: 4rem;
   font-size: 1.2rem;
+
+  @media screen and (min-width: ${breakpoints.sm}) {
+    padding: 1.2rem 5rem;
+  }
 `;
 
 export const UserInfo = styled.div`

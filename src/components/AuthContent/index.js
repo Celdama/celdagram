@@ -1,5 +1,6 @@
 import React from 'react';
 import { PostStore } from '../Post';
+import { Wrapper } from './authContent.style';
 
 export const AuthContent = ({ posts, currentUser }) => {
   const followings = currentUser && currentUser.followings;
@@ -13,12 +14,12 @@ export const AuthContent = ({ posts, currentUser }) => {
     );
 
   return (
-    <>
+    <Wrapper>
       {postsContent && postsContent.length > 0 ? (
         postsContent.map((post, index) => <PostStore key={index} post={post} />)
       ) : (
         <p>you need to follow someone to see post</p>
       )}
-    </>
+    </Wrapper>
   );
 };
