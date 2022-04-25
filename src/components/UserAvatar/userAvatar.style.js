@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
   h4 {
     font-size: 1.1rem;
     text-transform: lowercase;
+    color: var(--black);
   }
 `;
 
