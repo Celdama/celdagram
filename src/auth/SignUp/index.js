@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { Wrapper, Content, Form, FormBtn, SubFormContent } from '../auth.style';
 
 export const SignUp = ({ registerUserInFirebase }) => {
+  const [showPasswordError, setShowPasswordError] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [avatar, setAvatar] = useState(null);
   const [formData, setFormData] = useState({
@@ -43,6 +44,10 @@ export const SignUp = ({ registerUserInFirebase }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.password.length < 6) {
+      setShowPasswordError(true);
+      return;
+    }
     const avatarRef = ref(storage, `${username}-avatar`);
 
     try {
@@ -67,7 +72,7 @@ export const SignUp = ({ registerUserInFirebase }) => {
     <Wrapper>
       <Content>
         <h1>Celdagram</h1>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <div>
             <input
               onChange={handleChange}
@@ -75,6 +80,7 @@ export const SignUp = ({ registerUserInFirebase }) => {
               type='text'
               name='username'
               placeholder='Username'
+              required
             />
           </div>
           <div>
@@ -84,9 +90,11 @@ export const SignUp = ({ registerUserInFirebase }) => {
               type='email'
               name='email'
               placeholder='Email adress'
+              required
             />
           </div>
           <div>
+            {showPasswordError && <span>at least 6 characters</span>}
             <input
               onChange={handleChange}
               value={password}
@@ -96,11 +104,14 @@ export const SignUp = ({ registerUserInFirebase }) => {
             />
           </div>
           <div>
-            <input type='file' name='avatar' onChange={handleChangeAvatar} />
+            <input
+              type='file'
+              name='avatar'
+              required
+              onChange={handleChangeAvatar}
+            />
           </div>
-          <FormBtn type='button' onClick={handleSubmit}>
-            Sign up
-          </FormBtn>
+          <FormBtn>Sign up</FormBtn>
         </Form>
       </Content>
       <SubFormContent>

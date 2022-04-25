@@ -22,6 +22,13 @@ export const Content = styled.div`
     margin-bottom: 0.8rem;
     font-size: 1.3rem;
   }
+
+  span {
+    font-size: 0.9rem;
+    font-style: italic;
+    align-self: flex-end;
+    width: 100%;
+  }
 `;
 
 export const Form = styled.form`
