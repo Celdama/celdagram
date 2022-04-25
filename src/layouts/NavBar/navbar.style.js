@@ -11,6 +11,10 @@ export const Content = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  h1 {
+    font-family: 'Dancing Script', cursive;
+  }
+
   a {
     text-decoration: none;
     color: var(--black);

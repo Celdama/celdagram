@@ -41,8 +41,6 @@ see notebook
 - <Suggestion />
 ```
 
-# corriger le bug
-
-# voir la logique pour les filtres
-
-# commencer à implémenter des test JEST
+- [] check design mobile
+- [] find font
+- [] check user path

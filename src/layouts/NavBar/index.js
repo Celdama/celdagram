@@ -13,7 +13,9 @@ export const NavBar = ({ isAuth, authUser, handleLogOut }) => {
   return (
     <Wrapper>
       <Content className='content'>
-        <Link to='/'>Celdagram</Link>
+        <Link to='/'>
+          <h1>Celdagram</h1>
+        </Link>
         <ul>
           {isAuth ? (
             <>
