@@ -16,6 +16,11 @@ export const Wrapper = styled.ul`
       height: 1.4rem;
       cursor: pointer;
     }
+
+    a {
+      color: var(--black);
+      text-decoration: none;
+    }
   }
 
   .author {
