@@ -23,7 +23,6 @@ export const Wrapper = styled.div`
 export const PostBtn = styled.button`
   border: none;
   background-color: transparent;
-  width: 10%;
   color: var(--darkGray);
   font-size: 1.2rem;
   cursor: pointer;
