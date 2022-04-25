@@ -5,8 +5,9 @@ import {
   registerUser,
   updateUser,
 } from '../../store/actions/authAction';
+
 import { useNavigate } from 'react-router-dom';
-import { addUser } from '../../store/actions/usersAction';
+import { addUser, getUsers } from '../../store/actions/usersAction';
 import { storage } from '../../config/firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Link } from 'react-router-dom';
@@ -127,6 +128,7 @@ export const SignUpStore = () => {
         })
       );
       await dispatch(monitorAuthState());
+      await dispatch(getUsers());
     },
     [dispatch]
   );
