@@ -75,7 +75,6 @@ export const usersReducer = (state = initialState, action) => {
           : user;
       });
     case ADD_NEW_POST_ID:
-      console.log(action.payload.photoId);
       return state.map((user) => {
         return user.uid === action.payload.currentUserId
           ? {
