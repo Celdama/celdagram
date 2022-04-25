@@ -34,7 +34,15 @@ export const App = () => {
             <Route path='/profile/:id' element={<ProfileStore />} />
             <Route path='/signup' element={<SignUpStore />} />
             <Route path='/login' element={<LoginStore />} />
-            <Route path='/new-post' element={<AddPostStore />} />
+
+            <Route
+              path='/new-post'
+              element={
+                <RequireAuth redirectTo={'/'}>
+                  <AddPostStore />
+                </RequireAuth>
+              }
+            />
             <Route path='/test' element={<TestFilter />} />
           </Routes>
         </Main>
